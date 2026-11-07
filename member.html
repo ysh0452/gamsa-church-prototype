@@ -1,0 +1,1365 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="감사교회 프로토타입">
+<meta property="og:description" content="신도 앱 클릭 프로토타입 (예시 데이터)">
+<title>감사교회 신도 앱 프로토타입</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+/* 시안 C · 투명한 데이터 (D-21). 이 앱은 밝은 화면 하나로만 설계되어 있어 어두운 테마를 따로 두지 않는다.
+   배치: 데스크톱은 왼쪽 안내 + 오른쪽 휴대폰, 휴대폰에서는 앱이 화면 전체를 쓴다. */
+:root {
+  --bg: #f4f6fa;
+  --surface: #ffffff;
+  --surface-alt: #eef1f6;
+  --primary: #2256f2;
+  --primary-soft: #e8effe;
+  --accent: #12b5a6;
+  --accent-soft: #ddf5f2;
+  --text: #111827;
+  --text-sub: #4b5563;
+  --text-faint: #9ca3af;
+  --line: #e5e7eb;
+  --success: #0f9f6e;
+  --danger: #e5484d;
+  --on-hero-sub: #c9d7ff;
+  --chart-1: #2256f2;
+  --chart-2: #12b5a6;
+  --chart-3: #7c9cff;
+  --chart-4: #8be0d7;
+  --chart-5: #c5ccd8;
+  --stage: #dfe4ee;
+  --ink: #0f172a;
+  --font: "Gothic A1", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body {
+  background: var(--stage);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 48px;
+  padding: 24px;
+  -webkit-font-smoothing: antialiased;
+}
+button, input, textarea, select { font-family: inherit; font-size: inherit; color: inherit; }
+button { cursor: pointer; }
+:focus-visible { outline: 2px solid var(--primary); outline-offset: 2px; }
+.num { font-variant-numeric: tabular-nums; }
+
+/* ── 왼쪽 안내 ── */
+.panel { width: 300px; display: flex; flex-direction: column; gap: 18px; max-height: 100%; overflow-y: auto; padding-right: 4px; }
+.panel .eyebrow { font-size: 12px; font-weight: 700; color: var(--primary); letter-spacing: .02em; }
+.panel h1 { font-size: 24px; line-height: 32px; font-weight: 800; margin: 4px 0 0; text-wrap: balance; }
+.panel p { margin: 0; color: var(--text-sub); font-size: 14px; line-height: 21px; }
+.panel h2 { font-size: 13px; font-weight: 700; margin: 0 0 8px; color: var(--text); }
+.panel ul { margin: 0; padding-left: 18px; color: var(--text-sub); font-size: 13px; line-height: 20px; display: grid; gap: 4px; }
+.panel .card { background: var(--surface); border-radius: 14px; padding: 14px 16px; }
+.jump { display: flex; flex-wrap: wrap; gap: 6px; }
+.jump button { border: 1px solid var(--line); background: var(--surface); border-radius: 8px; padding: 4px 8px; font-size: 12px; line-height: 16px; color: var(--text-sub); }
+.jump button:hover { border-color: var(--primary); color: var(--primary); }
+.jump .grp { width: 100%; font-size: 11px; color: var(--text-faint); font-weight: 600; margin-top: 4px; }
+.panel-row { display: flex; gap: 8px; flex-wrap: wrap; }
+.btn-ghost { border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 8px 12px; font-size: 13px; font-weight: 600; }
+.btn-ghost[aria-pressed="true"] { background: var(--primary-soft); border-color: var(--primary); color: var(--primary); }
+
+/* ── 휴대폰 ── */
+.phone {
+  width: 375px; height: min(812px, 100%); flex: none;
+  background: var(--bg); border: 8px solid var(--ink); border-radius: 44px;
+  box-shadow: 0 30px 60px -20px rgba(15, 23, 42, .35);
+  overflow: hidden; display: flex; flex-direction: column; position: relative;
+}
+.notice {
+  flex: none; display: flex; align-items: center; justify-content: space-between; gap: 8px;
+  background: var(--ink); color: #e2e8f0; font-size: 11px; line-height: 14px; padding: 8px 16px 6px;
+}
+.notice b { color: #fff; font-weight: 700; }
+.notice button { background: transparent; border: 1px solid #475569; color: #e2e8f0; border-radius: 6px; padding: 2px 6px; font-size: 10px; line-height: 14px; }
+.area { flex: 1; position: relative; overflow: hidden; }
+.scr { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--bg); }
+.scr.enter { animation: slide .22s ease-out; }
+@keyframes slide { from { transform: translateX(24px); opacity: .6; } to { transform: none; opacity: 1; } }
+@media (prefers-reduced-motion: reduce) { .scr.enter { animation: none; } }
+.body { flex: 1; overflow-y: auto; overscroll-behavior: contain; padding: 0 20px 28px; display: flex; flex-direction: column; gap: 16px; }
+.body.flush { padding: 0 0 28px; }
+.hdr { flex: none; display: flex; align-items: center; gap: 4px; padding: 12px 12px 8px 8px; min-height: 52px; background: var(--bg); }
+.hdr .ttl { flex: 1; font-size: 17px; line-height: 24px; font-weight: 700; padding-left: 4px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.hdr.big { padding: 14px 16px 10px 20px; }
+.hdr.big .ttl { font-size: 22px; line-height: 30px; font-weight: 800; padding: 0; }
+.icon-btn { width: 40px; height: 40px; border: 0; background: transparent; border-radius: 12px; display: grid; place-items: center; color: var(--text); flex: none; position: relative; }
+.icon-btn:hover { background: var(--surface-alt); }
+.icon-btn .dot { position: absolute; top: 9px; right: 10px; width: 7px; height: 7px; border-radius: 50%; background: var(--danger); }
+svg.i { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
+svg.i.s { width: 20px; height: 20px; }
+svg.i.xs { width: 16px; height: 16px; }
+.sid { display: none; font-size: 10px; line-height: 14px; font-weight: 700; color: var(--primary); background: var(--primary-soft); border-radius: 6px; padding: 2px 6px; flex: none; }
+.show-ids .sid { display: inline-block; }
+.body > .sid, .sheet > .sid { align-self: flex-end; margin: -8px 0 -6px; }
+.cmt-bar .input { flex: 1; min-width: 0; }
+
+/* ── 하단 탭 (4개, D-18) ── */
+.tabbar { flex: none; height: 64px; display: grid; grid-template-columns: repeat(4, 1fr); background: var(--surface); border-top: 1px solid var(--line); padding: 0 8px; }
+.tab { border: 0; background: transparent; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 3px; color: var(--text-faint); font-size: 11px; line-height: 14px; font-weight: 600; }
+.tab[aria-current="page"] { color: var(--primary); }
+
+/* ── 공통 요소 ── */
+.card { background: var(--surface); border-radius: 16px; padding: 18px; }
+.card.tight { padding: 6px 0; }
+.sec-title { display: flex; align-items: center; justify-content: space-between; font-size: 17px; line-height: 24px; font-weight: 700; margin: 4px 0 -4px; }
+.sec-title a, .link { font-size: 13px; font-weight: 600; color: var(--text-sub); text-decoration: none; background: none; border: 0; padding: 0; display: inline-flex; align-items: center; gap: 2px; }
+.small { font-size: 13px; line-height: 19px; color: var(--text-sub); }
+.micro { font-size: 11px; line-height: 14px; color: var(--text-faint); }
+.faint { color: var(--text-faint); }
+.amount { font-size: 32px; line-height: 40px; font-weight: 800; letter-spacing: -.01em; }
+.amount-m { font-size: 20px; line-height: 28px; font-weight: 800; }
+.row { display: flex; align-items: center; gap: 12px; padding: 14px 18px; width: 100%; border: 0; background: transparent; text-align: left; }
+button.row:hover { background: #f8fafc; }
+.row + .row { border-top: 1px solid var(--line); }
+.row .grow { flex: 1; min-width: 0; }
+.row .t { font-size: 15px; line-height: 22px; font-weight: 600; }
+.row .s { font-size: 13px; line-height: 19px; color: var(--text-sub); }
+.row .chev { color: var(--text-faint); }
+.ic-box { width: 40px; height: 40px; border-radius: 12px; background: var(--primary-soft); color: var(--primary); display: grid; place-items: center; flex: none; }
+.ic-box.teal { background: var(--accent-soft); color: var(--accent); }
+.ic-box.gray { background: var(--surface-alt); color: var(--text-sub); }
+.btn { border: 0; border-radius: 14px; padding: 15px 18px; font-size: 16px; line-height: 24px; font-weight: 700; background: var(--primary); color: #fff; width: 100%; }
+.btn:disabled { background: var(--surface-alt); color: var(--text-faint); cursor: not-allowed; }
+.btn.sub { background: var(--primary-soft); color: var(--primary); }
+.btn.line { background: var(--surface); color: var(--text); border: 1px solid var(--line); }
+.btn.sm { padding: 9px 14px; font-size: 14px; line-height: 20px; border-radius: 10px; width: auto; }
+.btn-bar { flex: none; padding: 12px 20px 16px; background: var(--bg); display: flex; gap: 8px; }
+.pill { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; padding: 2px 8px; font-size: 11px; line-height: 16px; font-weight: 700; background: var(--surface-alt); color: var(--text-sub); flex: none; }
+.pill.blue { background: var(--primary-soft); color: var(--primary); }
+.pill.teal { background: var(--accent-soft); color: #0b7f74; }
+.pill.green { background: #dcf3ea; color: var(--success); }
+.pill.red { background: #fde4e4; color: var(--danger); }
+.chips { display: flex; gap: 8px; flex-wrap: wrap; }
+.chip { border: 1px solid var(--line); background: var(--surface); border-radius: 10px; padding: 7px 14px; font-size: 14px; line-height: 20px; font-weight: 600; color: var(--text-sub); }
+.chip[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: #fff; }
+.seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; background: var(--surface-alt); border-radius: 14px; padding: 4px; gap: 4px; }
+.seg button { border: 0; background: transparent; border-radius: 10px; padding: 8px 4px; font-size: 14px; line-height: 20px; font-weight: 600; color: var(--text-sub); }
+.seg button[aria-selected="true"] { background: var(--surface); color: var(--text); box-shadow: 0 1px 2px rgba(15, 23, 42, .08); }
+.sticky { position: sticky; top: 0; z-index: 2; background: var(--bg); padding: 4px 0 8px; margin: -4px 0 -8px; }
+.bar { height: 10px; border-radius: 999px; background: var(--surface-alt); overflow: hidden; display: flex; }
+.bar > i { display: block; height: 100%; }
+.legend { display: flex; flex-wrap: wrap; gap: 6px 14px; font-size: 13px; line-height: 19px; color: var(--text-sub); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 8px; height: 8px; border-radius: 3px; display: inline-block; }
+.note { background: var(--surface-alt); border-radius: 12px; padding: 12px 14px; font-size: 13px; line-height: 19px; color: var(--text-sub); display: flex; gap: 8px; }
+.note.blue { background: var(--primary-soft); color: #1d3fa8; }
+.note.warn { background: #fff4e5; color: #8a4b00; }
+.field { display: flex; flex-direction: column; gap: 6px; }
+.field label, .field .lbl { font-size: 13px; line-height: 19px; font-weight: 700; color: var(--text-sub); }
+.input { border: 1px solid var(--line); background: var(--surface); border-radius: 12px; padding: 12px 14px; width: 100%; font-size: 15px; line-height: 22px; }
+.input:focus { outline: 2px solid var(--primary); outline-offset: -1px; }
+.input:disabled { background: var(--surface-alt); color: var(--text-sub); }
+textarea.input { resize: none; min-height: 140px; }
+.switch { position: relative; width: 46px; height: 28px; flex: none; }
+.switch input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
+.switch span { position: absolute; inset: 0; border-radius: 999px; background: #cfd5df; transition: background .15s; pointer-events: none; }
+.switch span::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; transition: transform .15s; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
+.switch input:checked + span { background: var(--primary); }
+.switch input:checked + span::after { transform: translateX(18px); }
+.switch input:focus-visible + span { outline: 2px solid var(--primary); outline-offset: 2px; }
+.radio-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); width: 100%; text-align: left; }
+.radio-row[aria-checked="true"] { border-color: var(--primary); background: #f5f8ff; }
+.radio-row .dotc { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #cfd5df; flex: none; display: grid; place-items: center; }
+.radio-row[aria-checked="true"] .dotc { border-color: var(--primary); }
+.radio-row[aria-checked="true"] .dotc::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--primary); }
+.empty { text-align: center; padding: 28px 12px; color: var(--text-sub); font-size: 14px; }
+mark { background: transparent; color: var(--primary); font-weight: 800; }
+
+/* 홈 */
+.hero { background: var(--primary); color: #fff; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
+.hero .k { color: var(--on-hero-sub); font-size: 13px; line-height: 19px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
+.hero .k button { background: rgba(255,255,255,.14); border: 0; color: #fff; border-radius: 8px; padding: 3px 8px; font-size: 12px; font-weight: 600; }
+.hero .bar { background: rgba(255,255,255,.18); }
+.hero .legend { color: #e6ecff; }
+.quick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
+.quick button { border: 0; background: var(--surface); border-radius: 16px; padding: 14px 6px 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 13px; line-height: 18px; font-weight: 700; }
+.church-btn { border: 0; background: transparent; display: inline-flex; align-items: center; gap: 4px; font-size: 20px; line-height: 28px; font-weight: 800; padding: 0; }
+
+/* 커뮤니티 */
+.boards { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.boards button { border: 0; background: var(--surface); border-radius: 14px; padding: 12px 14px; text-align: left; display: flex; flex-direction: column; gap: 2px; }
+.boards b { font-size: 14px; line-height: 20px; }
+.post { display: flex; flex-direction: column; gap: 6px; padding: 14px 18px; width: 100%; border: 0; background: transparent; text-align: left; }
+.post + .post { border-top: 1px solid var(--line); }
+.post .pt { font-size: 15px; line-height: 22px; font-weight: 700; }
+.post .pb { font-size: 13px; line-height: 19px; color: var(--text-sub); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.meta { display: flex; align-items: center; gap: 10px; font-size: 12px; line-height: 16px; color: var(--text-faint); flex-wrap: wrap; }
+.meta span { display: inline-flex; align-items: center; gap: 3px; }
+.fab { position: absolute; right: 18px; bottom: 18px; border: 0; border-radius: 999px; background: var(--primary); color: #fff; padding: 12px 18px 12px 14px; display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 700; box-shadow: 0 8px 20px -6px rgba(34, 86, 242, .55); }
+.cmt { display: flex; flex-direction: column; gap: 4px; padding: 12px 0; }
+.cmt + .cmt { border-top: 1px solid var(--line); }
+.cmt .who { font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
+.cmt-bar { flex: none; display: flex; gap: 8px; align-items: center; padding: 10px 12px 12px; background: var(--surface); border-top: 1px solid var(--line); }
+.cmt-bar .input { padding: 10px 12px; border-radius: 10px; }
+.anon-check { display: inline-flex; align-items: center; gap: 4px; font-size: 12px; font-weight: 700; color: var(--text-sub); flex: none; }
+.anon-check input { accent-color: var(--primary); width: 16px; height: 16px; margin: 0; }
+
+/* MY */
+.search { display: flex; align-items: center; gap: 8px; background: var(--surface); border: 1.5px solid var(--line); border-radius: 14px; padding: 0 12px; height: 48px; }
+.search:focus-within { border-color: var(--primary); }
+.search input { flex: 1; border: 0; outline: 0; background: transparent; font-size: 15px; height: 100%; min-width: 0; }
+.search .clear { border: 0; background: var(--surface-alt); width: 22px; height: 22px; border-radius: 50%; display: grid; place-items: center; color: var(--text-sub); padding: 0; }
+.my-head { flex: none; padding: 14px 20px 10px; background: var(--bg); display: flex; flex-direction: column; gap: 12px; position: relative; z-index: 2; }
+.my-head .top { display: flex; align-items: center; justify-content: space-between; }
+.my-head .top h1 { font-size: 22px; line-height: 30px; font-weight: 800; margin: 0; }
+.groups { display: grid; grid-template-columns: 1fr; gap: 12px; }
+.group h3 { margin: 0; padding: 14px 18px 4px; font-size: 13px; line-height: 19px; color: var(--text-faint); font-weight: 700; display: flex; align-items: center; gap: 6px; }
+.group .row { padding: 11px 18px; }
+.group .row + .row { border-top: 0; }
+.group .row .t { font-weight: 500; }
+.res-row .grp { font-size: 12px; color: var(--text-faint); flex: none; }
+.recent { display: flex; flex-wrap: wrap; gap: 8px; }
+.recent span { display: inline-flex; align-items: center; gap: 2px; background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px 4px 4px 12px; font-size: 13px; }
+.recent span button { border: 0; background: transparent; padding: 2px 4px; display: grid; place-items: center; color: var(--text-faint); }
+.recent span button.q { padding: 0; font-size: 13px; color: var(--text); }
+.avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--primary-soft); color: var(--primary); display: grid; place-items: center; font-weight: 800; font-size: 18px; flex: none; }
+
+/* 시트·토스트 */
+.dim { position: absolute; inset: 0; background: rgba(15, 23, 42, .4); z-index: 20; display: flex; align-items: flex-end; }
+.sheet { background: var(--surface); width: 100%; border-radius: 22px 22px 0 0; padding: 10px 20px 20px; display: flex; flex-direction: column; gap: 12px; max-height: 85%; overflow-y: auto; }
+.sheet .grab { width: 36px; height: 4px; border-radius: 2px; background: var(--line); margin: 0 auto 4px; }
+.sheet h2 { margin: 0; font-size: 17px; line-height: 24px; }
+.sheet-item { border: 0; background: transparent; display: flex; align-items: center; gap: 12px; padding: 12px 4px; font-size: 15px; text-align: left; width: 100%; border-radius: 10px; }
+.sheet-item:hover { background: var(--surface-alt); }
+.toast { position: absolute; left: 50%; bottom: 84px; transform: translateX(-50%); background: rgba(17, 24, 39, .92); color: #fff; font-size: 13px; line-height: 19px; padding: 10px 16px; border-radius: 12px; z-index: 30; width: max-content; max-width: calc(100% - 40px); text-align: center; animation: pop .18s ease-out; }
+@keyframes pop { from { opacity: 0; transform: translate(-50%, 6px); } to { opacity: 1; transform: translate(-50%, 0); } }
+
+.donut-wrap { display: flex; align-items: center; gap: 18px; }
+.donut-wrap .legend { flex-direction: column; gap: 6px; flex: 1; }
+.donut-wrap .legend span { justify-content: space-between; display: flex; }
+.donut-wrap .legend em { font-style: normal; font-weight: 700; color: var(--text); }
+.months { display: grid; grid-template-columns: repeat(10, 1fr); gap: 6px; align-items: end; height: 120px; }
+.months div { display: flex; flex-direction: column; align-items: center; gap: 4px; height: 100%; justify-content: flex-end; }
+.months i { width: 100%; border-radius: 6px 6px 2px 2px; background: var(--chart-3); display: block; }
+.months i.cur { background: var(--chart-1); }
+.months span { font-size: 10px; line-height: 12px; color: var(--text-faint); }
+.kv { display: grid; grid-template-columns: auto 1fr; gap: 10px 16px; font-size: 14px; line-height: 20px; }
+.kv dt { color: var(--text-sub); }
+.kv dd { margin: 0; text-align: right; font-weight: 600; }
+.stamp { border: 2px dashed var(--danger); color: var(--danger); border-radius: 10px; padding: 6px 10px; font-size: 12px; font-weight: 800; text-align: center; }
+.qr { width: 168px; height: 168px; margin: 0 auto; background: #fff; padding: 10px; border-radius: 12px; border: 1px solid var(--line); }
+
+@media (max-width: 760px) {
+  body { padding: 0; gap: 0; display: block; }
+  .panel { display: none; }
+  .phone { width: 100%; height: 100%; border: 0; border-radius: 0; box-shadow: none; }
+}
+</style>
+</head>
+<body>
+
+<aside class="panel" aria-label="프로토타입 안내">
+  <div>
+    <div class="eyebrow">감사교회(가제) · 신도 앱 · 시안 C</div>
+    <h1>신도 앱 프로토타입 v1.2</h1>
+  </div>
+  <p>2026-11-06 결정(D-18~D-21)을 반영했습니다. 하단 메뉴는 홈 · 커뮤니티 · 헌금·재정 · MY 4개입니다. 내역·영수증과 재정 공개는 헌금·재정 안으로 들어갔고, 전체 메뉴는 MY의 메뉴 검색으로 바뀌었습니다. v1.2(2026-11-07)에서 재정 공개에 <b>교회 카드 사용 내역</b>(U-71, D-23)을 더했습니다.</p>
+  <div class="card">
+    <h2>이렇게 눌러 보세요</h2>
+    <ul>
+      <li>MY에서 <b>연말정산</b>, <b>자동이체</b>, <b>계좌</b>를 검색해 보기</li>
+      <li>헌금·재정 → 헌금하기를 끝까지 진행해 보기 (실제 결제 없음)</li>
+      <li>헌금 뒤 홈과 내역에서 금액이 바뀌는지 보기</li>
+      <li>커뮤니티에서 익명 글과 댓글 써 보기</li>
+      <li>헌금·재정 → 재정 공개 → <b>카드 사용</b>에서 교회 카드 내역 보기 (v1.2)</li>
+    </ul>
+  </div>
+  <div class="card">
+    <h2>화면 바로 가기</h2>
+    <div class="jump" id="jump"></div>
+  </div>
+  <div class="panel-row">
+    <button class="btn-ghost" id="idToggle" type="button" aria-pressed="true">화면 ID 보기</button>
+    <button class="btn-ghost" id="resetBtn" type="button">처음 상태로</button>
+  </div>
+  <p class="micro">교회 이름, 사람 이름, 금액, 계좌는 모두 예시입니다. 실제 결제와 개인정보 입력은 없습니다. 화면 ID(U-xx)는 Figma 화면 설계서와 같습니다.</p>
+  <p class="micro"><a href="admin.html">관리자 웹 프로토타입 보기 →</a> · <a href="./">처음 화면</a></p>
+</aside>
+
+<div class="phone show-ids" id="phone">
+  <div class="notice"><span><b>프로토타입</b> · 예시 데이터 · 실제 결제 없음</span><button type="button" id="idToggle2">ID</button></div>
+  <div class="area" id="area"></div>
+  <nav class="tabbar" id="tabbar" aria-label="하단 메뉴"></nav>
+</div>
+
+<script>
+(function () {
+  'use strict';
+
+  /* ───────── 아이콘 ───────── */
+  const P = {
+    home: '<path d="M4 10.5 12 4l8 6.5V19a1 1 0 0 1-1 1h-4.5v-5.5h-5V20H5a1 1 0 0 1-1-1z"/>',
+    chat: '<path d="M20 11.5c0 4.1-3.6 7.5-8 7.5-1.2 0-2.3-.2-3.3-.6L4 19.5l1.2-3.6C4.4 14.6 4 13.1 4 11.5 4 7.4 7.6 4 12 4s8 3.4 8 7.5z"/><path d="M8.5 11.5h.01M12 11.5h.01M15.5 11.5h.01" stroke-width="2.2"/>',
+    heart: '<path d="M12 19.5s-7.5-4.4-7.5-10A4.2 4.2 0 0 1 12 7a4.2 4.2 0 0 1 7.5 2.5c0 5.6-7.5 10-7.5 10z"/>',
+    user: '<circle cx="12" cy="8.5" r="3.8"/><path d="M4.5 20c.6-3.6 3.7-5.6 7.5-5.6s6.9 2 7.5 5.6"/>',
+    bell: '<path d="M6 16v-5a6 6 0 1 1 12 0v5l1.5 2h-15z"/><path d="M10 20.5a2 2 0 0 0 4 0"/>',
+    back: '<path d="M15 5l-7 7 7 7"/>',
+    chev: '<path d="M9 6l6 6-6 6"/>',
+    down: '<path d="M6 9l6 6 6-6"/>',
+    left: '<path d="M14 6l-6 6 6 6"/>',
+    search: '<circle cx="11" cy="11" r="6.5"/><path d="M20 20l-4.2-4.2"/>',
+    receipt: '<path d="M6 3.5h12v17l-2.5-1.5-2 1.5-1.5-1.5-1.5 1.5-2-1.5L6 20.5z"/><path d="M9 8.5h6M9 12h6M9 15.5h3.5"/>',
+    wallet: '<rect x="3.5" y="6" width="17" height="13" rx="2.5"/><path d="M3.5 10h17M15.5 14.5h2"/>',
+    pie: '<path d="M12 3.5v8.5h8.5A8.5 8.5 0 1 1 12 3.5z"/><path d="M15 3.8A8.5 8.5 0 0 1 20.2 9H15z"/>',
+    qr: '<rect x="4" y="4" width="6" height="6" rx="1"/><rect x="14" y="4" width="6" height="6" rx="1"/><rect x="4" y="14" width="6" height="6" rx="1"/><path d="M14 14h2v2h-2zM18 18h2v2h-2zM14 18.5h2M18.5 14h1.5"/>',
+    repeat: '<path d="M4 11V9.5A3.5 3.5 0 0 1 7.5 6H19l-3-3M20 13v1.5a3.5 3.5 0 0 1-3.5 3.5H5l3 3"/>',
+    mail: '<rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="M4 7l8 6 8-6"/>',
+    copy: '<rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"/>',
+    check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+    close: '<path d="M6 6l12 12M18 6 6 18"/>',
+    plus: '<path d="M12 5v14M5 12h14"/>',
+    pen: '<path d="M4 20h4L19 9l-4-4L4 16z"/><path d="M13 7l4 4"/>',
+    more: '<circle cx="5" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="12" cy="12" r="1.3" fill="currentColor" stroke="none"/><circle cx="19" cy="12" r="1.3" fill="currentColor" stroke="none"/>',
+    lock: '<rect x="5" y="10.5" width="14" height="9.5" rx="2"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5"/>',
+    bookmark: '<path d="M7 4h10v16l-5-3.5L7 20z"/>',
+    flag: '<path d="M5 21V4m0 0h11l-2 4 2 4H5"/>',
+    block: '<circle cx="12" cy="12" r="8"/><path d="M6.5 6.5l11 11"/>',
+    gear: '<circle cx="12" cy="12" r="3"/><path d="M12 3v2.5M12 18.5V21M3 12h2.5M18.5 12H21M5.6 5.6l1.8 1.8M16.6 16.6l1.8 1.8M5.6 18.4l1.8-1.8M16.6 7.4l1.8-1.8"/>',
+    users: '<circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19c.5-3 2.8-4.6 5.5-4.6s5 1.6 5.5 4.6"/><path d="M15.5 5.6a3 3 0 0 1 0 5.8M17 14.6c2 .5 3.2 2 3.5 4.4"/>',
+    headset: '<path d="M4.5 14v-2a7.5 7.5 0 0 1 15 0v2"/><rect x="3.5" y="13" width="4" height="6" rx="1.5"/><rect x="16.5" y="13" width="4" height="6" rx="1.5"/>',
+    doc: '<path d="M7 3.5h7l4 4v13H7z"/><path d="M14 3.5v4h4M9.5 12h6M9.5 15.5h6"/>',
+    mega: '<path d="M4 10v4h3l7 4V6L7 10z"/><path d="M17.5 9.5a3.5 3.5 0 0 1 0 5"/>',
+    brief: '<rect x="3.5" y="7" width="17" height="12" rx="2"/><path d="M9 7V5.5h6V7M3.5 12h17"/>',
+    logout: '<path d="M14 4h4.5a1.5 1.5 0 0 1 1.5 1.5v13a1.5 1.5 0 0 1-1.5 1.5H14M10 16l-4-4 4-4M6 12h10"/>',
+    clock: '<circle cx="12" cy="12" r="8"/><path d="M12 8v4.5l3 1.5"/>',
+    target: '<circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="4"/>',
+    question: '<circle cx="12" cy="12" r="8.5"/><path d="M9.6 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-1 .8-1 1.5v.5M12 16.8v.2"/>',
+    chart: '<path d="M4 20h16M7 16v-4M11 16V8M15 16v-6M19 16V5"/>',
+    shield: '<path d="M12 3.5l7 2.5v5.5c0 4.4-3 7.7-7 9-4-1.3-7-4.6-7-9V6z"/><path d="M9 12l2 2 4-4"/>',
+    globe: '<circle cx="12" cy="12" r="8.5"/><path d="M3.5 12h17M12 3.5c2.5 2.5 3.5 5.5 3.5 8.5s-1 6-3.5 8.5c-2.5-2.5-3.5-5.5-3.5-8.5s1-6 3.5-8.5z"/>',
+    card: '<rect x="3.5" y="6" width="17" height="12" rx="2"/><path d="M3.5 10h17M7 14.5h4"/>',
+    bank: '<path d="M4 9.5 12 5l8 4.5M5.5 10v7M10 10v7M14 10v7M18.5 10v7M4 19h16"/>'
+  };
+  const ic = (n, cls) => `<svg class="i${cls ? ' ' + cls : ''}" viewBox="0 0 24 24" aria-hidden="true">${P[n] || ''}</svg>`;
+
+  /* ───────── 도우미 ───────── */
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+  const won = (n) => n.toLocaleString('ko-KR') + '원';
+  const man = (n) => {
+    if (n >= 10000) { const v = n / 10000; return (Number.isInteger(v) ? v : v.toFixed(1)) + '만'; }
+    if (n >= 1000) return n / 1000 + '천';
+    return String(n);
+  };
+  const WD = ['일', '월', '화', '수', '목', '금', '토'];
+  const dLabel = (iso) => { const d = new Date(iso + 'T00:00:00'); return `${d.getMonth() + 1}월 ${d.getDate()}일 (${WD[d.getDay()]})`; };
+  const store = {
+    get(k, def) { try { const v = localStorage.getItem('gc-proto-' + k); return v == null ? def : JSON.parse(v); } catch (e) { return def; } },
+    set(k, v) { try { localStorage.setItem('gc-proto-' + k, JSON.stringify(v)); } catch (e) { /* 저장이 막혀도 화면은 그대로 동작 */ } }
+  };
+
+  /* ───────── 예시 데이터 (모두 가상) ───────── */
+  const TYPE_COLOR = { 십일조: 'var(--chart-1)', 감사헌금: 'var(--chart-2)', 선교헌금: 'var(--chart-3)', 주일헌금: 'var(--chart-4)', 건축헌금: 'var(--chart-5)', 구제헌금: '#f5b84a' };
+  const TYPES = ['십일조', '주일헌금', '감사헌금', '선교헌금', '건축헌금', '구제헌금'];
+  const TODAY = '2026-10-20';
+  let DB;
+  function freshDB() {
+    return {
+      church: '감사교회(예시)',
+      me: { name: '홍길동', role: '집사', group: '청년부', level: 3 },
+      offerings: [
+        { id: 'o1', date: '2026-10-17', type: '십일조', amt: 300000, via: '가상계좌 입금 · 11:42', kind: 'va' },
+        { id: 'o2', date: '2026-10-17', type: '감사헌금', amt: 15000, via: '봉투 헌금 · 10월 12일 주일', kind: 'env' },
+        { id: 'o3', date: '2026-10-05', type: '선교헌금', amt: 5000, via: '정기 헌금 (CMS)', kind: 'cms' },
+        { id: 'o4', date: '2026-09-21', type: '감사헌금', amt: 15000, via: '봉투 헌금 · 9월 21일 주일', kind: 'env' },
+        { id: 'o5', date: '2026-09-14', type: '십일조', amt: 280000, via: '가상계좌 입금 · 09:10', kind: 'va' },
+        { id: 'o6', date: '2026-09-05', type: '선교헌금', amt: 5000, via: '정기 헌금 (CMS)', kind: 'cms' }
+      ],
+      recurring: [{ id: 'r1', type: '선교헌금', amt: 5000, day: 5, next: '11월 5일' }],
+      questions: [
+        { id: 'q1', title: '주차장 보수 비용은 어디에서 나가나요?', body: '9월 리포트에 시설비가 늘었던데 주차장 보수 때문인지 궁금합니다.', anon: true, date: '10월 10일', answer: '네, 9월 시설비 중 410만 원이 주차장 바닥 보수 비용입니다. 견적서 3곳을 비교해 가장 낮은 곳과 계약했고, 운영위원회 회의록에 기록되어 있습니다. — 재정부' },
+        { id: 'q2', title: '선교헌금은 어떤 선교지에 쓰이나요?', body: '매달 정기 헌금을 드리고 있는데 쓰임이 궁금합니다.', anon: false, date: '9월 28일', answer: '선교헌금은 협력 선교지 3곳의 정기 후원(월 420만 원)과 단기 선교 준비에 쓰입니다. 선교지별 금액은 10월 리포트부터 따로 보여 드리겠습니다. — 재정부' },
+        { id: 'q3', title: '리포트에 예산 대비 표를 넣어 주실 수 있나요?', body: '항목별로 예산과 실제 집행을 나란히 보고 싶습니다.', anon: true, date: '10월 18일', answer: null }
+      ],
+      projects: [
+        { id: 'p1', name: '선교센터 건축', raised: 3100, goal: 5000, until: '2027년 6월', desc: '해외 단기 선교팀이 머물며 훈련할 수 있는 센터를 짓습니다. 모인 헌금은 건축헌금 계정으로 따로 관리하고, 매달 사용 내역을 공개합니다.' },
+        { id: 'p2', name: '청년부 겨울 수련회 지원', raised: 400, goal: 500, until: '2026년 12월', desc: '참가비가 부담되는 청년 30명의 참가비 절반을 지원합니다.' },
+        { id: 'p3', name: '이웃 겨울나기 구제', raised: 140, goal: 400, until: '2027년 2월', desc: '교회 주변 홀로 사는 어르신 40가구에 난방비와 생필품을 드립니다.' }
+      ],
+      boards: [
+        { id: 'free', name: '자유게시판', desc: '교인 누구나' },
+        { id: 'pray', name: '기도 제목', desc: '함께 기도해요' },
+        { id: 'young', name: '청년부', desc: '청년부만' },
+        { id: 'teen', name: '중고등부', desc: '청소년 전용 (D-15)' },
+        { id: 'share', name: '나눔·장터', desc: '물건 나눔' },
+        { id: 'union', name: '연합 게시판', desc: '여러 교회 함께 (D-16)', union: true }
+      ],
+      posts: [
+        { id: 'a1', board: 'pray', title: '어머니 수술이 잘 끝나도록 기도 부탁드려요', body: '다음 주 화요일에 어머니가 무릎 수술을 받으세요. 연세가 있으셔서 걱정이 많습니다. 회복까지 잘 되도록 함께 기도해 주시면 감사하겠습니다.', anon: true, likes: 34, time: '2시간 전', mine: false, comments: [{ who: '익명1', text: '함께 기도할게요. 수술 잘 끝나실 거예요.' }, { who: '익명2', text: '저희 어머니도 같은 수술 받으셨는데 금방 걸으셨어요. 힘내세요!' }, { who: '글쓴이', text: '다들 감사합니다. 힘이 됩니다.' }] },
+        { id: 'a2', board: 'free', title: '이번 주 주일 주차 안내 정리했어요', body: '본당 주차장 공사로 이번 주는 길 건너 초등학교 운동장을 씁니다. 9시 30분부터 안내 봉사자가 계세요.', anon: false, author: '김○○ 권사', likes: 12, time: '5시간 전', mine: false, comments: [{ who: '익명1', text: '정리 감사합니다!' }] },
+        { id: 'a3', board: 'young', title: '수련회 방 배정은 언제 나오나요?', body: '신청은 했는데 방 배정 공지가 아직 없어서요. 혹시 아시는 분?', anon: true, likes: 5, time: '어제', mine: false, comments: [{ who: '익명1', text: '이번 주 금요일에 단톡방에 올린다고 들었어요.' }] },
+        { id: 'a4', board: 'share', title: '아기 카시트 나눔합니다 (신생아용)', body: '1년 정도 쓴 신생아용 카시트 나눔합니다. 주일 3부 예배 뒤 로비에서 드릴게요.', anon: false, author: '이○○ 집사', likes: 9, time: '어제', mine: false, comments: [] },
+        { id: 'a5', board: 'union', title: '[연합] 성탄절 연합 찬양제 함께 준비할 교회 찾아요', body: '지역 교회 청년부가 함께하는 성탄 찬양제를 준비합니다. 관심 있는 교회 청년부는 댓글 남겨 주세요.', anon: true, church: '다른 교회(예시)', likes: 21, time: '2일 전', mine: false, comments: [{ who: '익명1', text: '저희 교회도 관심 있어요!' }] },
+        { id: 'a6', board: 'free', title: '새가족 환영 점심 메뉴 추천 받아요', body: '다음 달 새가족 환영회 점심을 준비하는데 메뉴 추천 부탁드려요.', anon: true, likes: 3, time: '3일 전', mine: false, comments: [] }
+      ],
+      notices: [
+        { t: '[공지] 연말정산 기부금영수증 안내', d: '10월 15일' },
+        { t: '[공지] 11월 정기 헌금(CMS) 출금일 안내', d: '10월 10일' },
+        { t: '[공지] 앱 업데이트: 하단 메뉴가 4개로 바뀌었어요', d: '11월 6일' }
+      ],
+      blocked: [],
+      seq: 100
+    };
+  }
+  DB = freshDB();
+
+  /* ───────── 메뉴 목록 (MY 검색 대상, A-165) ───────── */
+  const MENU = [
+    { g: '헌금·재정', n: '헌금하기', to: 'U-11', i: 'heart', al: ['헌금', '온라인헌금', '결제'] },
+    { g: '헌금·재정', n: '내 헌금 계좌', to: 'U-14', i: 'wallet', al: ['계좌', '입금', '가상계좌', '계좌번호'] },
+    { g: '헌금·재정', n: 'QR 헌금', to: 'U-15', i: 'qr', al: ['큐알', 'qr코드'] },
+    { g: '헌금·재정', n: '정기 헌금', to: 'U-16', i: 'repeat', al: ['자동이체', 'CMS', '매달'] },
+    { g: '헌금·재정', n: '내 헌금 내역', to: 'U-20', i: 'receipt', al: ['헌금 내역', '내역', '기록'] },
+    { g: '헌금·재정', n: '기부금영수증', to: 'U-22', i: 'doc', al: ['연말정산', '소득공제', '영수증', '세금'] },
+    { g: '헌금·재정', n: '영수증 발급 정보', to: 'U-23', i: 'lock', al: ['주민번호', '주민등록번호', '발급 정보'] },
+    { g: '헌금·재정', n: '나의 헌금 리포트', to: 'U-25', i: 'chart', al: ['리포트', '통계', '올해 헌금'] },
+    { g: '헌금·재정', n: '교회 재정 리포트', to: 'U-30', i: 'pie', al: ['재정', '결산', '재정 공개', '수입', '지출'] },
+    { g: '헌금·재정', n: '목적헌금', to: 'U-32', i: 'target', al: ['건축헌금', '프로젝트', '건축'] },
+    { g: '헌금·재정', n: '재정 Q&A', to: 'U-34', i: 'question', al: ['질문', '재정 질문', '문의'] },
+    { g: '헌금·재정', n: '교회 카드 사용 내역', to: 'U-71', i: 'card', al: ['카드', '교회카드', '법인카드', '카드 내역', '사용 내역'] },
+    { g: '커뮤니티', n: '커뮤니티 홈', to: 'U-60', i: 'chat', al: ['커뮤니티', '게시판', '익명'] },
+    { g: '커뮤니티', n: '글쓰기', to: 'U-63', i: 'pen', al: ['글 쓰기', '게시글'] },
+    { g: '커뮤니티', n: '연합 게시판', to: 'U-66', i: 'globe', al: ['연합', '다른 교회'] },
+    { g: '커뮤니티', n: '내 활동·차단 목록', to: 'U-68', i: 'block', al: ['차단', '내가 쓴 글', '내 댓글'] },
+    { g: '내 업무', n: '집행 목록', to: 'U-40', i: 'brief', al: ['집행', '예산', '업무'], only: '집행자만' },
+    { g: '내 업무', n: '사용 내역 등록', to: 'U-42', i: 'receipt', al: ['지출 등록', '증빙'], only: '집행자만' },
+    { g: '내 업무', n: '정산 요청', to: 'U-43', i: 'check', al: ['정산'], only: '집행자만' },
+    { g: '계정·설정', n: '내 정보', to: 'U-51', i: 'user', al: ['프로필', '전화번호', '이름'] },
+    { g: '계정·설정', n: '가족 관리', to: 'U-52', i: 'users', al: ['가족', '자녀', '배우자'] },
+    { g: '계정·설정', n: '알림 설정', to: 'U-54', i: 'gear', al: ['푸시', '알림 끄기'] },
+    { g: '계정·설정', n: '간편 비밀번호 변경', to: 'U-08', i: 'lock', al: ['비밀번호', '비번', '암호'] },
+    { g: '고객 지원', n: '알림', to: 'U-53', i: 'bell', al: ['알림함', '소식'] },
+    { g: '고객 지원', n: '공지사항', to: 'U-55', i: 'mega', al: ['공지', '안내'] },
+    { g: '고객 지원', n: '고객센터', to: 'U-56', i: 'headset', al: ['문의', '상담', '전화', '도움말'] },
+    { g: '고객 지원', n: '약관·정책', to: 'U-57', i: 'doc', al: ['약관', '개인정보처리방침', '정책'] },
+    { g: '고객 지원', n: '회원 탈퇴', to: 'U-58', i: 'logout', al: ['탈퇴', '계정 삭제'] }
+  ];
+  const GROUPS = ['헌금·재정', '커뮤니티', '내 업무', '계정·설정', '고객 지원'];
+
+  /* ───────── 상태·이동 ───────── */
+  const TABS = [
+    { key: 'home', label: '홈', icon: 'home', root: 'U-10' },
+    { key: 'community', label: '커뮤니티', icon: 'chat', root: 'U-60' },
+    { key: 'giving', label: '헌금·재정', icon: 'heart', root: 'U-70' },
+    { key: 'my', label: 'MY', icon: 'user', root: 'U-50' }
+  ];
+  const S = {
+    tab: 'home',
+    stacks: { home: [{ id: 'U-10' }], community: [{ id: 'U-60' }], giving: [{ id: 'U-70' }], my: [{ id: 'U-50' }] },
+    section: ['give', 'history', 'public'].includes(store.get('section', 'give')) ? store.get('section', 'give') : 'give',   // A-163: 마지막으로 본 구역을 기억
+    histSub: 'list',
+    month: '2026-10',
+    filter: '전체',
+    pubSub: 'report',
+    cardM: 9,
+    q: '',
+    draft: null,
+    give: null
+  };
+  // 화면이 어느 탭에 속하는지 (다른 탭에서 바로가기로 들어올 때 해당 탭으로 옮긴다)
+  const TAB_OF = (id) => {
+    const n = parseInt(id.slice(2), 10);
+    if (id === 'U-53' || id === 'U-55') return null; // 알림·공지는 지금 탭 위에 연다
+    if (id === 'U-10') return 'home';
+    if ((n >= 11 && n <= 36) || n === 70) return 'giving';
+    if (n >= 60 && n <= 69) return 'community';
+    return 'my';
+  };
+  const area = document.getElementById('area');
+  const phone = document.getElementById('phone');
+  const cur = () => S.stacks[S.tab][S.stacks[S.tab].length - 1];
+
+  function saveScroll() {
+    const b = area.querySelector('.body');
+    if (b) cur().scroll = b.scrollTop;
+  }
+  function go(id, p) {
+    // U-30·U-20·U-22는 헌금·재정 홈의 구역으로 연다
+    if (id === 'U-30') { openSection('public'); S.pubSub = 'report'; return render(); }
+    if (id === 'U-20') { openSection('history'); S.histSub = 'list'; return render(); }
+    if (id === 'U-22') { openSection('history'); S.histSub = 'receipt'; return render(); }
+    if (id === 'U-32') { openSection('public'); S.pubSub = 'project'; return render(); }
+    if (id === 'U-34') { openSection('public'); S.pubSub = 'qa'; return render(); }
+    if (id === 'U-71') { openSection('public'); S.pubSub = 'card'; return render(); }
+    if (id === 'U-11') p = Object.assign({ fresh: true }, p);
+    saveScroll();
+    const tab = TAB_OF(id) || S.tab;
+    const root = TABS.find((t) => t.key === tab).root;
+    if (tab !== S.tab) { S.tab = tab; S.stacks[tab] = [{ id: root }]; }
+    if (id === root) { S.stacks[tab] = [{ id: root }]; return render(true); }
+    S.stacks[S.tab].push({ id, p: p || {} });
+    render(true);
+  }
+  function openSection(sec) {
+    saveScroll();
+    S.tab = 'giving';
+    S.stacks.giving = [{ id: 'U-70' }];
+    setSection(sec);
+  }
+  function setSection(sec) { S.section = sec; store.set('section', sec); }
+  function back() {
+    const st = S.stacks[S.tab];
+    if (st.length > 1) { st.pop(); render(); }
+  }
+  function replaceTop(id, p) { const st = S.stacks[S.tab]; st[st.length - 1] = { id, p: p || {} }; render(true); }
+  function toRoot(tab) { saveScroll(); S.tab = tab; S.stacks[tab] = [S.stacks[tab][0]]; S.stacks[tab][0].scroll = 0; render(); }
+  function switchTab(tab) {
+    if (tab === S.tab) return toRoot(tab);
+    saveScroll();
+    S.tab = tab;
+    render();
+  }
+
+  /* ───────── 공통 조각 ───────── */
+  const sid = (id) => `<span class="sid">${id}</span>`;
+  const hdr = (title, id, right) => `<header class="hdr"><button class="icon-btn" data-act="back" aria-label="뒤로">${ic('back')}</button><div class="ttl">${title}</div>${sid(id)}${right || ''}</header>`;
+  const bigHdr = (title, id, right) => `<header class="hdr big"><div class="ttl">${title}</div>${sid(id)}${right || ''}</header>`;
+  const row = (o) => `<button class="row" type="button" ${o.attr || ''}>${o.icon ? `<span class="ic-box ${o.tone || ''}">${ic(o.icon, 's')}</span>` : ''}<span class="grow"><span class="t" style="display:block">${o.t}</span>${o.s ? `<span class="s" style="display:block">${o.s}</span>` : ''}</span>${o.right || ''}${o.noChev ? '' : `<span class="chev">${ic('chev', 's')}</span>`}</button>`;
+  const goAttr = (id, p) => `data-go="${id}"${p ? ` data-p='${esc(JSON.stringify(p))}'` : ''}`;
+  const toast = (msg) => {
+    const old = phone.querySelector('.toast'); if (old) old.remove();
+    const t = document.createElement('div'); t.className = 'toast'; t.setAttribute('role', 'status'); t.textContent = msg;
+    phone.appendChild(t); setTimeout(() => t.remove(), 2400);
+  };
+  function sheet(html) {
+    closeSheet();
+    const d = document.createElement('div'); d.className = 'dim'; d.id = 'dim';
+    d.innerHTML = `<div class="sheet" role="dialog" aria-modal="true"><div class="grab"></div>${html}</div>`;
+    d.addEventListener('click', (e) => { if (e.target === d) closeSheet(); });
+    phone.appendChild(d);
+    const f = d.querySelector('button, input'); if (f) f.focus();
+  }
+  function closeSheet() { const d = document.getElementById('dim'); if (d) d.remove(); }
+
+  const monthOf = (m) => DB.offerings.filter((o) => o.date.startsWith(m));
+  const sum = (arr) => arr.reduce((a, o) => a + o.amt, 0);
+  function byType(list) {
+    const m = {};
+    list.forEach((o) => { m[o.type] = (m[o.type] || 0) + o.amt; });
+    return Object.entries(m).sort((a, b) => b[1] - a[1]);
+  }
+  // 파란 카드 위에서는 십일조가 배경과 같은 색이 되므로 밝은 색 묶음을 따로 쓴다
+  const HERO_COLOR = { 십일조: '#ffffff', 감사헌금: '#5fe0d3', 선교헌금: '#a9bcff', 주일헌금: '#c9d7ff', 건축헌금: '#7dd3fc', 구제헌금: '#fcd34d' };
+  const stack = (list, total, colors) => `<div class="bar">${byType(list).map(([t, v]) => `<i style="width:${(v / total) * 100}%;background:${(colors || TYPE_COLOR)[t]}"></i>`).join('')}</div>`;
+  const short = (t) => t.replace('헌금', '') || t;
+
+  /* ───────── 화면들 ───────── */
+  const SCREENS = {};
+
+  /* U-10 홈 */
+  SCREENS['U-10'] = () => {
+    const list = monthOf('2026-10'), total = sum(list), prev = sum(monthOf('2026-09'));
+    const diff = total - prev;
+    const p = DB.projects[0];
+    return `<header class="hdr big"><button class="church-btn" type="button" data-toast="교회 바꾸기: 여러 교회에 다니면 여기서 고릅니다">${DB.church} ${ic('down', 's')}</button><div style="flex:1"></div>${sid('U-10')}<button class="icon-btn" ${goAttr('U-53')} aria-label="알림">${ic('bell')}<span class="dot"></span></button></header>
+    <div class="body">
+      <div class="small">${DB.me.name} 님, 평안하세요</div>
+      <section class="hero">
+        <div class="k">이번 달 내 헌금 <button type="button" data-go="U-20">내역 ›</button></div>
+        <div><div class="amount num">${won(total)}</div><div class="small" style="color:var(--on-hero-sub)">${list.length}건 · 지난달보다 ${won(Math.abs(diff))} ${diff >= 0 ? '많아요' : '적어요'}</div></div>
+        ${stack(list, total, HERO_COLOR)}
+        <div class="legend">${byType(list).map(([t, v]) => `<span><i style="background:${HERO_COLOR[t]}"></i>${short(t)} ${man(v)}</span>`).join('')}</div>
+      </section>
+      <div class="quick">
+        <button type="button" ${goAttr('U-11')}><span class="ic-box">${ic('heart', 's')}</span>헌금하기</button>
+        <button type="button" ${goAttr('U-14')}><span class="ic-box teal">${ic('wallet', 's')}</span>내 헌금 계좌</button>
+        <button type="button" ${goAttr('U-22')}><span class="ic-box gray">${ic('receipt', 's')}</span>기부금영수증</button>
+      </div>
+      <div class="sec-title">진행 중인 목적헌금 <button class="link" ${goAttr('U-32')}>전체 ${ic('chev', 'xs')}</button></div>
+      <button class="card" type="button" ${goAttr('U-33', { id: p.id })} style="border:0;text-align:left;display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;justify-content:space-between;width:100%"><b style="font-size:16px">${p.name}</b><b style="color:var(--accent)">${Math.round((p.raised / p.goal) * 100)}%</b></div>
+        <div class="bar" style="width:100%"><i style="width:${(p.raised / p.goal) * 100}%;background:var(--accent)"></i></div>
+        <div class="small num">${p.raised.toLocaleString()}만 / ${p.goal.toLocaleString()}만 원</div>
+      </button>
+      <div class="card tight">
+        ${row({ icon: 'pie', t: '9월 교회 재정 리포트', s: '10월 8일 발행', attr: goAttr('U-31', { m: 9 }), right: '<span class="pill blue">NEW</span>' })}
+        ${row({ icon: 'mega', tone: 'gray', t: DB.notices[0].t, s: DB.notices[0].d, attr: goAttr('U-55') })}
+      </div>
+    </div>`;
+  };
+
+  /* U-70 헌금·재정 홈 */
+  SCREENS['U-70'] = () => {
+    const segs = [['give', '헌금'], ['history', '내역·영수증'], ['public', '재정 공개']];
+    let body = '';
+    if (S.section === 'give') body = secGive();
+    else if (S.section === 'history') body = secHistory();
+    else body = secPublic();
+    return `${bigHdr('헌금·재정', 'U-70')}
+    <div class="body">
+      <div class="sticky"><div class="seg" role="tablist" aria-label="헌금·재정 구역">${segs.map(([k, l]) => `<button type="button" role="tab" aria-selected="${S.section === k}" data-sec="${k}">${l}</button>`).join('')}</div></div>
+      ${body}
+    </div>`;
+  };
+  function secGive() {
+    const r = DB.recurring;
+    const total = sum(monthOf('2026-10'));
+    return `
+      <section class="hero">
+        <div><div style="font-size:20px;line-height:28px;font-weight:800">헌금하기</div><div class="small" style="color:var(--on-hero-sub)">헌금 종류와 금액을 고르면 바로 드릴 수 있어요</div></div>
+        <button class="btn" type="button" style="background:#fff;color:var(--primary)" ${goAttr('U-11')}>헌금하기</button>
+      </section>
+      <div class="card tight">
+        ${row({ icon: 'wallet', tone: 'teal', t: '내 헌금 계좌', s: '가상은행(예시) · 보내면 내 헌금으로 기록', attr: goAttr('U-14') })}
+        ${row({ icon: 'repeat', t: '정기 헌금', s: r.length ? `${r[0].type} 매월 ${r[0].day}일 ${won(r[0].amt)}${r.length > 1 ? ` 외 ${r.length - 1}건` : ''}` : '등록된 정기 헌금이 없어요', attr: goAttr('U-16') })}
+        ${row({ icon: 'qr', tone: 'gray', t: 'QR 헌금', s: '예배당 QR을 찍어 헌금', attr: goAttr('U-15') })}
+      </div>
+      <button class="card" type="button" data-sec="history" style="border:0;display:flex;align-items:center;justify-content:space-between;text-align:left">
+        <span><span class="small" style="display:block">이번 달 드린 헌금</span><span class="amount-m num">${won(total)}</span></span>
+        <span class="link">내역 보기 ${ic('chev', 'xs')}</span>
+      </button>
+      <div class="sec-title">목적헌금</div>
+      <div class="card tight">${DB.projects.slice(0, 2).map((p) => row({ icon: 'target', tone: 'teal', t: p.name, s: `${Math.round((p.raised / p.goal) * 100)}% · ${p.until}까지`, attr: goAttr('U-33', { id: p.id }) })).join('')}</div>`;
+  }
+  function secHistory() {
+    const sub = `<div class="seg" role="tablist" aria-label="내역·영수증"><button type="button" role="tab" aria-selected="${S.histSub === 'list'}" data-hist="list">헌금 내역</button><button type="button" role="tab" aria-selected="${S.histSub === 'receipt'}" data-hist="receipt">기부금영수증</button></div>`;
+    if (S.histSub === 'receipt') {
+      const y26 = DB.offerings.filter((o) => o.date.startsWith('2026')).reduce((a, o) => a + o.amt, 0);
+      return `${sub}${sid('U-22')}
+      <button class="card" type="button" ${goAttr('U-23')} style="border:0;text-align:left;display:flex;align-items:center;gap:12px">
+        <span class="ic-box teal">${ic('check', 's')}</span>
+        <span style="flex:1"><b style="display:block">발급 정보가 등록되어 있어요</b><span class="small">주민등록번호 900101-1****** (예시)</span></span>
+        <span class="link">수정 ${ic('chev', 'xs')}</span>
+      </button>
+      <div class="sec-title">연도별 영수증</div>
+      <div class="card tight">
+        ${row({ icon: 'clock', tone: 'gray', t: '2026년 영수증', s: `2027년 1월 10일 발급 예정 · 지금까지 ${won(y26 + 2310000)}`, right: '<span class="pill">예정</span>', attr: 'data-toast="2026년 영수증은 2027년 1월 10일에 발급돼요"' })}
+        ${row({ icon: 'receipt', t: '2025년 영수증', s: '전자 발급 · 2026.01.09', right: '<b class="num" style="font-size:15px">2,840,000원</b>', attr: goAttr('U-24', { y: 2025 }) })}
+        ${row({ icon: 'receipt', t: '2024년 영수증', s: '전자 발급 · 2025.01.10', right: '<b class="num" style="font-size:15px">2,610,000원</b>', attr: goAttr('U-24', { y: 2024 }) })}
+      </div>
+      <div class="note">${ic('shield', 's')}<span>전자기부금영수증은 국세청 연말정산 간소화 자료에 자동으로 반영돼요. 따로 제출하지 않아도 돼요.</span></div>`;
+    }
+    const list = monthOf(S.month);
+    const types = ['전체', ...Array.from(new Set(list.map((o) => o.type)))];
+    if (!types.includes(S.filter)) S.filter = '전체';
+    const shown = S.filter === '전체' ? list : list.filter((o) => o.type === S.filter);
+    const days = {};
+    shown.forEach((o) => { (days[o.date] = days[o.date] || []).push(o); });
+    const [y, m] = S.month.split('-').map(Number);
+    const ICON = { va: 'wallet', env: 'mail', cms: 'repeat', app: 'heart' };
+    return `${sub}${sid('U-20')}
+      <div style="display:flex;align-items:center;gap:4px">
+        <button class="icon-btn" type="button" data-month="-1" aria-label="이전 달" ${S.month === '2026-09' ? 'disabled style="opacity:.3"' : ''}>${ic('left', 's')}</button>
+        <b style="font-size:17px" class="num">${y}년 ${m}월</b>
+        <button class="icon-btn" type="button" data-month="1" aria-label="다음 달" ${S.month === '2026-10' ? 'disabled style="opacity:.3"' : ''}>${ic('chev', 's')}</button>
+      </div>
+      <div class="card" style="display:flex;justify-content:space-between;align-items:center"><span class="small">${m}월 합계</span><span class="amount-m num" style="color:var(--primary)">${won(sum(list))}</span></div>
+      <div class="chips">${types.map((t) => `<button type="button" class="chip" aria-pressed="${S.filter === t}" data-filter="${t}">${t === '전체' ? t : short(t)}</button>`).join('')}</div>
+      ${Object.keys(days).sort().reverse().map((d) => `<div class="micro" style="font-size:13px;margin-bottom:-8px">${dLabel(d)}</div><div class="card tight">${days[d].map((o) => row({ icon: ICON[o.kind], t: o.type, s: o.via, right: `<b class="num" style="font-size:15px">${won(o.amt)}</b>`, noChev: true, attr: goAttr('U-21', { id: o.id }) })).join('')}</div>`).join('') || '<div class="empty">이 달에는 헌금 내역이 없어요</div>'}
+      <div class="card tight">${row({ icon: 'chart', tone: 'teal', t: '나의 헌금 리포트', s: '올해 드린 헌금을 한눈에', attr: goAttr('U-25') })}</div>`;
+  }
+  const EXP = [['사역', 38, 'var(--chart-1)'], ['인건비', 27, 'var(--chart-2)'], ['선교', 15, 'var(--chart-3)'], ['구제', 8, 'var(--chart-4)'], ['운영', 12, 'var(--chart-5)']];
+  function donut(parts, size) {
+    const r = 15.915, c = 2 * Math.PI * r; let off = 0;
+    const arcs = parts.map(([, v, col]) => { const len = (v / 100) * c; const s = `<circle r="${r}" cx="21" cy="21" fill="none" stroke="${col}" stroke-width="6" stroke-dasharray="${len - 0.6} ${c - len + 0.6}" stroke-dashoffset="${-off}" transform="rotate(-90 21 21)"/>`; off += len; return s; }).join('');
+    return `<svg viewBox="0 0 42 42" width="${size}" height="${size}" role="img" aria-label="지출 구성 도넛 차트">${arcs}<text x="21" y="20" text-anchor="middle" font-size="4" fill="var(--text-sub)" font-family="inherit">집행률</text><text x="21" y="25.5" text-anchor="middle" font-size="6" font-weight="800" fill="var(--text)" font-family="inherit">94%</text></svg>`;
+  }
+  function secPublic() {
+    const sub = `<div class="chips" role="tablist" aria-label="재정 공개">${[['report', '재정 리포트'], ['project', '목적헌금'], ['qa', 'Q&A'], ['card', '카드 사용']].map(([k, l]) => `<button type="button" role="tab" class="chip" aria-pressed="${S.pubSub === k}" data-pub="${k}">${l}</button>`).join('')}</div>`;
+    if (S.pubSub === 'project') {
+      return `${sub}${sid('U-32')}${DB.projects.map((p) => `<button class="card" type="button" ${goAttr('U-33', { id: p.id })} style="border:0;text-align:left;display:flex;flex-direction:column;gap:10px">
+        <span style="display:flex;justify-content:space-between;width:100%"><b style="font-size:16px">${p.name}</b><b style="color:var(--accent)">${Math.round((p.raised / p.goal) * 100)}%</b></span>
+        <span class="bar" style="width:100%"><i style="width:${(p.raised / p.goal) * 100}%;background:var(--accent)"></i></span>
+        <span class="small num">${p.raised.toLocaleString()}만 / ${p.goal.toLocaleString()}만 원 · ${p.until}까지</span></button>`).join('')}`;
+    }
+    if (S.pubSub === 'qa') return `${sub}${qaList()}`;
+    if (S.pubSub === 'card') return `${sub}${cardUse()}`;
+    return `${sub}${sid('U-30')}
+      <section class="card" style="display:flex;flex-direction:column;gap:16px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><b style="font-size:17px">9월 재정 요약</b><span class="micro">10월 8일 발행</span></div>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+          <div style="background:var(--primary-soft);border-radius:12px;padding:12px"><div class="small">수입</div><div class="amount-m num" style="color:var(--primary)">8,420만 원</div></div>
+          <div style="background:var(--accent-soft);border-radius:12px;padding:12px"><div class="small">지출</div><div class="amount-m num" style="color:#0b7f74">7,960만 원</div></div>
+        </div>
+        <div><div class="small" style="font-weight:700;margin-bottom:8px">지출 구성 · 예산 대비 집행률 94%</div>
+          <div class="donut-wrap">${donut(EXP, 112)}<div class="legend">${EXP.map(([n, v, c]) => `<span><span style="display:inline-flex;align-items:center;gap:6px"><i style="background:${c}"></i>${n}</span><em class="num">${v}%</em></span>`).join('')}</div></div>
+        </div>
+        <div class="note blue">${ic('lock', 's')}<span>개인별 헌금액과 헌금자 명단은 공개되지 않아요</span></div>
+      </section>
+      <div class="sec-title">월별 리포트</div>
+      <div class="card tight">
+        ${row({ icon: 'pie', t: '9월 재정 리포트', s: '10월 8일 발행 · 재정부장 설명', right: '<span class="pill blue">NEW</span>', attr: goAttr('U-31', { m: 9 }) })}
+        ${row({ icon: 'pie', tone: 'gray', t: '8월 재정 리포트', s: '9월 9일 발행', attr: goAttr('U-31', { m: 8 }) })}
+        ${row({ icon: 'pie', tone: 'gray', t: '7월 재정 리포트', s: '8월 8일 발행', attr: goAttr('U-31', { m: 7 }) })}
+      </div>
+      <div class="card tight">${row({ icon: 'question', tone: 'teal', t: '재정 Q&A', s: `질문 ${DB.questions.length}개 · 답변 ${DB.questions.filter((q) => q.answer).length}개`, attr: 'data-pub="qa"' })}</div>`;
+  }
+  /* U-71 교회 카드 사용 내역 (D-23, F-081) — 월 마감 뒤 리포트와 함께 공개, 카드 쓴 사람 이름은 보이지 않음 */
+  const CARD_USE = {
+    9: { pub: '10월 8일', rows: [
+      ['9.27', '한빛 식자재마트', '친교위원회', '친교·행사', 512000], ['9.26', '새길 주유소', '시설위원회', '차량 유지', 138000], ['9.24', null, '친교위원회', '구제', 186000, '구제비 과목'],
+      ['9.20', '들꽃 꽃집', '예배위원회', '예배', 90000], ['9.19', '북카페 다락', '청년부', '교육', 84000], ['9.13', '한빛 식자재마트', '친교위원회', '친교·행사', 468000],
+      ['9.12', null, '교회학교', '교육', 31500, '의료 업종'], ['9.11', '생명의말씀 서점', '교회학교', '교육', 176000], ['9.06', '들꽃 꽃집', '예배위원회', '예배', 85000], ['9.03', '바른 문구', '재정위원회', '사무·통신', 64000]
+    ], hidden: [1, 120000, '교역자 경조사 (본인 요청)'] },
+    8: { pub: '9월 9일', rows: [
+      ['8.29', '한빛 식자재마트', '친교위원회', '친교·행사', 544000], ['8.23', '새길 주유소', '시설위원회', '차량 유지', 121000], ['8.21', '북카페 다락', '청년부', '교육', 62000],
+      ['8.16', '들꽃 꽃집', '예배위원회', '예배', 92000], ['8.09', '은혜 기독교백화점', '예배위원회', '예배', 118000], ['8.02', '한빛 식자재마트', '친교위원회', '친교·행사', 401000]
+    ], hidden: [0, 0, ''] },
+    7: { pub: '8월 8일', rows: [
+      ['7.26', '한빛 식자재마트', '친교위원회', '친교·행사', 590000], ['7.19', '새길 주유소', '시설위원회', '차량 유지', 147000], ['7.12', '들꽃 꽃집', '예배위원회', '예배', 99000],
+      ['7.05', '한빛 식자재마트', '친교위원회', '친교·행사', 610000], ['7.04', '생명의말씀 서점', '교회학교', '교육', 205000]
+    ], hidden: [0, 0, ''] }
+  };
+  function cardUse() {
+    const m = CARD_USE[S.cardM] ? S.cardM : 9; const d = CARD_USE[m];
+    const total = d.rows.reduce((a, r) => a + r[4], 0) + d.hidden[1];
+    const by = {}; d.rows.forEach((r) => { by[r[3]] = (by[r[3]] || 0) + r[4]; });
+    const keys = Object.keys(by).sort((a, b) => by[b] - by[a]); const mx = Math.max(...keys.map((k) => by[k]));
+    const masked = d.rows.filter((r) => !r[1]).length;
+    return `${sid('U-71')}<div class="chips" role="tablist" aria-label="달">${[9, 8, 7].map((x) => `<button type="button" role="tab" class="chip" aria-pressed="${m === x}" data-cardm="${x}">${x}월</button>`).join('')}</div>
+      <section class="card" style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between;align-items:baseline"><b style="font-size:17px">${m}월 교회 카드 사용</b><span class="micro">${d.pub} 리포트와 함께 공개</span></div>
+        <div style="background:var(--primary-soft);border-radius:12px;padding:12px"><div class="small">합계 · ${d.rows.length + d.hidden[0]}건</div><div class="amount-m num" style="color:var(--primary)">${total.toLocaleString()}원</div></div>
+        <div style="display:flex;flex-direction:column;gap:8px">${keys.map((k) => `<div style="display:grid;grid-template-columns:72px 1fr 84px;gap:8px;align-items:center" class="small"><span>${k}</span><span class="bar" style="height:8px"><i style="width:${(by[k] / mx) * 100}%;background:var(--chart-2)"></i></span><span class="num" style="text-align:right;color:var(--text)">${by[k].toLocaleString()}원</span></div>`).join('')}</div>
+      </section>
+      <div class="sec-title">사용 내역</div>
+      <div class="card tight">${d.rows.map((r) => row({ icon: 'card', tone: r[1] ? '' : 'gray', t: r[1] ? esc(r[1]) : '가맹점 가림', s: `${r[0]} · ${r[2]} · ${r[3]}${r[5] ? ' · ' + r[5] + '이라 가림' : ''}`, right: `<b class="num" style="font-size:14px">${r[4].toLocaleString()}원</b>`, noChev: true, attr: 'data-toast="카드 사용 상세는 프로토타입에서 생략했어요"' })).join('')}
+        ${d.hidden[0] ? row({ icon: 'lock', tone: 'gray', t: `비공개 ${d.hidden[0]}건`, s: `사유: ${d.hidden[2]} · 합계에는 들어가요`, right: `<b class="num" style="font-size:14px">${d.hidden[1].toLocaleString()}원</b>`, noChev: true, attr: 'data-toast="비공개 건은 금액만 합계에 들어가요"' }) : ''}</div>
+      <div class="note blue">${ic('lock', 's')}<span>카드를 쓴 사람 이름은 보이지 않고 사용 부서만 보여요. 구제·의료 관련 가맹점은 가려져요${masked ? ` (이번 달 ${masked}건)` : ''}.</span></div>
+      <div class="note">${ic('shield', 's')}<span>월 마감 뒤 재정부가 확인한 내역만 공개돼요. 교회가 공개를 켠 경우에만 이 칩이 보여요.</span></div>
+      <button class="btn sub" type="button" ${goAttr('U-35')}>카드 사용에 대해 질문하기</button>`;
+  }
+  function qaList() {
+    return `${sid('U-34')}<div class="card tight">${DB.questions.map((q) => row({ t: esc(q.title), s: `${q.anon ? '이름 숨김' : DB.me.name} · ${q.date}`, right: q.answer ? '<span class="pill green">답변 완료</span>' : '<span class="pill">답변 대기</span>', attr: goAttr('U-36', { id: q.id }) })).join('')}</div>
+      <button class="btn sub" type="button" ${goAttr('U-35')}>재정부에 질문하기</button>
+      <div class="note">${ic('shield', 's')}<span>질문은 재정부와 교회 관리자만 답할 수 있어요. 이름을 숨겨도 재정부는 질문한 사람을 볼 수 없어요.</span></div>`;
+  }
+
+  /* U-11 헌금하기 */
+  SCREENS['U-11'] = (p) => {
+    if (!S.give || p.fresh) { S.give = { type: p.type || '십일조', amt: 0, method: 'bank', receipt: true, project: p.project || null }; p.fresh = false; }
+    const g = S.give;
+    const methods = [['bank', '계좌 간편결제', '예시은행 ****12 · 수수료 가장 적음'], ['card', '카드 간편결제', '등록된 카드로 결제'], ['va', '내 헌금 계좌로 보내기', '은행 앱에서 직접 입금']];
+    return `${hdr('헌금하기', 'U-11')}
+    <div class="body">
+      ${g.project ? `<div class="note blue">${ic('target', 's')}<span>목적헌금 <b>${esc(g.project)}</b>에 드려요</span></div>` : ''}
+      <div class="field"><span class="lbl">헌금 종류</span><div class="chips">${TYPES.map((t) => `<button type="button" class="chip" aria-pressed="${g.type === t}" data-gtype="${t}">${t}</button>`).join('')}</div></div>
+      <div class="field"><label for="amt">금액</label>
+        <div style="display:flex;align-items:baseline;gap:6px;border-bottom:2px solid ${g.amt ? 'var(--primary)' : 'var(--line)'};padding:4px 2px 8px">
+          <input id="amt" class="num" inputmode="numeric" autocomplete="off" placeholder="0" value="${g.amt ? g.amt.toLocaleString('ko-KR') : ''}" style="border:0;outline:0;background:transparent;font-size:30px;line-height:40px;font-weight:800;width:100%;min-width:0">
+          <span style="font-size:20px;font-weight:700">원</span>
+        </div>
+        <div class="chips">${[10000, 50000, 100000].map((v) => `<button type="button" class="chip" data-add="${v}">+${man(v)}</button>`).join('')}<button type="button" class="chip" data-add="0">지우기</button></div>
+      </div>
+      <div class="field"><span class="lbl">결제 수단</span><div style="display:grid;gap:8px" role="radiogroup" aria-label="결제 수단">${methods.map(([k, t, s]) => `<button type="button" class="radio-row" role="radio" aria-checked="${g.method === k}" data-method="${k}"><span class="dotc"></span><span><b style="display:block;font-size:15px">${t}</b><span class="small">${s}</span></span></button>`).join('')}</div></div>
+      <div class="card" style="display:flex;align-items:center;gap:12px;padding:14px 16px"><span style="flex:1"><b style="display:block;font-size:15px">기부금영수증에 넣기</b><span class="small">연말정산 때 세금을 돌려받을 수 있어요</span></span><label class="switch"><input type="checkbox" id="rcpt" ${g.receipt ? 'checked' : ''} aria-label="기부금영수증에 넣기"><span></span></label></div>
+    </div>
+    <div class="btn-bar"><button class="btn" type="button" id="giveNext" data-go="U-12" ${g.amt > 0 ? '' : 'disabled'}>${g.amt > 0 ? won(g.amt) + ' 헌금하기' : '금액을 입력해 주세요'}</button></div>`;
+  };
+  /* U-12 결제 확인 */
+  SCREENS['U-12'] = () => {
+    const g = S.give;
+    if (g.method === 'va') {
+      return `${hdr('내 헌금 계좌로 보내기', 'U-12')}<div class="body">${vaCard()}<div class="note blue">${ic('check', 's')}<span>은행 앱에서 위 계좌로 <b class="num">${won(g.amt)}</b>을 보내면 '${g.type}'으로 기록돼요. 다른 종류로 기록되면 내역에서 바꿀 수 있어요.</span></div></div>
+      <div class="btn-bar"><button class="btn line" type="button" data-act="copyva">계좌번호 복사</button><button class="btn" type="button" data-act="home">확인</button></div>`;
+    }
+    return `${hdr('헌금 확인', 'U-12')}
+    <div class="body">
+      <div class="card" style="text-align:center;display:flex;flex-direction:column;gap:4px;padding:24px 18px"><span class="small">${esc(g.project || g.type)}</span><span class="amount num">${won(g.amt)}</span></div>
+      <div class="card"><dl class="kv"><dt>헌금 종류</dt><dd>${g.type}</dd><dt>결제 수단</dt><dd>${g.method === 'bank' ? '계좌 간편결제 (예시은행 ****12)' : '카드 간편결제'}</dd><dt>기부금영수증</dt><dd>${g.receipt ? '2026년분에 넣기' : '넣지 않음'}</dd><dt>교회</dt><dd>${DB.church}</dd></dl></div>
+      <div class="note warn">${ic('lock', 's')}<span>프로토타입이라 실제 결제되지 않아요. 실제 앱에서는 이 단계에서 간편 비밀번호를 입력해요.</span></div>
+    </div>
+    <div class="btn-bar"><button class="btn" type="button" data-act="pay">헌금 드리기</button></div>`;
+  };
+  /* U-13 완료 */
+  SCREENS['U-13'] = (p) => {
+    const o = DB.offerings.find((x) => x.id === p.id);
+    return `<header class="hdr">${'<div style="width:40px"></div>'}<div class="ttl"></div>${sid('U-13')}<button class="icon-btn" data-act="home" aria-label="닫기">${ic('close')}</button></header>
+    <div class="body" style="align-items:center;text-align:center;justify-content:center">
+      <span class="ic-box" style="width:72px;height:72px;border-radius:50%;background:var(--accent-soft);color:var(--accent)">${ic('check')}</span>
+      <div><div style="font-size:22px;line-height:30px;font-weight:800">헌금을 드렸어요</div><div class="small">${o.type} · ${dLabel(o.date)}</div></div>
+      <div class="amount num">${won(o.amt)}</div>
+      <div class="note" style="text-align:left">${ic('receipt', 's')}<span>${o.receipt === false ? '기부금영수증에는 넣지 않았어요.' : '2026년 기부금영수증에 자동으로 들어가요.'} 홈과 내역에도 바로 보여요.</span></div>
+    </div>
+    <div class="btn-bar"><button class="btn line" type="button" data-go="U-20">내역 보기</button><button class="btn" type="button" data-act="home">확인</button></div>`;
+  };
+  function vaCard() {
+    return `<div class="card" style="display:flex;flex-direction:column;gap:12px">
+      <div style="display:flex;align-items:center;gap:10px"><span class="ic-box teal">${ic('bank', 's')}</span><span><b style="display:block">가상은행(예시)</b><span class="small">예금주 ${DB.church}</span></span></div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:8px;background:var(--surface-alt);border-radius:12px;padding:12px 14px"><span class="amount-m num" style="font-size:18px">000-0000-0000-00</span><button class="btn sm sub" type="button" data-act="copyva">${ic('copy', 'xs')} 복사</button></div>
+      <div class="micro">예시 계좌번호예요. 실제로 입금되지 않아요.</div>
+    </div>`;
+  }
+  /* U-14 내 헌금 계좌 */
+  SCREENS['U-14'] = () => `${hdr('내 헌금 계좌', 'U-14')}
+    <div class="body">
+      <div class="small">나에게만 주어진 헌금 전용 계좌예요. 이 계좌로 보내면 이름을 따로 적지 않아도 내 헌금으로 기록돼요.</div>
+      ${vaCard()}
+      <div class="card tight">
+        ${row({ icon: 'heart', t: '기본 헌금 종류', s: '이 계좌로 들어온 돈은 십일조로 기록', right: '<span class="small">십일조</span>', attr: 'data-toast="기본 종류 바꾸기 — 시트에서 고릅니다 (프로토타입 생략)"' })}
+        ${row({ icon: 'receipt', tone: 'gray', t: '들어온 헌금 보기', s: '종류를 잘못 골랐다면 내역에서 바꿀 수 있어요', attr: goAttr('U-20') })}
+      </div>
+      <div class="note">${ic('shield', 's')}<span>교회 공용 계좌로 보내도 되지만, 그때는 재정부가 이름을 확인한 뒤 기록해요. 내 헌금 계좌로 보내면 바로 기록돼요.</span></div>
+    </div>`;
+  /* U-15 QR 헌금 */
+  SCREENS['U-15'] = () => {
+    let cells = ''; let seed = 7;
+    const rnd = () => { seed = (seed * 9301 + 49297) % 233280; return seed / 233280; };
+    const fin = (x, y) => (x < 7 && y < 7) || (x > 13 && y < 7) || (x < 7 && y > 13);
+    for (let y = 0; y < 21; y++) for (let x = 0; x < 21; x++) {
+      let on;
+      if (fin(x, y)) { const lx = x > 13 ? x - 14 : x, ly = y > 13 ? y - 14 : y; on = lx === 0 || lx === 6 || ly === 0 || ly === 6 || (lx >= 2 && lx <= 4 && ly >= 2 && ly <= 4); }
+      else on = rnd() > 0.52;
+      if (on) cells += `<rect x="${x}" y="${y}" width="1" height="1"/>`;
+    }
+    return `${hdr('QR 헌금', 'U-15')}
+    <div class="body">
+      <div class="card" style="display:flex;flex-direction:column;gap:14px;align-items:center;text-align:center">
+        <svg class="qr" viewBox="0 0 21 21" shape-rendering="crispEdges" fill="var(--ink)" role="img" aria-label="예시 QR 그림">${cells}</svg>
+        <div><b>예배당 헌금함과 주보에 있는 QR</b><div class="small">휴대폰 카메라로 찍으면 헌금하기 화면이 바로 열려요. 헌금 종류가 미리 골라져 있어요.</div></div>
+        <span class="pill">예시 그림 · 찍히지 않아요</span>
+      </div>
+      <button class="btn" type="button" data-toast="프로토타입에서는 카메라를 쓰지 않아요">QR 찍기</button>
+    </div>`;
+  };
+  /* U-16 정기 헌금 */
+  SCREENS['U-16'] = () => `${hdr('정기 헌금', 'U-16')}
+    <div class="body">
+      ${DB.recurring.map((r) => `<div class="card" style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:16px">${r.type}</b><span class="pill teal">CMS 자동이체</span></div>
+        <div class="amount-m num">매월 ${r.day}일 ${won(r.amt)}</div>
+        <div class="small">다음 출금 ${r.next} · 예시은행 ****12</div>
+        <div style="display:flex;gap:8px"><button class="btn sm line" type="button" data-toast="금액·날짜 바꾸기 (프로토타입 생략)">바꾸기</button><button class="btn sm line" type="button" data-cancelrec="${r.id}">해지</button></div>
+      </div>`).join('') || '<div class="empty">등록된 정기 헌금이 없어요</div>'}
+      <button class="btn sub" type="button" ${goAttr('U-17')}>${ic('plus', 's')} 정기 헌금 추가</button>
+      <div class="note">${ic('repeat', 's')}<span>정한 날짜에 자동으로 출금되고, 내역과 기부금영수증에 자동으로 들어가요.</span></div>
+    </div>`;
+  /* U-17 정기 헌금 등록 */
+  SCREENS['U-17'] = () => {
+    const d = S.rec || (S.rec = { type: '선교헌금', amt: 10000, day: 10 });
+    return `${hdr('정기 헌금 등록', 'U-17')}
+    <div class="body">
+      <div class="field"><span class="lbl">헌금 종류</span><div class="chips">${TYPES.map((t) => `<button type="button" class="chip" aria-pressed="${d.type === t}" data-rtype="${t}">${t}</button>`).join('')}</div></div>
+      <div class="field"><span class="lbl">매달 금액</span><div class="chips">${[5000, 10000, 30000, 50000, 100000].map((v) => `<button type="button" class="chip" aria-pressed="${d.amt === v}" data-ramt="${v}">${won(v)}</button>`).join('')}</div></div>
+      <div class="field"><span class="lbl">출금일</span><div class="chips">${[5, 10, 15, 25].map((v) => `<button type="button" class="chip" aria-pressed="${d.day === v}" data-rday="${v}">매월 ${v}일</button>`).join('')}</div></div>
+      <div class="field"><span class="lbl">출금 계좌</span><div class="card" style="display:flex;gap:10px;align-items:center;padding:14px 16px"><span class="ic-box gray">${ic('lock', 's')}</span><span class="small">실제 앱에서는 본인 인증 뒤 본인 명의 계좌를 연결해요. 프로토타입에서는 계좌를 입력받지 않아요.</span></div></div>
+    </div>
+    <div class="btn-bar"><button class="btn" type="button" data-act="addrec">매월 ${d.day}일 ${won(d.amt)} 등록하기</button></div>`;
+  };
+  /* U-21 헌금 상세 */
+  SCREENS['U-21'] = (p) => {
+    const o = DB.offerings.find((x) => x.id === p.id);
+    if (!o) return `${hdr('헌금 상세', 'U-21')}<div class="body"><div class="empty">내역을 찾을 수 없어요</div></div>`;
+    return `${hdr('헌금 상세', 'U-21')}
+    <div class="body">
+      <div class="card" style="text-align:center;padding:24px 18px"><div class="small">${o.type}</div><div class="amount num">${won(o.amt)}</div></div>
+      <div class="card"><dl class="kv"><dt>날짜</dt><dd>${dLabel(o.date)}</dd><dt>드린 방법</dt><dd>${o.via}</dd><dt>기부금영수증</dt><dd>${o.receipt === false ? '넣지 않음' : '2026년분에 들어감'}</dd><dt>교회</dt><dd>${DB.church}</dd></dl></div>
+      ${o.kind === 'va' || o.kind === 'app' ? `<button class="btn line" type="button" data-chtype="${o.id}">헌금 종류 바꾸기</button>` : ''}
+      ${o.kind === 'app' ? `<button class="btn line" type="button" data-toast="취소 요청은 재정부가 확인한 뒤 처리돼요 (F-019)">헌금 취소 요청</button>` : ''}
+      <div class="note">${ic('shield', 's')}<span>${o.kind === 'env' ? '봉투 헌금은 재정부가 입력했어요. 틀린 곳이 있으면 재정부에 알려 주세요.' : '종류를 바꾸면 재정부에 기록이 남아요. 월 마감 뒤에는 바꿀 수 없어요.'}</span></div>
+    </div>`;
+  };
+  /* U-23 발급 정보 */
+  SCREENS['U-23'] = () => `${hdr('영수증 발급 정보', 'U-23')}
+    <div class="body">
+      <div class="small">기부금영수증을 국세청에 보내려면 주민등록번호가 필요해요.</div>
+      <div class="field"><label for="f-name">이름</label><input id="f-name" class="input" value="${DB.me.name}" disabled></div>
+      <div class="field"><label for="f-rrn">주민등록번호</label><div style="position:relative"><input id="f-rrn" class="input num" value="900101-1******" disabled><span style="position:absolute;right:12px;top:12px;color:var(--text-faint)">${ic('lock', 's')}</span></div></div>
+      <div class="field"><label for="f-addr">주소</label><input id="f-addr" class="input" value="서울시 ○○구 ○○로 (예시)" disabled></div>
+      <div class="note warn">${ic('lock', 's')}<span>프로토타입에서는 주민등록번호를 입력받지 않아요. 실제 앱에서는 암호화해 보관하고, 재정부도 가운데 자리를 볼 수 없어요.</span></div>
+    </div>
+    <div class="btn-bar"><button class="btn" type="button" disabled>수정 (프로토타입에서는 막혀 있어요)</button></div>`;
+  /* U-24 영수증 상세 */
+  SCREENS['U-24'] = (p) => {
+    const y = p.y || 2025;
+    const data = y === 2025 ? [['십일조', 2400000], ['감사헌금', 180000], ['선교헌금', 60000], ['건축헌금', 200000]] : [['십일조', 2280000], ['감사헌금', 150000], ['선교헌금', 60000], ['구제헌금', 120000]];
+    const tot = data.reduce((a, d) => a + d[1], 0);
+    return `${hdr(`${y}년 기부금영수증`, 'U-24')}
+    <div class="body">
+      <div class="stamp">예시 화면 · 실제 영수증이 아닙니다</div>
+      <div class="card" style="display:flex;flex-direction:column;gap:14px">
+        <div style="display:flex;justify-content:space-between"><b>기부 금액 합계</b><b class="num" style="color:var(--primary)">${won(tot)}</b></div>
+        <dl class="kv"><dt>기부자</dt><dd>${DB.me.name}</dd><dt>기부처</dt><dd>${DB.church} (종교단체)</dd><dt>기간</dt><dd class="num">${y}.01.01 ~ ${y}.12.31</dd><dt>발급</dt><dd>전자 발급 · 국세청 반영</dd></dl>
+        <div style="border-top:1px solid var(--line);padding-top:12px;display:grid;gap:8px">${data.map(([t, v]) => `<div style="display:flex;justify-content:space-between" class="small"><span>${t}</span><span class="num">${won(v)}</span></div>`).join('')}</div>
+      </div>
+      <button class="btn line" type="button" data-toast="프로토타입에서는 파일을 만들지 않아요">PDF로 저장</button>
+    </div>`;
+  };
+  /* U-25 나의 헌금 리포트 */
+  SCREENS['U-25'] = () => {
+    const base = [285000, 290000, 290000, 285000, 290000, 300000, 285000, 285000, sum(monthOf('2026-09')), sum(monthOf('2026-10'))];
+    const max = Math.max(...base);
+    const tot = base.reduce((a, b) => a + b, 0);
+    const types = byType(DB.offerings.filter((o) => o.date.startsWith('2026')));
+    return `${hdr('나의 헌금 리포트', 'U-25')}
+    <div class="body">
+      <div class="card" style="display:flex;flex-direction:column;gap:14px">
+        <div><div class="small">2026년 1~10월에 드린 헌금</div><div class="amount num">${won(tot)}</div><div class="small" style="color:var(--success)">작년 같은 기간보다 4% 늘었어요</div></div>
+        <div class="months" role="img" aria-label="월별 헌금 막대 그래프">${base.map((v, i) => `<div><i class="${i === 9 ? 'cur' : ''}" style="height:${(v / max) * 92}px" title="${i + 1}월 ${won(v)}"></i><span>${i + 1}월</span></div>`).join('')}</div>
+      </div>
+      <div class="card" style="display:flex;flex-direction:column;gap:10px"><b>9~10월 종류별</b>${types.map(([t, v]) => `<div style="display:flex;justify-content:space-between" class="small"><span style="display:inline-flex;gap:6px;align-items:center"><i style="width:8px;height:8px;border-radius:3px;background:${TYPE_COLOR[t]}"></i>${t}</span><span class="num">${won(v)}</span></div>`).join('')}</div>
+      <div class="note">${ic('lock', 's')}<span>이 리포트는 나만 볼 수 있어요.</span></div>
+    </div>`;
+  };
+  /* U-31 재정 리포트 상세 */
+  SCREENS['U-31'] = (p) => {
+    const m = p.m || 9;
+    const inc = [['십일조', 4380], ['주일헌금', 1520], ['감사헌금', 1010], ['선교헌금', 760], ['목적헌금', 590], ['기타', 160]];
+    const exp = [['사역', 3025], ['인건비', 2149], ['선교', 1194], ['운영', 955], ['구제', 637]];
+    const tbl = (rows, col) => { const mx = Math.max(...rows.map((r) => r[1])); return rows.map(([n, v]) => `<div style="display:grid;grid-template-columns:64px 1fr 72px;gap:8px;align-items:center" class="small"><span>${n}</span><span class="bar" style="height:8px"><i style="width:${(v / mx) * 100}%;background:${col}"></i></span><span class="num" style="text-align:right;color:var(--text)">${v.toLocaleString()}만</span></div>`).join(''); };
+    return `${hdr(`${m}월 재정 리포트`, 'U-31')}
+    <div class="body">
+      ${m !== 9 ? '<div class="note">예시로 9월과 같은 숫자를 보여 줘요.</div>' : ''}
+      <div class="card" style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;justify-content:space-between"><b>수입</b><b class="num" style="color:var(--primary)">8,420만 원</b></div>${tbl(inc, 'var(--chart-1)')}</div>
+      <div class="card" style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;justify-content:space-between"><b>지출</b><b class="num" style="color:#0b7f74">7,960만 원</b></div>${tbl(exp, 'var(--chart-2)')}</div>
+      <div class="card" style="display:flex;flex-direction:column;gap:8px"><b>재정부장 설명</b><p class="small" style="margin:0">9월에는 주차장 바닥 보수(410만 원)로 운영비가 늘었습니다. 선교센터 건축헌금은 별도 계정으로 관리하며 이번 달 220만 원이 모였습니다. 남은 460만 원은 다음 달로 이월합니다.</p></div>
+      <button class="btn sub" type="button" ${goAttr('U-35')}>이 리포트에 대해 질문하기</button>
+    </div>`;
+  };
+  /* U-33 목적헌금 상세 */
+  SCREENS['U-33'] = (p) => {
+    const pr = DB.projects.find((x) => x.id === p.id) || DB.projects[0];
+    const pct = Math.round((pr.raised / pr.goal) * 100);
+    return `${hdr('목적헌금', 'U-33')}
+    <div class="body">
+      <div class="card" style="display:flex;flex-direction:column;gap:12px">
+        <b style="font-size:20px;line-height:28px">${pr.name}</b>
+        <div style="display:flex;align-items:baseline;gap:8px"><span class="amount num" style="color:var(--accent)">${pct}%</span><span class="small num">${pr.raised.toLocaleString()}만 / ${pr.goal.toLocaleString()}만 원</span></div>
+        <div class="bar"><i style="width:${pct}%;background:var(--accent)"></i></div>
+        <div class="small">${pr.until}까지</div>
+      </div>
+      <div class="card"><p class="small" style="margin:0">${pr.desc}</p></div>
+      <div class="note">${ic('pie', 's')}<span>사용 내역은 매달 재정 리포트에 함께 공개돼요.</span></div>
+    </div>
+    <div class="btn-bar"><button class="btn" type="button" data-go="U-11" data-p='${esc(JSON.stringify({ type: '건축헌금', project: pr.name, fresh: true }))}'>이 프로젝트에 헌금하기</button></div>`;
+  };
+  /* U-35 질문 작성 */
+  SCREENS['U-35'] = () => `${hdr('재정부에 질문하기', 'U-35')}
+    <div class="body">
+      <div class="field"><label for="q-title">제목</label><input id="q-title" class="input" maxlength="50" placeholder="예: 9월 시설비가 늘어난 이유가 궁금해요"></div>
+      <div class="field"><label for="q-body">내용</label><textarea id="q-body" class="input" maxlength="1000" placeholder="궁금한 점을 적어 주세요"></textarea></div>
+      <div class="card" style="display:flex;align-items:center;gap:12px;padding:14px 16px"><span style="flex:1"><b style="display:block;font-size:15px">이름 숨기기</b><span class="small">다른 교인에게 내 이름이 보이지 않아요</span></span><label class="switch"><input type="checkbox" id="q-anon" checked aria-label="이름 숨기기"><span></span></label></div>
+    </div>
+    <div class="btn-bar"><button class="btn" type="button" data-act="ask">질문 올리기</button></div>`;
+  /* U-36 Q&A 상세 */
+  SCREENS['U-36'] = (p) => {
+    const q = DB.questions.find((x) => x.id === p.id);
+    return `${hdr('재정 Q&A', 'U-36')}
+    <div class="body">
+      <div class="card" style="display:flex;flex-direction:column;gap:8px"><span class="pill ${q.answer ? 'green' : ''}" style="align-self:flex-start">${q.answer ? '답변 완료' : '답변 대기'}</span><b style="font-size:17px;line-height:24px">${esc(q.title)}</b><div class="micro">${q.anon ? '이름 숨김' : DB.me.name} · ${q.date}</div><p class="small" style="margin:4px 0 0">${esc(q.body)}</p></div>
+      ${q.answer ? `<div class="card" style="display:flex;flex-direction:column;gap:8px;border-left:4px solid var(--primary)"><b>재정부 답변</b><p class="small" style="margin:0">${esc(q.answer)}</p></div>` : '<div class="note">재정부가 확인하고 있어요. 답변이 오면 알림으로 알려 드려요.</div>'}
+    </div>`;
+  };
+
+  /* ── 커뮤니티 ── */
+  const visiblePosts = (f) => DB.posts.filter((x) => !DB.blocked.includes(x.id) && f(x));
+  const postItem = (x) => {
+    const b = DB.boards.find((bb) => bb.id === x.board);
+    return `<button class="post" type="button" ${goAttr('U-62', { id: x.id })}><span class="pt">${esc(x.title)}</span><span class="pb">${esc(x.body)}</span><span class="meta"><span>${b.name}</span><span>${x.anon ? '익명' : esc(x.author || DB.me.name)}${x.church ? ' · ' + x.church : ''}</span><span>${x.time}</span><span style="margin-left:auto;color:var(--danger)">${ic('heart', 'xs')}${x.likes}</span><span style="color:var(--primary)">${ic('chat', 'xs')}${x.comments.length}</span></span></button>`;
+  };
+  SCREENS['U-60'] = () => {
+    const hot = visiblePosts(() => true).filter((x) => x.likes >= 10).sort((a, b) => b.likes - a.likes);
+    const recent = visiblePosts((x) => x.board !== 'union').slice(0, 4);
+    return `${bigHdr('커뮤니티', 'U-60', `<button class="icon-btn" ${goAttr('U-68')} aria-label="내 활동">${ic('user')}</button>`)}
+    <div class="body">
+      <button class="note blue" type="button" style="border:0;text-align:left" data-toast="커뮤니티 이용 동의(U-67): 처음 들어올 때 한 번 동의해요">${ic('shield', 's')}<span>우리 교회 교인만 보는 공간이에요. 이름·연락처·계좌번호는 올리지 말아 주세요. <b>이용 규칙 ›</b></span></button>
+      <div class="boards">${DB.boards.map((b) => `<button type="button" ${b.union ? goAttr('U-66') : goAttr('U-61', { b: b.id })}><b>${b.name}</b><span class="micro">${b.desc}</span></button>`).join('')}</div>
+      <div class="sec-title">공감 많은 글</div>
+      <div class="card tight">${hot.map(postItem).join('')}</div>
+      <div class="sec-title">최근 글</div>
+      <div class="card tight">${recent.map(postItem).join('')}</div>
+      <div style="height:48px"></div>
+    </div>
+    <button class="fab" type="button" ${goAttr('U-63')}>${ic('pen', 's')}글쓰기</button>`;
+  };
+  SCREENS['U-61'] = (p) => {
+    const b = DB.boards.find((x) => x.id === p.b) || DB.boards[0];
+    const list = visiblePosts((x) => x.board === b.id);
+    return `${hdr(b.name, 'U-61')}
+    <div class="body">${b.id === 'teen' ? '<div class="note blue">중고등부 전용 게시판이에요. 보호자 동의를 받은 청소년과 교역자만 볼 수 있어요.</div>' : ''}
+      <div class="card tight">${list.map(postItem).join('') || '<div class="empty">아직 글이 없어요. 첫 글을 써 보세요</div>'}</div><div style="height:48px"></div></div>
+    <button class="fab" type="button" data-go="U-63" data-p='${esc(JSON.stringify({ b: b.id }))}'>${ic('pen', 's')}글쓰기</button>`;
+  };
+  SCREENS['U-66'] = () => {
+    const list = visiblePosts((x) => x.board === 'union');
+    return `${hdr('연합 게시판', 'U-66')}
+    <div class="body"><div class="note blue">${ic('globe', 's')}<span>이 서비스를 쓰는 여러 교회 교인이 함께 보는 게시판이에요. 글쓴이 교회 이름만 보여요.</span></div>
+      <div class="card tight">${list.map(postItem).join('')}</div><div style="height:48px"></div></div>
+    <button class="fab" type="button" data-go="U-63" data-p='${esc(JSON.stringify({ b: 'union' }))}'>${ic('pen', 's')}글쓰기</button>`;
+  };
+  SCREENS['U-62'] = (p) => {
+    const x = DB.posts.find((y) => y.id === p.id);
+    if (!x) return `${hdr('글', 'U-62')}<div class="body"><div class="empty">글을 찾을 수 없어요</div></div>`;
+    const b = DB.boards.find((bb) => bb.id === x.board);
+    return `${hdr(b.name, 'U-62', `<button class="icon-btn" type="button" data-postmenu="${x.id}" aria-label="더 보기">${ic('more')}</button>`)}
+    <div class="body">
+      <article class="card" style="display:flex;flex-direction:column;gap:12px">
+        <div style="display:flex;align-items:center;gap:10px"><span class="avatar" style="width:36px;height:36px;font-size:14px">${x.anon ? '익' : esc((x.author || DB.me.name).slice(0, 1))}</span><span><b style="display:block;font-size:14px">${x.anon ? '익명' : esc(x.author || DB.me.name)}${x.mine ? ' <span class="pill blue">내 글</span>' : ''}</b><span class="micro">${x.church ? x.church + ' · ' : ''}${x.time}</span></span></div>
+        <b style="font-size:18px;line-height:26px">${esc(x.title)}</b>
+        <p style="margin:0;white-space:pre-wrap">${esc(x.body)}</p>
+        <div style="display:flex;gap:8px"><button class="btn sm line" type="button" data-like="${x.id}" style="color:${x.liked ? 'var(--danger)' : 'inherit'}">${ic('heart', 'xs')} 공감 ${x.likes}</button><button class="btn sm line" type="button" data-scrap="${x.id}">${ic('bookmark', 'xs')} ${x.scrap ? '스크랩함' : '스크랩'}</button></div>
+      </article>
+      <div class="card" style="padding:4px 18px"><div style="padding:12px 0 4px" class="small"><b>댓글 ${x.comments.length}</b> · 익명 댓글은 글마다 익명1, 익명2 순서로 번호가 붙어요</div>
+        ${x.comments.map((c) => `<div class="cmt"><span class="who">${esc(c.who)}${c.who === '글쓴이' ? ' <span class="pill blue">글쓴이</span>' : ''}${c.me ? ' <span class="pill">나</span>' : ''}</span><span class="small" style="color:var(--text)">${esc(c.text)}</span></div>`).join('') || '<div class="empty" style="padding:16px">첫 댓글을 남겨 보세요</div>'}
+      </div>
+    </div>
+    <form class="cmt-bar" data-cform="${x.id}"><label class="anon-check"><input type="checkbox" id="c-anon" checked>익명</label><input class="input" id="c-text" placeholder="댓글을 입력하세요" autocomplete="off" aria-label="댓글"><button class="btn sm" type="submit">등록</button></form>`;
+  };
+  SCREENS['U-63'] = (p) => {
+    if (!S.draft || p.b && S.draft.b !== p.b && !S.draft.title) S.draft = { b: p.b || 'free', title: '', body: '', anon: true };
+    const d = S.draft;
+    const warn = /01[0-9][- ]?\d{3,4}[- ]?\d{4}|\d{2,6}-\d{2,6}-\d{2,7}|계좌/.test(d.title + ' ' + d.body);
+    return `${hdr('글쓰기', 'U-63', `<button class="btn sm" type="button" data-act="post" ${d.title.trim() && d.body.trim() ? '' : 'disabled'} style="margin-right:4px">올리기</button>`)}
+    <div class="body">
+      <div class="field"><span class="lbl">게시판</span><div class="chips">${DB.boards.filter((b) => b.id !== 'teen').map((b) => `<button type="button" class="chip" aria-pressed="${d.b === b.id}" data-wboard="${b.id}">${b.name}</button>`).join('')}</div></div>
+      <input id="w-title" class="input" maxlength="50" placeholder="제목 (50자까지)" value="${esc(d.title)}" aria-label="제목">
+      <div class="field"><textarea id="w-body" class="input" maxlength="2000" placeholder="내용을 입력하세요. 특정 교인을 비방하거나 개인정보를 올리면 이용이 제한될 수 있어요." aria-label="내용" style="min-height:180px">${esc(d.body)}</textarea><span class="micro" id="w-count" style="text-align:right">${d.body.length} / 2,000</span></div>
+      <div id="w-warn">${warn ? `<div class="note warn">${ic('shield', 's')}<span>연락처나 계좌번호로 보이는 내용이 있어요. 다른 교인의 개인정보라면 지워 주세요. (F-075)</span></div>` : ''}</div>
+      <div class="card" style="display:flex;align-items:center;gap:12px;padding:14px 16px"><span style="flex:1"><b style="display:block;font-size:15px">익명으로 올리기</b><span class="small">교회가 익명을 켰을 때만 보여요 (D-13)</span></span><label class="switch"><input type="checkbox" id="w-anon" ${d.anon ? 'checked' : ''} aria-label="익명으로 올리기"><span></span></label></div>
+    </div>`;
+  };
+  SCREENS['U-68'] = () => {
+    const mine = DB.posts.filter((x) => x.mine);
+    const blocked = DB.posts.filter((x) => DB.blocked.includes(x.id));
+    return `${hdr('내 활동·차단 목록', 'U-68')}
+    <div class="body">
+      <div class="sec-title">내가 쓴 글</div>
+      <div class="card tight">${mine.map(postItem).join('') || '<div class="empty">아직 쓴 글이 없어요</div>'}</div>
+      <div class="sec-title">차단한 사람</div>
+      <div class="card tight">${blocked.map((x) => `<div class="row"><span class="ic-box gray">${ic('block', 's')}</span><span class="grow"><span class="t" style="display:block">${x.anon ? '익명 글쓴이' : esc(x.author)}</span><span class="s" style="display:block">'${esc(x.title.slice(0, 18))}…' 글에서 차단</span></span><button class="btn sm line" type="button" data-unblock="${x.id}">해제</button></div>`).join('') || '<div class="empty">차단한 사람이 없어요</div>'}</div>
+      <div class="note">${ic('block', 's')}<span>차단은 내 화면에서만 가려요. 상대는 차단된 걸 몰라요.</span></div>
+    </div>`;
+  };
+
+  /* ── MY (U-50) ── */
+  SCREENS['U-50'] = () => `<div class="my-head">
+      <div class="top"><h1>MY</h1><span style="display:flex;gap:4px;align-items:center">${sid('U-50')}<button class="icon-btn" ${goAttr('U-53')} aria-label="알림">${ic('bell')}<span class="dot"></span></button></span></div>
+      <form class="search" role="search" id="menuSearch">${ic('search', 's')}<input id="q" type="search" placeholder="메뉴 검색 (예: 연말정산, 자동이체)" autocomplete="off" value="${esc(S.q)}" aria-label="메뉴 검색">${S.q ? `<button class="clear" type="button" data-act="clearq" aria-label="검색어 지우기">${ic('close', 'xs')}</button>` : ''}</form>
+    </div>
+    <div class="body" id="myBody">${S.q ? searchResults() : myHome()}</div>`;
+  function myHome() {
+    const recent = store.get('recent', []);
+    return `${recent.length ? `<div style="display:flex;flex-direction:column;gap:8px"><div style="display:flex;justify-content:space-between"><span class="small" style="font-weight:700">최근 검색어</span><button class="link" type="button" data-act="clearrecent">전체 삭제</button></div><div class="recent">${recent.map((r, i) => `<span><button class="q" type="button" data-recent="${esc(r)}">${esc(r)}</button><button type="button" data-delrecent="${i}" aria-label="${esc(r)} 지우기">${ic('close', 'xs')}</button></span>`).join('')}</div></div>` : ''}
+      <button class="card" type="button" ${goAttr('U-51')} style="border:0;display:flex;align-items:center;gap:14px;text-align:left">
+        <span class="avatar">${DB.me.name.slice(0, 1)}</span>
+        <span style="flex:1;min-width:0"><b style="display:block;font-size:17px">${DB.me.name} 님</b><span class="small">${DB.church} · ${DB.me.group} · ${DB.me.role}</span></span>
+        <span class="pill blue">Lv.${DB.me.level} 리더</span>
+      </button>
+      <div class="groups">${GROUPS.map((g) => {
+        const items = MENU.filter((m) => m.g === g);
+        return `<section class="card tight group"><h3>${g}${g === '내 업무' ? ' <span class="pill teal">집행자에게만 보여요</span>' : ''}</h3>${items.map((m) => row({ icon: m.i, tone: 'gray', t: m.n, attr: `data-menu="${m.to}"` })).join('')}</section>`;
+      }).join('')}</div>
+      <div style="display:flex;justify-content:center;gap:20px" class="small"><button class="link" type="button" data-toast="로그아웃 (프로토타입에서는 그대로 머물러요)">로그아웃</button><button class="link" type="button" ${goAttr('U-58')}>회원 탈퇴</button></div>
+      <div class="micro" style="text-align:center">앱 버전 1.1 · 프로토타입</div>`;
+  }
+  const norm = (s) => s.toLowerCase().replace(/\s+/g, '');
+  function hl(name, q) {
+    const n = norm(q); if (!n) return esc(name);
+    // 공백을 무시하고 맞는 글자를 찾아 강조
+    const chars = [...name]; let flat = '', map = [];
+    chars.forEach((c, i) => { if (!/\s/.test(c)) { flat += c.toLowerCase(); map.push(i); } });
+    const at = flat.indexOf(n);
+    if (at < 0) return esc(name);
+    const s = map[at], e = map[at + n.length - 1];
+    return esc(chars.slice(0, s).join('')) + '<mark>' + esc(chars.slice(s, e + 1).join('')) + '</mark>' + esc(chars.slice(e + 1).join(''));
+  }
+  function searchResults() {
+    const n = norm(S.q);
+    const res = [];
+    MENU.forEach((m) => {
+      if (norm(m.n).includes(n)) res.push({ m, by: null, rank: norm(m.n).startsWith(n) ? 0 : 1 });
+      else { const a = m.al.find((x) => norm(x).includes(n)); if (a) res.push({ m, by: a, rank: 2 }); }
+    });
+    res.sort((a, b) => a.rank - b.rank);
+    if (!res.length) {
+      return `<div class="empty" style="display:flex;flex-direction:column;gap:12px;align-items:center"><span class="ic-box gray" style="width:56px;height:56px;border-radius:50%">${ic('search')}</span><div><b style="color:var(--text)">'${esc(S.q)}'에 맞는 메뉴가 없어요</b><div class="small">메뉴 이름만 찾을 수 있어요. 글이나 헌금 내역은 찾지 않아요.</div></div><button class="btn sm sub" type="button" data-menu="U-56">고객센터에 물어보기</button></div>`;
+    }
+    return `<div class="small"><b style="color:var(--text)">메뉴 ${res.length}개</b></div><div class="card tight">${res.map(({ m, by }) => row({ icon: m.i, tone: 'gray', t: hl(m.n, S.q), s: by ? `'${hl(by, S.q)}'(으)로 찾음` : null, right: `<span class="grp">${m.g}</span>`, attr: `data-menu="${m.to}" data-save="1"` })).join('')}</div>`;
+  }
+
+  /* ── MY 하위 화면 ── */
+  SCREENS['U-51'] = () => `${hdr('내 정보', 'U-51')}<div class="body">
+      <div class="card" style="display:flex;align-items:center;gap:14px"><span class="avatar">${DB.me.name.slice(0, 1)}</span><span><b style="display:block;font-size:17px">${DB.me.name}</b><span class="small">${DB.church} · ${DB.me.group} · ${DB.me.role}</span></span></div>
+      <div class="card"><dl class="kv"><dt>휴대폰</dt><dd>010-****-5678 (예시)</dd><dt>교적 상태</dt><dd>등록 교인</dd><dt>커뮤니티 레벨</dt><dd>Lv.${DB.me.level} 리더</dd><dt>가입일</dt><dd>2026년 10월 1일</dd></dl></div>
+      <div class="note">교적 정보(이름·소속)는 교회 행정실에서 바꿀 수 있어요.</div></div>`;
+  SCREENS['U-53'] = () => `${hdr('알림', 'U-53')}<div class="body"><div class="card tight">
+      ${row({ icon: 'check', tone: 'teal', t: '십일조 300,000원이 기록됐어요', s: '10월 17일 · 내 헌금 계좌 입금', attr: goAttr('U-21', { id: 'o1' }) })}
+      ${row({ icon: 'pie', t: '9월 교회 재정 리포트가 나왔어요', s: '10월 8일', attr: goAttr('U-31', { m: 9 }) })}
+      ${row({ icon: 'question', tone: 'teal', t: '재정 Q&A에 답변이 달렸어요', s: '10월 11일', attr: goAttr('U-36', { id: 'q1' }) })}
+      ${row({ icon: 'chat', tone: 'gray', t: '내 글에 댓글이 달렸어요', s: '10월 9일', attr: goAttr('U-60') })}
+    </div></div>`;
+  SCREENS['U-54'] = () => `${hdr('알림 설정', 'U-54')}<div class="body"><div class="card tight">${[['헌금 기록·영수증', true], ['정기 헌금 출금 안내', true], ['재정 리포트·목적헌금 소식', true], ['재정 Q&A 답변', true], ['커뮤니티 댓글·공감', false], ['공지사항', true]].map(([t, on], i) => `<div class="row"><span class="grow t">${t}</span><label class="switch"><input type="checkbox" id="nt${i}" ${on ? 'checked' : ''} aria-label="${t}"><span></span></label></div>`).join('')}</div></div>`;
+  SCREENS['U-55'] = () => `${hdr('공지사항', 'U-55')}<div class="body"><div class="card tight">${DB.notices.map((n) => row({ icon: 'mega', tone: 'gray', t: n.t, s: n.d, attr: `data-toast="${esc(n.t)} — 본문 화면은 생략했어요"` })).join('')}</div></div>`;
+  SCREENS['U-56'] = () => `${hdr('고객센터', 'U-56')}<div class="body">
+      <div class="card" style="display:flex;flex-direction:column;gap:6px"><b>무엇을 도와드릴까요?</b><span class="small">평일 10시~18시에 답해 드려요. 헌금 금액이나 교적 문의는 교회 행정실로 연결해 드려요.</span></div>
+      <div class="card tight">${row({ icon: 'chat', t: '1:1 문의하기', s: '보통 하루 안에 답변', attr: 'data-toast="1:1 문의 작성 화면 (프로토타입 생략)"' })}${row({ icon: 'question', tone: 'gray', t: '자주 묻는 질문', s: '기부금영수증 · 정기 헌금 · 계좌', attr: 'data-toast="자주 묻는 질문 목록 (프로토타입 생략)"' })}</div></div>`;
+  SCREENS['U-57'] = () => `${hdr('약관·정책', 'U-57')}<div class="body"><div class="card tight">${['서비스 이용약관', '개인정보 처리방침', '커뮤니티 운영 정책', '전자금융거래 이용약관'].map((t) => row({ icon: 'doc', tone: 'gray', t, attr: 'data-toast="약관 본문 (프로토타입 생략)"' })).join('')}</div></div>`;
+  const PH = {
+    'U-08': ['간편 비밀번호 변경', '헌금·영수증 조회 때 쓰는 숫자 6자리 비밀번호를 바꿔요. 지금 비밀번호 확인 → 새 비밀번호 두 번 입력.'],
+    'U-40': ['집행 목록', '내게 맡겨진 예산 집행 건을 봐요. 집행자로 지정된 교인에게만 MY › 내 업무에 보여요.'],
+    'U-41': ['집행 상세', '집행 건의 예산, 쓴 금액, 남은 금액, 증빙 상태를 봐요.'],
+    'U-42': ['사용 내역 등록', '쓴 돈과 영수증 사진을 올려요. 재정부가 확인해야 장부에 들어가요.'],
+    'U-43': ['정산 요청', '집행을 마치고 남은 돈과 증빙을 정리해 재정부에 정산을 요청해요.'],
+    'U-52': ['가족 관리', '배우자·자녀를 연결해 가족 헌금을 함께 보고, 자녀 헌금을 대신 드릴 수 있어요. (2차)'],
+    'U-58': ['회원 탈퇴', '탈퇴해도 교회 장부의 헌금 기록과 이미 발급된 영수증은 법에 따라 남아요. 안내 확인 → 사유 선택 → 간편 비밀번호.'],
+    'U-64': ['작성자 확인', '기준 레벨 이상 계정만 익명 글쓴이를 확인할 수 있어요. 확인한 기록이 남아요. (D-12)'],
+    'U-65': ['신고하기', 'Lv.3 이상만 신고할 수 있어요. (D-17)'],
+    'U-67': ['커뮤니티 이용 동의', '처음 들어올 때 규칙에 동의해요.'],
+    'U-69': ['보호자 동의', '중고등부 청소년이 가입할 때 보호자에게 동의를 받아요. (D-15)']
+  };
+  Object.entries(PH).forEach(([id, [t, d]]) => {
+    SCREENS[id] = () => `${hdr(t, id)}<div class="body"><div class="card" style="display:flex;flex-direction:column;gap:10px"><span class="pill blue" style="align-self:flex-start">${id}</span><b style="font-size:17px">${t}</b><p class="small" style="margin:0">${d}</p></div><div class="note">이 화면은 프로토타입에서 간단히 보여 줘요. 자세한 화면은 Figma 화면 설계서 ${id}를 참고하세요.</div></div>`;
+  });
+
+  /* ───────── 그리기 ───────── */
+  function renderTabs() {
+    document.getElementById('tabbar').innerHTML = TABS.map((t) => `<button class="tab" type="button" data-tab="${t.key}" ${S.tab === t.key ? 'aria-current="page"' : ''}>${ic(t.icon)}<span>${t.label}</span></button>`).join('');
+  }
+  function render(anim) {
+    closeSheet();
+    const top = cur();
+    const fn = SCREENS[top.id];
+    const scr = document.createElement('div');
+    scr.className = 'scr' + (anim ? ' enter' : '');
+    scr.innerHTML = fn ? fn(top.p || {}) : `${hdr(top.id, top.id)}<div class="body"><div class="empty">준비 중인 화면</div></div>`;
+    area.replaceChildren(scr);
+    const b = scr.querySelector('.body');
+    if (b && top.scroll) b.scrollTop = top.scroll;
+    renderTabs();
+    try { if (location.hash !== '#' + S.tab) history.replaceState(null, '', '#' + S.tab); } catch (e) { /* 무시 */ }
+    bindInputs(scr);
+  }
+
+  function bindInputs(scr) {
+    const amt = scr.querySelector('#amt');
+    if (amt) amt.addEventListener('input', () => {
+      const v = parseInt(amt.value.replace(/\D/g, ''), 10) || 0;
+      S.give.amt = Math.min(v, 100000000);
+      amt.value = S.give.amt ? S.give.amt.toLocaleString('ko-KR') : '';
+      const btn = scr.querySelector('#giveNext');
+      btn.disabled = !S.give.amt;
+      btn.textContent = S.give.amt ? won(S.give.amt) + ' 헌금하기' : '금액을 입력해 주세요';
+      amt.parentElement.style.borderBottomColor = S.give.amt ? 'var(--primary)' : 'var(--line)';
+    });
+    const rc = scr.querySelector('#rcpt');
+    if (rc) rc.addEventListener('change', () => { S.give.receipt = rc.checked; });
+    const q = scr.querySelector('#q');
+    if (q) {
+      q.addEventListener('input', () => {
+        S.q = q.value;
+        scr.querySelector('#myBody').innerHTML = S.q ? searchResults() : myHome();
+        const f = scr.querySelector('#menuSearch');
+        const c = f.querySelector('.clear');
+        if (S.q && !c) f.insertAdjacentHTML('beforeend', `<button class="clear" type="button" data-act="clearq" aria-label="검색어 지우기">${ic('close', 'xs')}</button>`);
+        if (!S.q && c) c.remove();
+      });
+      scr.querySelector('#menuSearch').addEventListener('submit', (e) => { e.preventDefault(); const first = scr.querySelector('[data-menu][data-save]'); if (first) first.click(); });
+    }
+    const wt = scr.querySelector('#w-title'), wb = scr.querySelector('#w-body'), wa = scr.querySelector('#w-anon');
+    if (wt) {
+      const upd = () => {
+        S.draft.title = wt.value; S.draft.body = wb.value;
+        scr.querySelector('#w-count').textContent = `${wb.value.length} / 2,000`;
+        const warn = /01[0-9][- ]?\d{3,4}[- ]?\d{4}|\d{2,6}-\d{2,6}-\d{2,7}|계좌/.test(wt.value + ' ' + wb.value);
+        scr.querySelector('#w-warn').innerHTML = warn ? `<div class="note warn">${ic('shield', 's')}<span>연락처나 계좌번호로 보이는 내용이 있어요. 다른 교인의 개인정보라면 지워 주세요. (F-075)</span></div>` : '';
+        scr.querySelector('[data-act="post"]').disabled = !(wt.value.trim() && wb.value.trim());
+      };
+      wt.addEventListener('input', upd); wb.addEventListener('input', upd);
+      wa.addEventListener('change', () => { S.draft.anon = wa.checked; });
+    }
+    const cf = scr.querySelector('[data-cform]');
+    if (cf) cf.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const x = DB.posts.find((y) => y.id === cf.dataset.cform);
+      const t = cf.querySelector('#c-text').value.trim();
+      if (!t) return;
+      const anon = cf.querySelector('#c-anon').checked;
+      let who;
+      if (x.mine) who = '글쓴이';
+      else if (!anon) who = DB.me.name;
+      else {
+        if (!x.myNo) x.myNo = x.comments.filter((c) => /^익명\d+$/.test(c.who)).reduce((a, c) => Math.max(a, parseInt(c.who.slice(2), 10)), 0) + 1;
+        who = '익명' + x.myNo;
+      }
+      x.comments.push({ who, text: t, me: true });
+      saveScroll(); cur().scroll = 99999; render();
+    });
+  }
+
+  function remember(q) {
+    const t = q.trim(); if (!t) return;
+    const list = store.get('recent', []).filter((r) => r !== t);
+    list.unshift(t); store.set('recent', list.slice(0, 5));
+  }
+
+  /* ───────── 클릭 처리 ───────── */
+  phone.addEventListener('click', (e) => {
+    const el = e.target.closest('button, [data-go], [data-menu]');
+    if (!el || el.disabled) return;
+    const d = el.dataset;
+    if (d.tab) return switchTab(d.tab);
+    if (d.menu) {
+      if (d.save) remember(S.q);
+      S.q = '';
+      return go(d.menu);
+    }
+    if (d.go) { let p = {}; try { p = d.p ? JSON.parse(d.p) : {}; } catch (er) { p = {}; } return go(d.go, p); }
+    if (d.toast) return toast(d.toast);
+    if (d.sec) { saveScroll(); setSection(d.sec); cur().scroll = 0; return render(); }
+    if (d.hist) { S.histSub = d.hist; return render(); }
+    if (d.pub) { if (S.tab !== 'giving' || cur().id !== 'U-70') openSection('public'); S.pubSub = d.pub; return render(); }
+    if (d.cardm) { S.cardM = Number(d.cardm); return render(); }
+    if (d.filter) { S.filter = d.filter; return render(); }
+    if (d.month) { S.month = d.month === '1' ? '2026-10' : '2026-09'; S.filter = '전체'; return render(); }
+    if (d.gtype) { S.give.type = d.gtype; return rerenderKeep(); }
+    if (d.add !== undefined) { S.give.amt = d.add === '0' ? 0 : Math.min(S.give.amt + Number(d.add), 100000000); return rerenderKeep(); }
+    if (d.method) { S.give.method = d.method; return rerenderKeep(); }
+    if (d.rtype) { S.rec.type = d.rtype; return rerenderKeep(); }
+    if (d.ramt) { S.rec.amt = Number(d.ramt); return rerenderKeep(); }
+    if (d.rday) { S.rec.day = Number(d.rday); return rerenderKeep(); }
+    if (d.cancelrec) { DB.recurring = DB.recurring.filter((r) => r.id !== d.cancelrec); toast('정기 헌금을 해지했어요 (예시)'); return render(); }
+    if (d.wboard) { S.draft.b = d.wboard; return rerenderKeep(); }
+    if (d.like) { const x = DB.posts.find((y) => y.id === d.like); x.liked = !x.liked; x.likes += x.liked ? 1 : -1; return rerenderKeep(); }
+    if (d.scrap) { const x = DB.posts.find((y) => y.id === d.scrap); x.scrap = !x.scrap; toast(x.scrap ? '스크랩했어요' : '스크랩을 취소했어요'); return rerenderKeep(); }
+    if (d.unblock) { DB.blocked = DB.blocked.filter((id) => id !== d.unblock); toast('차단을 풀었어요'); return render(); }
+    if (d.recent) { S.q = d.recent; return render(); }
+    if (d.delrecent !== undefined) { const l = store.get('recent', []); l.splice(Number(d.delrecent), 1); store.set('recent', l); return render(); }
+    if (d.postmenu) return postMenu(d.postmenu);
+    if (d.report) return reportSheet(d.report);
+    if (d.chtype) return typeSheet(d.chtype);
+    if (d.settype) {
+      const o = DB.offerings.find((x) => x.id === d.oid); o.type = d.settype; closeSheet(); toast(`${d.settype}(으)로 바꿨어요`); return render();
+    }
+    if (d.reason) { el.parentElement.querySelectorAll('[data-reason]').forEach((b) => b.setAttribute('aria-checked', String(b === el))); el.closest('.sheet').querySelector('[data-act="doreport"]').disabled = false; return; }
+    switch (d.act) {
+      case 'back': return back();
+      case 'home': S.give = null; return toRoot(S.tab);
+      case 'copyva':
+        try { navigator.clipboard.writeText('000-0000-0000-00').then(() => toast('예시 계좌번호를 복사했어요'), () => toast('복사가 막혀 있어요. 직접 적어 주세요')); } catch (er) { toast('복사가 막혀 있어요. 직접 적어 주세요'); }
+        return;
+      case 'pay': {
+        const g = S.give;
+        const o = { id: 'o' + (++DB.seq), date: TODAY, type: g.type, amt: g.amt, via: `앱 헌금 · ${g.method === 'bank' ? '계좌 간편결제' : '카드 간편결제'}${g.project ? ' · ' + g.project : ''}`, kind: 'app', receipt: g.receipt };
+        DB.offerings.unshift(o);
+        S.month = '2026-10'; S.filter = '전체';
+        const st = S.stacks[S.tab];
+        while (st.length > 1) st.pop();
+        S.give = null;
+        return go('U-13', { id: o.id });
+      }
+      case 'addrec': {
+        const r = S.rec;
+        DB.recurring.push({ id: 'r' + (++DB.seq), type: r.type, amt: r.amt, day: r.day, next: `11월 ${r.day}일` });
+        S.rec = null; toast('정기 헌금을 등록했어요 (예시)'); return back();
+      }
+      case 'ask': {
+        const scr = area.querySelector('.scr');
+        const t = scr.querySelector('#q-title').value.trim(), b = scr.querySelector('#q-body').value.trim();
+        if (!t || !b) return toast('제목과 내용을 적어 주세요');
+        DB.questions.unshift({ id: 'q' + (++DB.seq), title: t, body: b, anon: scr.querySelector('#q-anon').checked, date: '10월 20일', answer: null });
+        toast('질문을 올렸어요. 답변이 오면 알려 드려요');
+        setSection('public'); S.pubSub = 'qa';
+        S.stacks.giving = [{ id: 'U-70' }];
+        if (S.tab !== 'giving') S.tab = 'giving';
+        return render();
+      }
+      case 'post': {
+        const dr = S.draft;
+        const p = { id: 'a' + (++DB.seq), board: dr.b, title: dr.title.trim(), body: dr.body.trim(), anon: dr.anon, author: dr.anon ? null : `${DB.me.name} ${DB.me.role}`, likes: 0, time: '방금', mine: true, comments: [], church: dr.b === 'union' ? DB.church : undefined };
+        DB.posts.unshift(p);
+        S.draft = null;
+        const st = S.stacks.community; st.pop();
+        toast('글을 올렸어요');
+        st.push({ id: 'U-62', p: { id: p.id } });
+        return render(true);
+      }
+      case 'block': {
+        DB.blocked.push(d.pid); closeSheet(); toast('이 사람의 글을 더 이상 보지 않아요. 내 활동에서 풀 수 있어요');
+        return back();
+      }
+      case 'doreport': closeSheet(); return toast('신고했어요. 교회 담당자가 3일 안에 확인하고 결과를 알려 드려요');
+      case 'closesheet': return closeSheet();
+      case 'clearq': S.q = ''; render(); { const i = area.querySelector('#q'); if (i) i.focus(); } return;
+      case 'clearrecent': store.set('recent', []); return render();
+      default:
+    }
+  });
+  function rerenderKeep() { saveScroll(); render(); }
+
+  function postMenu(id) {
+    const x = DB.posts.find((y) => y.id === id);
+    const canReport = DB.me.level >= 3;
+    sheet(`<h2>글 메뉴</h2>
+      ${x.mine ? `<button class="sheet-item" type="button" data-toast="수정 화면 (프로토타입 생략)">${ic('pen', 's')}수정하기</button>` : `
+      <button class="sheet-item" type="button" data-act="block" data-pid="${id}">${ic('block', 's')}<span><b style="display:block">이 사람 글 안 보기</b><span class="small">상대는 모르고, 내 화면에서만 가려요</span></span></button>
+      ${canReport ? `<button class="sheet-item" type="button" data-report="${id}">${ic('flag', 's')}<span><b style="display:block">신고하기</b><span class="small">Lv.3 이상만 보여요 (D-17)</span></span></button>` : ''}`}
+      <button class="btn line" type="button" data-act="closesheet">닫기</button>`);
+  }
+  function reportSheet(id) {
+    const reasons = ['특정인 비방·저격', '개인정보 노출', '욕설·혐오', '음란·폭력', '상업 홍보·외부 포교', '허위 사실', '기타'];
+    sheet(`<h2>신고 사유를 골라 주세요</h2><span class="small">교회 담당자가 3일 안에 확인해요. 신고한 사람은 글쓴이에게 알리지 않아요.</span>
+      <div style="display:grid;gap:8px" role="radiogroup" aria-label="신고 사유">${reasons.map((r) => `<button type="button" class="radio-row" role="radio" aria-checked="false" data-reason="${r}"><span class="dotc"></span><span>${r}</span></button>`).join('')}</div>
+      <button class="btn" type="button" data-act="doreport" disabled>신고하기</button>${sid('U-65')}`);
+  }
+  function typeSheet(oid) {
+    const o = DB.offerings.find((x) => x.id === oid);
+    sheet(`<h2>헌금 종류 바꾸기</h2><span class="small">지금: ${o.type}</span>${TYPES.map((t) => `<button class="sheet-item" type="button" data-settype="${t}" data-oid="${oid}">${t === o.type ? ic('check', 's') : '<span style="width:20px"></span>'}${t}</button>`).join('')}<button class="btn line" type="button" data-act="closesheet">닫기</button>`);
+  }
+  phone.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeSheet(); });
+
+  /* ───────── 안내 패널 ───────── */
+  const JUMP = [
+    ['홈', ['U-10']],
+    ['헌금·재정', ['U-70', 'U-11', 'U-14', 'U-15', 'U-16', 'U-17', 'U-20', 'U-21', 'U-22', 'U-23', 'U-24', 'U-25', 'U-30', 'U-31', 'U-32', 'U-33', 'U-34', 'U-35', 'U-71']],
+    ['커뮤니티', ['U-60', 'U-61', 'U-62', 'U-63', 'U-66', 'U-68']],
+    ['MY', ['U-50', 'U-51', 'U-53', 'U-54', 'U-55', 'U-56', 'U-57', 'U-40']]
+  ];
+  document.getElementById('jump').innerHTML = JUMP.map(([g, ids]) => `<span class="grp">${g}</span>${ids.map((id) => `<button type="button" data-j="${id}">${id}</button>`).join('')}`).join('');
+  document.getElementById('jump').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-j]'); if (!b) return;
+    const id = b.dataset.j;
+    const root = TABS.find((t) => t.root === id);
+    if (root) { S.tab = root.key; S.stacks[root.key] = [{ id }]; if (id === 'U-70') setSection('give'); return render(true); }
+    if (id === 'U-21') return go(id, { id: DB.offerings[0].id });
+    if (id === 'U-24') return go(id, { y: 2025 });
+    if (id === 'U-31') return go(id, { m: 9 });
+    if (id === 'U-33') return go(id, { id: 'p1' });
+    if (id === 'U-62') return go(id, { id: 'a1' });
+    if (id === 'U-61') return go(id, { b: 'free' });
+    if (id === 'U-11') return go(id, { fresh: true });
+    return go(id);
+  });
+  function setIds(on) {
+    phone.classList.toggle('show-ids', on);
+    document.getElementById('idToggle').setAttribute('aria-pressed', String(on));
+    store.set('ids', on);
+  }
+  setIds(store.get('ids', true));
+  document.getElementById('idToggle').addEventListener('click', () => setIds(!phone.classList.contains('show-ids')));
+  document.getElementById('idToggle2').addEventListener('click', () => setIds(!phone.classList.contains('show-ids')));
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    DB = freshDB();
+    Object.assign(S, { tab: 'home', stacks: { home: [{ id: 'U-10' }], community: [{ id: 'U-60' }], giving: [{ id: 'U-70' }], my: [{ id: 'U-50' }] }, histSub: 'list', month: '2026-10', filter: '전체', pubSub: 'report', q: '', draft: null, give: null, rec: null });
+    setSection('give'); store.set('recent', []);
+    render();
+    toast('처음 상태로 돌렸어요');
+  });
+
+  /* 주소의 #home · #community · #giving · #my 로 첫 탭을 고른다 */
+  function fromHash() {
+    const h = (location.hash || '').slice(1);
+    if (TABS.some((t) => t.key === h) && h !== S.tab) { S.tab = h; render(); }
+  }
+  window.addEventListener('hashchange', fromHash);
+  const h0 = (location.hash || '').slice(1);
+  if (TABS.some((t) => t.key === h0)) S.tab = h0;
+  render();
+})();
+</script>
+</body>
+</html>
