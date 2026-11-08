@@ -393,7 +393,7 @@ svg.i.xs { width: 15px; height: 15px; }
 </head>
 <body class="show-ids">
 <div class="proto" role="region" aria-label="프로토타입 안내">
-  <b>감사교회 관리자 웹 프로토타입 v2.1 · 커뮤니티 중심</b>
+  <b>감사교회 관리자 웹 프로토타입 v2.2 · 커뮤니티 중심</b>
   <span>디자인 시안 C · 예시 데이터 · 입력한 내용은 이 창에만 남고 실제로 저장·발송·결제되지 않습니다</span>
   <span class="sp"></span>
   <a class="proto-link" href="member.html">신도 앱 프로토타입 ↗</a>
@@ -1454,7 +1454,7 @@ svg.i.xs { width: 15px; height: 15px; }
       const subs = SCREENS.filter((x) => x.g === g[0] && !x.hide && !x.later);
       if (on && subs.length > 1) s += '<div class="sub">' + subs.map((x) => '<a href="#' + x.h + '" class="' + (x.h === sc.h || (sc.h === 'aw-71' && x.h === 'aw-70') ? 'on' : '') + '">' + x.t + '</a>').join('') + '</div>';
     });
-    s += '</nav><div class="foot">커뮤니티 중심 v2.1(D-24·D-25) · 재정은 부가 기능 · 예산·집행·교단은 계획만 보여 줍니다</div>';
+    s += '</nav><div class="foot">커뮤니티 중심 v2.2(D-24~D-26) · 재정은 부가 기능 · 예산·집행·교단은 계획만 보여 줍니다</div>';
     $('#side').innerHTML = s;
     const P0 = actor(); $('#who').innerHTML = '<span class="cname">' + esc(DB.church.name) + '</span><span class="sep"></span><span class="avatar">' + P0.name[0] + '</span><b>' + P0.name + '</b><span class="role">' + P0.role + '</span><button type="button" class="btn btn-g sm" data-act="logout" title="로그아웃" aria-label="로그아웃">' + ic('logout', 's') + '</button>';
   }
@@ -2059,6 +2059,12 @@ svg.i.xs { width: 15px; height: 15px; }
       { id: 'r2', title: '아이폰 반값에 팝니다 (선입금)', board: '나눔·장터', reason: '거래 사기 의심', count: 1, at: '2026-11-07 14:02', excerpt: '선입금 주시면 택배로 보내 드려요. 계좌는 댓글로…', anon: false, status: 'pending' },
       { id: 'r3', title: '○○ 세미나 무료 초대 (외부 단체)', board: '자유게시판', reason: '외부 홍보', count: 2, at: '2026-11-06 09:45', excerpt: '성경을 새롭게 배우는 무료 세미나에 초대합니다. 연락처는…', anon: true, status: 'pending' }
     ];
+    // v2.2(A-208): 신도 앱 커뮤니티 맨 위 '꼭 보세요'에 고정한 글과 인기 글 자동 표시 기준
+    D.pins = [
+      { title: '[교회 안내] 추수감사주일 셀별 특송 신청은 11월 12일까지', board: '자유게시판', by: '오은총 목사', until: '2026-11-12까지' },
+      { title: '[운영 안내] 돈을 먼저 보내 달라는 거래 글은 신고해 주세요', board: '나눔·장터', by: '오은총 목사', until: '해제할 때까지' }
+    ];
+    D.pinCfg = { hot: true, min: 10 };
     D.levelCfg = { reportLv: 3, revealLv: 5 };
     D.reveals = [{ at: '2026-10-29 23:40', who: '정목양 담임목사', post: '기도 제목(교회 전체) · "다 그만두고 싶어요"', reason: '자해 우려가 있어 담당 교역자가 직접 연락하기 위해' }];
     D.notices = [
@@ -2123,7 +2129,13 @@ svg.i.xs { width: 15px; height: 15px; }
     return '<div class="page" style="max-width:980px">' + head(sc, '게시판 설정', '교회 전체 게시판을 만들고, 누가 볼지와 익명을 켤지 정합니다(D-13). 신도 앱에서는 소그룹과 게시판이 커뮤니티 한 메뉴에 함께 보입니다. 구역·셀·부서 공간은 조직에서 자동으로 생기므로 여기서 만들지 않습니다(A-202).', '<button type="button" class="btn btn-p" data-act="boardAdd">' + ic('plus', 's') + '게시판 만들기</button>') +
       '<div class="card"><div class="tw"><table class="t"><thead><tr><th>게시판</th><th>이용 대상</th><th>익명 허용</th><th>글쓰기 레벨</th><th class="r">지난 7일 글</th></tr></thead><tbody>' +
       DB.boards.map((b, i) => '<tr><td><b>' + esc(b.name) + '</b></td><td>' + esc(b.aud) + '</td><td><button type="button" class="tog" role="switch" aria-checked="' + b.anon + '" aria-label="' + esc(b.name) + ' 익명" data-act="boardAnon" data-i="' + i + '"></button></td><td><select class="in sm" style="width:auto" data-chg="boardLv" data-i="' + i + '" aria-label="글쓰기 레벨">' + [1, 2, 3].map((l) => opt(l, 'Lv.' + l + ' 이상', b.lv)).join('') + '</select></td><td class="r num">' + b.posts7 + '</td></tr>').join('') + '</tbody></table></div>' +
-      '<p class="hint" style="margin:12px 0 0">익명을 꺼도 지난 익명 글은 그대로 익명입니다. 중고등부 게시판은 보호자 동의를 받은 청소년과 교역자만 봅니다(D-15).</p></div></div>';
+      '<p class="hint" style="margin:12px 0 0">익명을 꺼도 지난 익명 글은 그대로 익명입니다. 중고등부 게시판은 보호자 동의를 받은 청소년과 교역자만 봅니다(D-15).</p></div>' +
+      // v2.2(A-208): 커뮤니티 맨 위 고정 글
+      '<div class="card" style="margin-top:16px"><div class="ch"><h2>커뮤니티 맨 위 고정 글</h2><button type="button" class="btn sm btn-l r" data-act="pinAdd">' + ic('plus', 's') + '고정 글 추가</button></div>' +
+      '<p class="hint" style="margin:0 0 12px">신도 앱 커뮤니티 맨 위 \'꼭 보세요\'에 보입니다. 교회가 고정한 글이 먼저 나오고, 남는 자리(최대 3줄)에 공감 많은 글이 자동으로 들어갑니다. 교회 안내처럼 모두가 꼭 알아야 할 글만 고정해 주세요.</p>' +
+      '<div class="tw"><table class="t"><thead><tr><th>글</th><th>게시판</th><th>고정한 사람</th><th>고정 기간</th><th class="r"></th></tr></thead><tbody>' +
+      (DB.pins.length ? DB.pins.map((p, i) => '<tr><td><b>' + esc(p.title) + '</b></td><td>' + esc(p.board) + '</td><td>' + esc(p.by) + '</td><td>' + esc(p.until) + '</td><td class="r"><button type="button" class="btn sm btn-l" data-act="pinOff" data-i="' + i + '">고정 풀기</button></td></tr>').join('') : '<tr><td colspan="5" class="faint">고정한 글이 없습니다. 공감 많은 글만 자동으로 보입니다.</td></tr>') + '</tbody></table></div>' +
+      '<div style="display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px"><button type="button" class="tog" role="switch" aria-checked="' + DB.pinCfg.hot + '" aria-label="공감 많은 글 자동 표시" data-act="pinHot"></button><span>공감 많은 글 자동 표시</span><select class="in sm" style="width:auto" data-chg="pinMin" aria-label="공감 기준"' + (DB.pinCfg.hot ? '' : ' disabled') + '>' + [5, 10, 20].map((n) => opt(n, '공감 ' + n + '개 이상', DB.pinCfg.min)).join('') + '</select><span class="hint">지난 7일 글 기준. 소그룹 글은 그 그룹 식구에게만 보입니다.</span></div></div></div>';
   }
 
   /* AW-76 계정 레벨 (+ AW-78 작성자 확인 기록) */
@@ -2180,6 +2192,9 @@ svg.i.xs { width: 15px; height: 15px; }
 
   Object.assign(ACT, {
     nudge: (b) => { const n = orgNode(b.dataset.id); logA('소그룹 알림', n.name, '담당자에게 활동 확인 요청 (예시)'); toast(n.name + ' 담당자에게 알림을 보낸 것으로 기록했습니다 (실제로 보내지 않음)'); },
+    pinOff: (b) => { const p = DB.pins.splice(Number(b.dataset.i), 1)[0]; logA('커뮤니티 고정 글', p.title, '고정 풀기'); toast('고정을 풀었습니다. 신도 앱 맨 위에서 사라집니다'); render(); },
+    pinHot: () => { DB.pinCfg.hot = !DB.pinCfg.hot; logA('커뮤니티 고정 글', '공감 많은 글 자동 표시', DB.pinCfg.hot ? '켜기' : '끄기'); render(); },
+    pinAdd: () => ask('고정 글 추가', '신도 앱 커뮤니티 맨 위에 보일 글입니다. 7일 뒤 자동으로 풀립니다(프로토타입에서는 제목만 적습니다).', '고정하기', (v) => { const a = actor(); DB.pins.unshift({ title: v, board: '자유게시판', by: a.name + ' ' + a.title, until: '7일 뒤 자동 해제' }); logA('커뮤니티 고정 글', v, '고정'); toast('커뮤니티 맨 위에 고정했습니다'); }, { input: '글 제목', max: 50, ph: '예: 성탄 장식 봉사자 모집 안내' }),
     boardAnon: (b) => { const x = DB.boards[Number(b.dataset.i)]; x.anon = !x.anon; logA('게시판 설정', x.name, '익명 ' + (x.anon ? '켜기' : '끄기')); render(); },
     boardAdd: () => ask('게시판 만들기', '교회 전체 게시판입니다. 소그룹 공간은 조직에서 자동으로 생깁니다.', '만들기', (v) => { if (DB.boards.some((x) => x.name === v)) { $('#askErr').textContent = '같은 이름이 있습니다'; return false; } DB.boards.splice(DB.boards.length - 1, 0, { id: 'b' + DB.boards.length, name: v, aud: '전 교인', anon: false, lv: 1, posts7: 0 }); logA('게시판 만들기', v, ''); toast('\'' + v + '\' 게시판을 만들었습니다'); }, { input: '게시판 이름', max: 20, ph: '예: 육아 나눔' }),
     repDo: (b) => { const r = DB.reports.find((x) => x.id === b.dataset.id); r.status = b.dataset.v; logA('신고 처리', r.title, ({ kept: '유지', hidden: '숨김', limited: '숨김 + 7일 이용 제한' })[r.status]); render(); toast('처리했습니다. 신고한 교인에게 결과를 알립니다'); },
@@ -2215,6 +2230,7 @@ svg.i.xs { width: 15px; height: 15px; }
     if (k === 'f31noev') { S.f31.noEv = el.checked; if (el.checked) S.f31.files = []; render(); return; }
     if (k === 'upFile') { if (el.files.length) { S.upload = { file: el.files[0].name, done: false }; render(); } return; }
     if (k === 'pubAud') { const st = DB.pub.stages[el.dataset.k]; st.aud = el.value; logA('공개 대상 변경', el.dataset.k, audLabel(st)); render(); if (st.aud === 'groups' && !st.groups.length) ACT.pubGroups(el); return; }
+    if (k === 'pinMin') { DB.pinCfg.min = Number(el.value); logA('커뮤니티 고정 글', '공감 많은 글 기준', '공감 ' + el.value + '개 이상'); render(); return; }
     if (k === 'boardLv') { const x = DB.boards[i]; x.lv = Number(el.value); logA('게시판 설정', x.name, '글쓰기 Lv.' + x.lv + ' 이상'); render(); return; }
     if (k === 'lvCfg') { DB.levelCfg[el.dataset.k] = Number(el.value); logA('계정 레벨 기준', el.dataset.k === 'reportLv' ? '신고' : '익명 작성자 확인', 'Lv.' + el.value + ' 이상'); render(); return; }
     if (k === 'finMode') { DB.finMode = el.value; logA('재정 부가 기능', 'ERP 연동 설정', ({ erp: 'ERP 연동', builtin: '내장 재정 모듈', off: '사용 안 함' })[el.value]); render(); return; }
