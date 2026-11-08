@@ -180,6 +180,30 @@ textarea.input { resize: none; min-height: 140px; }
 .radio-row[aria-checked="true"] .dotc::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--primary); }
 .empty { text-align: center; padding: 28px 12px; color: var(--text-sub); font-size: 14px; }
 mark { background: transparent; color: var(--primary); font-weight: 800; }
+/* v2.2: 홈 헌금 띠(A-207), 커뮤니티 맨 위 고정(A-208), 글 검색 결과(A-209) */
+.give-strip { padding: 14px 16px 6px; display: flex; flex-direction: column; gap: 8px; }
+.gs-top { display: flex; align-items: center; gap: 12px; }
+.gs-top .grow { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.gs-top b { font-size: 15px; line-height: 21px; }
+.gs-acc { display: flex; align-items: center; gap: 8px; background: var(--surface-alt); border-radius: 10px; padding: 8px 12px; }
+.gs-acc .num { flex: 1; font-size: 14px; line-height: 20px; font-weight: 700; white-space: nowrap; }
+.gs-acc .micro { white-space: nowrap; }
+.gs-acc .link { color: var(--primary); flex: none; white-space: nowrap; }
+.gs-top .micro { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.gs-acts { display: grid; grid-template-columns: repeat(3, 1fr); border-top: 1px solid var(--line); }
+.gs-acts button { border: 0; background: transparent; display: inline-flex; align-items: center; justify-content: center; gap: 4px; font-size: 12px; line-height: 16px; font-weight: 600; color: var(--text-sub); padding: 10px 2px 8px; white-space: nowrap; }
+.gs-acts button + button { border-left: 1px solid var(--line); }
+.pinrow { display: flex; align-items: center; gap: 10px; padding: 11px 16px; width: 100%; border: 0; background: transparent; text-align: left; }
+.pinrow + .pinrow { border-top: 1px solid var(--line); }
+.pinrow .pill { flex: none; }
+.pinrow .grow { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.pinrow .t { font-size: 14px; line-height: 20px; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pinrow .s { font-size: 12px; line-height: 16px; color: var(--text-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.pinrow .chev { color: var(--text-faint); }
+.sres { display: flex; flex-direction: column; gap: 4px; padding: 14px 18px; width: 100%; border: 0; background: transparent; text-align: left; }
+.sres + .sres { border-top: 1px solid var(--line); }
+.sres .pt { font-size: 15px; line-height: 22px; font-weight: 700; }
+.sres .pb { font-size: 13px; line-height: 19px; color: var(--text-sub); }
 
 /* 홈 */
 .hero { background: var(--primary); color: #fff; border-radius: 20px; padding: 20px; display: flex; flex-direction: column; gap: 14px; }
@@ -278,12 +302,15 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
 <aside class="panel" aria-label="프로토타입 안내">
   <div>
     <div class="eyebrow">감사교회(가제) · 신도 앱 · 시안 C · 커뮤니티 중심</div>
-    <h1>신도 앱 프로토타입 v2.1</h1>
+    <h1>신도 앱 프로토타입 v2.2</h1>
   </div>
-  <p><b>2026-11-08 컨셉(D-24·D-25)</b>: 교회별 커뮤니티 중심입니다. 하단 메뉴는 <b>홈 · 커뮤니티 · 소식 · MY</b> 4개입니다. 소그룹과 게시판을 <b>커뮤니티 한 메뉴</b>로 합쳤고, 기도 제목은 '내 소그룹만'과 '교회 전체' 중에서 골라 올립니다. 예전 헌금 기능(헌금하기·내 헌금 계좌·정기 헌금·내역·기부금영수증·재정 공개)은 모두 <b>부가 기능</b>으로 남아 MY 맨 위와 홈 아래쪽 '헌금·재정'에서 바로 열립니다.</p>
+  <p><b>2026-11-08 컨셉(D-24·D-25)</b>: 교회별 커뮤니티 중심입니다. 하단 메뉴는 <b>홈 · 커뮤니티 · 소식 · MY</b> 4개입니다. 소그룹과 게시판을 <b>커뮤니티 한 메뉴</b>로 합쳤고, 기도 제목은 '내 소그룹만'과 '교회 전체' 중에서 골라 올립니다. 예전 헌금 기능(헌금하기·내 헌금 계좌·정기 헌금·내역·기부금영수증·재정 공개)은 모두 <b>부가 기능</b>으로 남아 MY 맨 위 '헌금·재정' 카드에서 열립니다. <b>v2.2(D-26)</b>: 홈 주일 카드 아래에 작은 헌금 영역(헌금하기·계좌 복사·QR)을 넣었고, 커뮤니티 맨 위에 고정 글·인기 글과 글 검색을 더했습니다.</p>
   <div class="card">
     <h2>이렇게 눌러 보세요</h2>
     <ul>
+      <li>홈: 파란 주일 카드 바로 아래 헌금하기 · 계좌 복사 · QR 헌금 (v2.2)</li>
+      <li>커뮤니티 맨 위 '꼭 보세요': 교회가 고정한 글과 인기 글 (v2.2)</li>
+      <li>커뮤니티 오른쪽 위 🔍: 글 검색 — '수련회'·'주차'로 찾아보기 (v2.2)</li>
       <li>커뮤니티 → 전체: 내 소그룹 글(🔒)과 게시판 글이 한 줄에</li>
       <li>커뮤니티 → 기도: 교회 전체·소그룹 기도 제목, 기도했어요</li>
       <li>커뮤니티 → 글쓰기: 올릴 곳에서 소그룹이나 게시판 고르기</li>
@@ -411,6 +438,9 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
         { id: 'union', name: '연합 게시판', desc: '여러 교회 함께 (D-16)', union: true }
       ],
       posts: [
+        // v2.2(A-208): pin = 교회(관리자)가 커뮤니티 맨 위에 고정한 글
+        { id: 'a7', board: 'free', pin: true, title: '[교회 안내] 추수감사주일 셀별 특송 신청은 11월 12일까지', body: '11월 15일 연합 예배 특송은 셀별로 신청해요. 셀장님이 11월 12일(목)까지 교육부 사무실에 곡과 인원을 알려 주세요.', anon: false, author: '교회 사무실', likes: 18, time: '어제', mine: false, comments: [{ who: '익명1', text: '저희 셀은 신청했어요!' }] },
+        { id: 'a8', board: 'share', pin: true, title: '[운영 안내] 돈을 먼저 보내 달라는 거래 글은 신고해 주세요', body: '나눔·장터에서 선입금을 요구하는 글은 사기일 수 있어요. 직접 만나서 주고받고, 의심되는 글은 글 메뉴에서 신고해 주세요.', anon: false, author: '커뮤니티 운영팀', likes: 11, time: '3일 전', mine: false, comments: [] },
         { id: 'a2', board: 'free', title: '이번 주 주일 주차 안내 정리했어요', body: '본당 주차장 공사로 이번 주는 길 건너 초등학교 운동장을 씁니다. 9시 30분부터 안내 봉사자가 계세요.', anon: false, author: '김○○ 권사', likes: 12, time: '5시간 전', mine: false, comments: [{ who: '익명1', text: '정리 감사합니다!' }] },
         { id: 'a3', board: 'free', title: '청년부 수련회 방 배정은 언제 나오나요?', body: '신청은 했는데 방 배정 공지가 아직 없어서요. 혹시 아시는 분?', anon: true, likes: 5, time: '어제', mine: false, comments: [{ who: '익명1', text: '이번 주 금요일에 단톡방에 올린다고 들었어요.' }] },
         { id: 'a4', board: 'share', title: '아기 카시트 나눔합니다 (신생아용)', body: '1년 정도 쓴 신생아용 카시트 나눔합니다. 주일 3부 예배 뒤 로비에서 드릴게요.', anon: false, author: '이○○ 집사', likes: 9, time: '어제', mine: false, comments: [] },
@@ -448,6 +478,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     { g: '헌금·재정', n: '교회 카드 사용 내역', to: 'U-71', i: 'card', al: ['카드', '교회카드', '법인카드', '카드 내역', '사용 내역'] },
     { g: '커뮤니티', n: '커뮤니티 홈', to: 'U-60', i: 'chat', al: ['커뮤니티', '게시판', '익명', '기도', '모임'] },
     { g: '커뮤니티', n: '내 소그룹', to: 'U-72', i: 'users', al: ['소그룹', '구역', '셀', '소모임', '그룹', '속회'] },
+    { g: '커뮤니티', n: '글 검색', to: 'U-80', i: 'search', al: ['검색', '글 찾기', '게시글 검색'] },
     { g: '커뮤니티', n: '글쓰기', to: 'U-63', i: 'pen', al: ['글 쓰기', '게시글'] },
     { g: '커뮤니티', n: '연합 게시판', to: 'U-66', i: 'globe', al: ['연합', '다른 교회'] },
     { g: '커뮤니티', n: '내 활동·차단 목록', to: 'U-68', i: 'block', al: ['차단', '내가 쓴 글', '내 댓글'] },
@@ -484,6 +515,8 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     pubSub: 'report',
     cardM: 9,
     q: '',
+    cq: '',     // 커뮤니티 글 검색어 (U-80)
+    cf: 'all',  // 검색 범위: all · board · group · pray
     draft: null,
     give: null
   };
@@ -493,7 +526,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     if (id === 'U-53' || id === 'U-55') return null; // 알림·공지는 지금 탭 위에 연다
     if (id === 'U-10') return 'home';
     if (n >= 76 && n <= 79) return 'news';
-    if ((n >= 60 && n <= 69) || (n >= 72 && n <= 75)) return 'community';
+    if ((n >= 60 && n <= 69) || (n >= 72 && n <= 75) || n === 80) return 'community';
     return 'my';
   };
   const area = document.getElementById('area');
@@ -646,7 +679,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
       notices: [
         { id: 'n1', pin: true, t: '추수감사주일 연합 예배 안내 (11월 15일)', d: '11월 6일', read: false, body: '11월 15일 추수감사주일에는 1·2부 예배 후 오후 2시에 전 교인 연합 예배를 드립니다. 셀별 특송 신청은 각 셀장에게 해 주세요. 예배 후 교회 마당에서 감사 나눔 식사가 있습니다.' },
         { id: 'n2', pin: false, t: '김장 나눔 봉사자 모집 (11월 22일)', d: '11월 5일', read: false, body: '올해도 지역 어르신 120가구에 김장 김치를 나눕니다. 소식 › 행사에서 신청해 주세요. 앞치마와 고무장갑은 교회에서 준비합니다.' },
-        { id: 'n3', pin: false, t: '앱이 커뮤니티 중심으로 바뀌었어요', d: '11월 8일', read: true, body: '이제 홈에서 교회 소식과 내 소그룹을 먼저 볼 수 있어요. 소그룹과 게시판은 커뮤니티 한 곳에 모였고, 기도 제목은 내 소그룹이나 교회 전체 중에서 골라 올릴 수 있어요. 헌금하기·내 헌금 내역·기부금영수증은 MY 맨 위와 홈 아래쪽 \'헌금·재정\'에서 그대로 쓸 수 있어요.' },
+        { id: 'n3', pin: false, t: '앱이 커뮤니티 중심으로 바뀌었어요', d: '11월 8일', read: true, body: '이제 홈에서 교회 소식과 내 소그룹을 먼저 볼 수 있어요. 소그룹과 게시판은 커뮤니티 한 곳에 모였고, 기도 제목은 내 소그룹이나 교회 전체 중에서 골라 올릴 수 있어요. 헌금하기·내 헌금 계좌·QR 헌금은 홈 주일 카드 바로 아래에, 내역·기부금영수증·교회 재정은 MY 맨 위 \'헌금·재정\'에 있어요. 커뮤니티 맨 위에는 꼭 봐야 할 글이 고정되고, 오른쪽 위 돋보기로 글을 찾을 수 있어요.' },
         { id: 'n4', pin: false, t: '[공지] 연말정산 기부금영수증 안내', d: '10월 15일', read: true, body: '기부금영수증은 MY › 헌금·재정 › 내역·영수증에서 확인할 수 있어요. 발급 정보(주민등록번호)를 미리 등록해 주세요.' }
       ],
       bulletin: { date: '11월 8일 주일', week: '추수감사절 전 주일',
@@ -682,7 +715,13 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
   const scopeTag = (gid, name) => (gid === 'church' ? '<span class="scope all">교회 전체</span>' : `<span class="scope">🔒 ${esc(name)}</span>`);
   const prayCard = (gid, name, x) => `<div class="card" style="display:flex;flex-direction:column;gap:8px">${scopeTag(gid, name)}<p style="margin:0">${esc(x.text)}</p><div style="display:flex;align-items:center;gap:8px"><span class="small" style="flex:1">${x.anon ? '익명' : esc(x.who)} · ${x.time} · 🙏 <b>${x.count}</b>명이 기도했어요</span><button type="button" class="btn sm ${x.prayed ? 'line' : 'sub'}" data-v2="pray" data-g="${gid}" data-id="${x.id}">${x.prayed ? '기도했어요 ✓' : '기도했어요'}</button></div></div>`;
   const meetCard = (g, m, showG) => `<div class="card" style="display:flex;flex-direction:column;gap:10px">${showG ? scopeTag(g.id, g.name) : ''}<b style="font-size:16px">${esc(m.title)}</b><span class="small">📅 ${esc(m.when)}<br>📍 ${esc(m.place)}</span><div class="bar" style="height:8px"><i style="width:${(m.yes / m.total) * 100}%;background:var(--accent)"></i></div><span class="micro">참석 ${m.yes} · 불참 ${m.no} · 응답 안 함 ${m.total - m.yes - m.no}</span><div style="display:flex;gap:8px"><button type="button" class="btn sm ${m.rsvp === 'yes' ? '' : 'line'}" style="flex:1" data-v2="rsvp" data-g="${g.id}" data-id="${m.id}" data-v="yes">${m.rsvp === 'yes' ? '참석 ✓' : '참석'}</button><button type="button" class="btn sm ${m.rsvp === 'no' ? '' : 'line'}" style="flex:1" data-v2="rsvp" data-g="${g.id}" data-id="${m.id}" data-v="no">${m.rsvp === 'no' ? '불참 ✓' : '불참'}</button></div></div>`;
-  // 헌금·재정 부가 기능 바로가기 (홈 아래쪽·MY 맨 위, A-204)
+  // v2.2(A-207): 홈의 작은 헌금 영역. 파란 주일 카드 바로 아래. 헌금하기 · 내 헌금 계좌 복사 · QR · 내역
+  const giveStrip = () => `<section class="card give-strip" aria-label="헌금">
+      <div class="gs-top"><span class="ic-box">${ic('heart', 's')}</span><span class="grow"><b>헌금</b><span class="micro">바로 드릴 수 있어요</span></span><button class="btn sm" type="button" ${goAttr('U-11')}>헌금하기</button></div>
+      <div class="gs-acc"><span class="micro">내 헌금 계좌</span><span class="num">000-0000-0000-00</span><button class="link" type="button" data-act="copyva">${ic('copy', 'xs')} 복사</button></div>
+      <div class="gs-acts"><button type="button" ${goAttr('U-15')}>${ic('qr', 'xs')} QR 헌금</button><button type="button" ${goAttr('U-16')}>${ic('repeat', 'xs')} 정기 헌금</button><button type="button" ${goAttr('U-20')}>${ic('receipt', 'xs')} 내역·영수증</button></div>
+    </section>`;
+  // 헌금·재정 부가 기능 바로가기 (MY 맨 위, A-204)
   const addonCard = () => `<section class="card" style="display:flex;flex-direction:column;gap:10px;padding:14px 10px 10px">
       <div style="display:flex;align-items:center;gap:8px;padding:0 8px"><b style="font-size:16px">헌금·재정</b><span class="pill">부가 기능</span><span style="flex:1"></span><button class="link" type="button" ${goAttr('U-70')}>전체 ${ic('chev', 'xs')}</button></div>
       <div class="addon">${[['U-11', 'heart', '', '헌금하기'], ['U-20', 'receipt', 'teal', '헌금 내역'], ['U-22', 'doc', 'gray', '영수증'], ['U-30', 'pie', 'gray', '교회 재정']].map(([to, i, tone, l]) => `<button type="button" ${goAttr(to)}><span class="ic-box ${tone}">${ic(i, 's')}</span>${l}</button>`).join('')}</div>
@@ -701,10 +740,11 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
         <div><div class="amount-m">${b.week}</div><div class="small" style="color:var(--on-hero-sub);margin-top:4px">설교 「${s0.title}」 · ${s0.who}</div></div>
         <div style="display:flex;gap:8px"><button type="button" class="btn sm" style="background:rgba(255,255,255,.16)" ${goAttr('U-78')}>주보 보기</button><button type="button" class="btn sm" style="background:rgba(255,255,255,.16)" data-go="U-77" data-p='${esc(JSON.stringify({ seg: 'sermon' }))}'>예배 시간·설교</button></div>
       </section>
+      ${giveStrip()}
       <div class="quick" style="grid-template-columns:repeat(4,1fr)">
         <button type="button" data-go="U-77" data-p='${esc(JSON.stringify({ seg: 'event' }))}'><span class="ic-box">${ic('clock', 's')}</span>행사 신청</button>
         <button type="button" data-go="U-60" data-p='${esc(JSON.stringify({ seg: 'pray' }))}'><span class="ic-box teal">${ic('heart', 's')}</span>기도 제목</button>
-        <button type="button" data-go="U-60" data-p='${esc(JSON.stringify({ seg: 'meet' }))}'><span class="ic-box teal">${ic('users', 's')}</span>소그룹 모임</button>
+        <button type="button" data-go="U-60" data-p='${esc(JSON.stringify({ seg: 'meet' }))}'><span class="ic-box teal">${ic('users', 's')}</span>모임 참석</button>
         <button type="button" data-go="U-77" data-p='${esc(JSON.stringify({ seg: 'notice' }))}'><span class="ic-box">${ic('mega', 's')}</span>공지${unreadN ? ` <span class="pill red" style="margin-left:2px">${unreadN}</span>` : ''}</button>
       </div>
       <div class="sec-title">내 소그룹 <button class="link" type="button" ${goAttr('U-72')}>전체 ${ic('chev', 'xs')}</button></div>
@@ -715,8 +755,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
       <div class="sec-title">교회 공지 <button class="link" type="button" data-go="U-77" data-p='${esc(JSON.stringify({ seg: 'notice' }))}'>전체 ${ic('chev', 'xs')}</button></div>
       <div class="card tight">${V.notices.slice(0, 2).map((n) => row({ icon: 'mega', tone: n.read ? 'gray' : '', t: esc(n.t), s: n.d + (n.read ? '' : ' · 안 읽음'), attr: goAttr('U-76', { id: n.id }) })).join('')}</div>
       <div class="sec-title">커뮤니티 인기 글 <button class="link" type="button" data-tab="community">전체 ${ic('chev', 'xs')}</button></div>
-      <div class="card tight">${visiblePosts((x) => x.board !== 'union').sort((a, c) => c.likes - a.likes).slice(0, 2).map(postItem).join('')}</div>
-      ${addonCard()}
+      <div class="card tight">${visiblePosts((x) => x.board !== 'union' && !x.pin).sort((a, c) => c.likes - a.likes).slice(0, 2).map(postItem).join('')}</div>
     </div>`;
   };
 
@@ -835,6 +874,8 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
       case 'gseg': { V.gseg = d.v; const t = cur(); t.p = Object.assign({}, t.p, { seg: d.v }); return render(); }
       case 'nseg': { V.nseg = d.v; const t = cur(); t.p = Object.assign({}, t.p, { seg: d.v }); return render(); }
       case 'cseg': { V.cseg = d.v; const t = cur(); t.p = Object.assign({}, t.p, { seg: d.v }); t.scroll = 0; return render(); }
+      case 'cf': { S.cf = d.v; return render(); }
+      case 'cq': { S.cq = d.v; rememberC(d.v); return render(); }
       case 'pscope': {
         // 범위를 바꿔도 적던 내용과 익명 선택은 그대로 둔다
         const t = cur(); const ta = area.querySelector('#v2-text'); const an = area.querySelector('#v2-anon');
@@ -1227,7 +1268,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
   const visiblePosts = (f) => DB.posts.filter((x) => !DB.blocked.includes(x.id) && f(x));
   const postItem = (x) => {
     const b = DB.boards.find((bb) => bb.id === x.board);
-    return `<button class="post" type="button" ${goAttr('U-62', { id: x.id })}><span class="pt">${esc(x.title)}</span><span class="pb">${esc(x.body)}</span><span class="meta"><span>${b.name}</span><span>${x.anon ? '익명' : esc(x.author || DB.me.name)}${x.church ? ' · ' + x.church : ''}</span><span>${x.time}</span><span style="margin-left:auto;color:var(--danger)">${ic('heart', 'xs')}${x.likes}</span><span style="color:var(--primary)">${ic('chat', 'xs')}${x.comments.length}</span></span></button>`;
+    return `<button class="post" type="button" ${goAttr('U-62', { id: x.id })}><span class="pt">${x.pin ? '<span class="pill red" style="margin-right:6px">📌 고정</span>' : ''}${esc(x.title)}</span><span class="pb">${esc(x.body)}</span><span class="meta"><span>${b.name}</span><span>${x.anon ? '익명' : esc(x.author || DB.me.name)}${x.church ? ' · ' + x.church : ''}</span><span>${x.time}</span><span style="margin-left:auto;color:var(--danger)">${ic('heart', 'xs')}${x.likes}</span><span style="color:var(--primary)">${ic('chat', 'xs')}${x.comments.length}</span></span></button>`;
   };
   /* U-60 커뮤니티 (v2.1 D-25): 소그룹과 게시판을 한 메뉴로. 위에는 내 소그룹, 아래는 전체 · 기도 · 모임 · 게시판 */
   const gFeedItem = ({ g, f }) => `<button class="card gfeed" type="button" data-go="U-75" data-p='${esc(JSON.stringify({ g: g.id, id: f.id }))}'>${scopeTag(g.id, g.name)}<span class="tx">${esc(f.text)}</span><span class="micro">${esc(f.who)} · ${f.time} · ♥ ${f.likes} · 댓글 ${f.comments.length}</span></button>`;
@@ -1236,7 +1277,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     const V = DB.v2; const gi = [];
     const maxL = Math.max(...V.groups.map((g) => g.feed.length));
     for (let i = 0; i < maxL; i++) V.groups.forEach((g) => { if (g.feed[i]) gi.push({ g, f: g.feed[i] }); });
-    const bp = visiblePosts((x) => x.board !== 'union');
+    const bp = visiblePosts((x) => x.board !== 'union' && !x.pin);   // 고정 글은 맨 위 '꼭 보세요'에 있으므로 뺀다
     const out = []; let a = 0, b = 0;
     while (a < gi.length || b < bp.length) {
       if (a < gi.length) out.push(gFeedItem(gi[a++]));
@@ -1260,14 +1301,26 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
       <div class="sec-title">공감 많은 글</div>
       <div class="card tight">${hot.map(postItem).join('') || '<div class="empty">아직 공감 많은 글이 없어요</div>'}</div>`;
   }
+  /* v2.2(A-208): 커뮤니티 맨 위 '꼭 보세요' — 교회가 고정한 글 먼저, 남는 자리(최대 3줄)에 공감 많은 글을 자동으로 */
+  const boardName = (x) => (DB.boards.find((b) => b.id === x.board) || {}).name || '';
+  const pinRow = (kind, title, sub, attr) => `<button class="pinrow" type="button" ${attr}><span class="pill ${kind === 'pin' ? 'red' : 'blue'}">${kind === 'pin' ? '📌 고정' : '🔥 인기'}</span><span class="grow"><span class="t">${title}</span><span class="s">${sub}</span></span><span class="chev">${ic('chev', 's')}</span></button>`;
+  function pinBlock() {
+    const pins = visiblePosts((x) => x.pin);
+    const hot = visiblePosts((x) => !x.pin && x.board !== 'union' && x.likes >= 10).map((x) => ({ likes: x.likes, html: pinRow('hot', esc(x.title), `${esc(boardName(x))} · ♥ ${x.likes} · 댓글 ${x.comments.length}`, goAttr('U-62', { id: x.id })) }));
+    DB.v2.groups.forEach((g) => g.feed.forEach((f) => { if (f.likes >= 10) hot.push({ likes: f.likes, html: pinRow('hot', esc(f.text.split('\n')[0]), `🔒 ${esc(g.name)} · ${esc(f.who)} · ♥ ${f.likes}`, `data-go="U-75" data-p='${esc(JSON.stringify({ g: g.id, id: f.id }))}'`) }); }));
+    hot.sort((a, c) => c.likes - a.likes);
+    const rows = pins.map((x) => pinRow('pin', esc(x.title), `${esc(boardName(x))} · ${esc(x.author || '')}`, goAttr('U-62', { id: x.id }))).concat(hot.slice(0, Math.max(0, 3 - pins.length)).map((h) => h.html));
+    return rows.length ? `<div class="sec-title" style="margin-top:0">꼭 보세요</div><section class="card tight" style="padding:2px 0">${rows.join('')}</section>` : '';
+  }
   SCREENS['U-60'] = (p) => {
     const V = DB.v2; if (p.seg) V.cseg = p.seg; const seg = V.cseg || 'all';
     const segs = [['all', '전체'], ['pray', '기도'], ['meet', '모임'], ['board', '게시판']];
     const body = seg === 'pray' ? prayList() : seg === 'meet' ? meetList() : seg === 'board' ? boardHub() : mixFeed();
     const fab = seg === 'pray' ? `data-go="U-74" data-p='${esc(JSON.stringify({ kind: 'prayer' }))}'` : goAttr('U-63');
-    return `${bigHdr('커뮤니티', 'U-60', `<button class="icon-btn" ${goAttr('U-68')} aria-label="내 활동">${ic('user')}</button>`)}
+    return `${bigHdr('커뮤니티', 'U-60', `<button class="icon-btn" ${goAttr('U-80')} aria-label="글 검색">${ic('search')}</button><button class="icon-btn" ${goAttr('U-68')} aria-label="내 활동">${ic('user')}</button>`)}
     <div class="body">
-      <div class="sec-title" style="margin-top:0">내 소그룹 <button class="link" type="button" ${goAttr('U-72')}>전체 ${ic('chev', 'xs')}</button></div>
+      ${pinBlock()}
+      <div class="sec-title">내 소그룹 <button class="link" type="button" ${goAttr('U-72')}>전체 ${ic('chev', 'xs')}</button></div>
       <div class="gstrip">${V.groups.map((g) => `<button type="button" ${goAttr('U-73', { id: g.id })}><span style="display:flex;align-items:center;gap:6px"><b>${esc(g.name)}</b>${g.unread ? `<span class="pill red">${g.unread}</span>` : ''}</span><span class="micro">${esc(g.path)}</span><span class="micro">${g.members}명${g.primary ? ' · 대표 소속' : ''}</span></button>`).join('')}</div>
       <div class="seg sticky" role="tablist" aria-label="커뮤니티 메뉴">${segs.map(([k, l]) => `<button type="button" role="tab" aria-selected="${seg === k}" data-v2="cseg" data-v="${k}">${l}</button>`).join('')}</div>
       ${body}
@@ -1277,7 +1330,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
   };
   SCREENS['U-61'] = (p) => {
     const b = DB.boards.find((x) => x.id === p.b) || DB.boards[0];
-    const list = visiblePosts((x) => x.board === b.id);
+    const list = visiblePosts((x) => x.board === b.id).sort((a, c) => (c.pin ? 1 : 0) - (a.pin ? 1 : 0));   // 고정 글이 맨 위
     return `${hdr(b.name, 'U-61')}
     <div class="body">${b.id === 'teen' ? '<div class="note blue">중고등부 전용 게시판이에요. 보호자 동의를 받은 청소년과 교역자만 볼 수 있어요.</div>' : ''}
       <div class="card tight">${list.map(postItem).join('') || '<div class="empty">아직 글이 없어요. 첫 글을 써 보세요</div>'}</div><div style="height:48px"></div></div>
@@ -1298,6 +1351,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     <div class="body">
       <article class="card" style="display:flex;flex-direction:column;gap:12px">
         <div style="display:flex;align-items:center;gap:10px"><span class="avatar" style="width:36px;height:36px;font-size:14px">${x.anon ? '익' : esc((x.author || DB.me.name).slice(0, 1))}</span><span><b style="display:block;font-size:14px">${x.anon ? '익명' : esc(x.author || DB.me.name)}${x.mine ? ' <span class="pill blue">내 글</span>' : ''}</b><span class="micro">${x.church ? x.church + ' · ' : ''}${x.time}</span></span></div>
+        ${x.pin ? '<span class="pill red" style="align-self:flex-start">📌 교회가 고정한 글 · 커뮤니티 맨 위에 보여요</span>' : ''}
         <b style="font-size:18px;line-height:26px">${esc(x.title)}</b>
         <p style="margin:0;white-space:pre-wrap">${esc(x.body)}</p>
         <div style="display:flex;gap:8px"><button class="btn sm line" type="button" data-like="${x.id}" style="color:${x.liked ? 'var(--danger)' : 'inherit'}">${ic('heart', 'xs')} 공감 ${x.likes}</button><button class="btn sm line" type="button" data-scrap="${x.id}">${ic('bookmark', 'xs')} ${x.scrap ? '스크랩함' : '스크랩'}</button></div>
@@ -1339,6 +1393,41 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     </div>`;
   };
 
+  /* ── U-80 커뮤니티 글 검색 (v2.2, A-209): 내가 볼 수 있는 게시판 글 · 내 소그룹 글 · 기도 제목에서 찾는다 ── */
+  function snip(text, q) {
+    const t = String(text).replace(/\s+/g, ' '); const i = t.toLowerCase().indexOf(q.trim().toLowerCase());
+    if (t.length <= 72) return t;
+    const s = i < 0 ? 0 : Math.max(0, i - 20);
+    return (s > 0 ? '…' : '') + t.slice(s, s + 72) + (s + 72 < t.length ? '…' : '');
+  }
+  function rememberC(q) {
+    const t = (q || '').trim(); if (!t) return;
+    const list = store.get('crecent', []).filter((r) => r !== t); list.unshift(t); store.set('crecent', list.slice(0, 5));
+  }
+  function csearch() {
+    const q = S.cq.trim();
+    if (!q) {
+      const rec = store.get('crecent', []);
+      return `${rec.length ? `<div class="small" style="font-weight:700">최근 검색어</div><div class="recent">${rec.map((r) => `<span><button class="q" type="button" data-v2="cq" data-v="${esc(r)}">${esc(r)}</button></span>`).join('')}</div>` : ''}
+        <div class="small" style="font-weight:700">이렇게 찾아보세요</div>
+        <div class="chips">${['수련회', '주차', '기도', '김장', '나눔'].map((w) => `<button type="button" class="chip" data-v2="cq" data-v="${w}">${w}</button>`).join('')}</div>
+        <div class="note">${ic('lock', 's')}<span>내가 볼 수 있는 글만 찾아요. 소그룹 글은 내가 속한 그룹 것만, 익명 글은 이름 없이 나와요. 차단한 사람의 글은 나오지 않아요.</span></div>`;
+    }
+    const n = norm(q); const has = (s) => norm(s).includes(n);
+    const res = []; const f = S.cf;
+    if (f === 'all' || f === 'board') visiblePosts((x) => has(x.title + ' ' + x.body)).forEach((x) => res.push({ tag: `<span class="scope all">${x.pin ? '📌 ' : ''}${esc(x.board === 'union' ? '연합 게시판' : boardName(x))}</span>`, t: x.title, b: x.body, meta: `${x.anon ? '익명' : esc(x.author || DB.me.name)} · ${x.time} · ♥ ${x.likes}`, attr: goAttr('U-62', { id: x.id }) }));
+    if (f === 'all' || f === 'group') DB.v2.groups.forEach((g) => g.feed.forEach((x) => { if (has(x.text + ' ' + x.who)) res.push({ tag: scopeTag(g.id, g.name), t: null, b: x.text, meta: `${esc(x.who)} · ${x.time} · ♥ ${x.likes}`, attr: `data-go="U-75" data-p='${esc(JSON.stringify({ g: g.id, id: x.id }))}'` }); }));
+    if (f === 'all' || f === 'pray') allPrayers().forEach(({ gid, name, p }) => { if (has(p.text)) res.push({ tag: scopeTag(gid, name) + ' <span class="scope" style="color:var(--text-sub)">· 기도 제목</span>', t: null, b: p.text, meta: `${p.anon ? '익명' : esc(p.who)} · ${p.time} · 🙏 ${p.count}명`, attr: `data-go="U-60" data-p='${esc(JSON.stringify({ seg: 'pray' }))}'` }); });
+    if (!res.length) return `<div class="empty"><b style="color:var(--text)">'${esc(q)}'(으)로 찾은 글이 없어요</b><div class="small">다른 낱말로 찾거나 범위를 '전체'로 바꿔 보세요</div></div>`;
+    return `<div class="small"><b style="color:var(--text)">글 ${res.length}개</b></div><div class="card tight">${res.map((r) => `<button class="sres" type="button" data-csave="1" ${r.attr}>${r.tag}${r.t ? `<span class="pt">${hl(r.t, q)}</span>` : ''}<span class="pb">${hl(snip(r.b, q), q)}</span><span class="micro">${r.meta}</span></button>`).join('')}</div>`;
+  }
+  SCREENS['U-80'] = () => `${hdr('글 검색', 'U-80')}
+    <div class="body">
+      <form class="search" role="search" id="cSearch">${ic('search', 's')}<input id="cq" type="search" placeholder="제목·내용으로 찾기 (예: 수련회, 주차)" autocomplete="off" value="${esc(S.cq)}" aria-label="커뮤니티 글 검색"></form>
+      <div class="chips" role="group" aria-label="검색 범위">${[['all', '전체'], ['board', '게시판'], ['group', '소그룹'], ['pray', '기도']].map(([k, l]) => `<button type="button" class="chip" aria-pressed="${S.cf === k}" data-v2="cf" data-v="${k}">${l}</button>`).join('')}</div>
+      <div id="cqBody" style="display:flex;flex-direction:column;gap:12px">${csearch()}</div>
+    </div>`;
+
   /* ── MY (U-50) ── */
   SCREENS['U-50'] = () => `<div class="my-head">
       <div class="top"><h1>MY</h1><span style="display:flex;gap:4px;align-items:center">${sid('U-50')}<button class="icon-btn" ${goAttr('U-53')} aria-label="알림">${ic('bell')}<span class="dot"></span></button></span></div>
@@ -1359,7 +1448,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
         return `<section class="card tight group"><h3>${g}${g === '내 업무' ? ' <span class="pill teal">집행자에게만 보여요</span>' : ''}</h3>${items.map((m) => row({ icon: m.i, tone: 'gray', t: m.n, attr: `data-menu="${m.to}"` })).join('')}</section>`;
       }).join('')}</div>
       <div style="display:flex;justify-content:center;gap:20px" class="small"><button class="link" type="button" data-toast="로그아웃 (프로토타입에서는 그대로 머물러요)">로그아웃</button><button class="link" type="button" ${goAttr('U-58')}>회원 탈퇴</button></div>
-      <div class="micro" style="text-align:center">앱 버전 2.1 · 프로토타입 · 헌금·재정은 부가 기능이에요</div>`;
+      <div class="micro" style="text-align:center">앱 버전 2.2 · 프로토타입 · 헌금·재정은 부가 기능이에요</div>`;
   }
   const norm = (s) => s.toLowerCase().replace(/\s+/g, '');
   function hl(name, q) {
@@ -1381,7 +1470,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     });
     res.sort((a, b) => a.rank - b.rank);
     if (!res.length) {
-      return `<div class="empty" style="display:flex;flex-direction:column;gap:12px;align-items:center"><span class="ic-box gray" style="width:56px;height:56px;border-radius:50%">${ic('search')}</span><div><b style="color:var(--text)">'${esc(S.q)}'에 맞는 메뉴가 없어요</b><div class="small">메뉴 이름만 찾을 수 있어요. 글이나 헌금 내역은 찾지 않아요.</div></div><button class="btn sm sub" type="button" data-menu="U-56">고객센터에 물어보기</button></div>`;
+      return `<div class="empty" style="display:flex;flex-direction:column;gap:12px;align-items:center"><span class="ic-box gray" style="width:56px;height:56px;border-radius:50%">${ic('search')}</span><div><b style="color:var(--text)">'${esc(S.q)}'에 맞는 메뉴가 없어요</b><div class="small">여기서는 메뉴 이름만 찾아요. 글은 커뮤니티 › 글 검색에서 찾을 수 있어요.</div></div><div style="display:flex;gap:8px;justify-content:center;flex-wrap:wrap"><button class="btn sm" type="button" data-menu="U-80">'${esc(S.q)}' 글 검색</button><button class="btn sm sub" type="button" data-menu="U-56">고객센터에 물어보기</button></div></div>`;
     }
     return `<div class="small"><b style="color:var(--text)">메뉴 ${res.length}개</b></div><div class="card tight">${res.map(({ m, by }) => row({ icon: m.i, tone: 'gray', t: hl(m.n, S.q), s: by ? `'${hl(by, S.q)}'(으)로 찾음` : null, right: `<span class="grp">${m.g}</span>`, attr: `data-menu="${m.to}" data-save="1"` })).join('')}</div>`;
   }
@@ -1464,6 +1553,12 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
       });
       scr.querySelector('#menuSearch').addEventListener('submit', (e) => { e.preventDefault(); const first = scr.querySelector('[data-menu][data-save]'); if (first) first.click(); });
     }
+    const cq = scr.querySelector('#cq');
+    if (cq) {
+      // 글자를 칠 때마다 결과만 다시 그려 입력 칸 포커스를 지킨다
+      cq.addEventListener('input', () => { S.cq = cq.value; scr.querySelector('#cqBody').innerHTML = csearch(); });
+      scr.querySelector('#cSearch').addEventListener('submit', (e) => { e.preventDefault(); rememberC(S.cq); cq.blur(); });
+    }
     const wt = scr.querySelector('#w-title'), wb = scr.querySelector('#w-body'), wa = scr.querySelector('#w-anon');
     if (wt) {
       const upd = () => {
@@ -1508,9 +1603,11 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     if (!el || el.disabled) return;
     const d = el.dataset;
     if (d.v2) return v2Act(el, d);
+    if (d.csave) rememberC(S.cq);   // 검색 결과를 누르면 검색어를 최근 검색어에 남긴다
     if (d.tab) return switchTab(d.tab);
     if (d.menu) {
       if (d.save) remember(S.q);
+      if (d.menu === 'U-80' && S.q) S.cq = S.q;   // 메뉴 검색에서 글 검색으로 넘어갈 때 검색어를 가져간다
       S.q = '';
       return go(d.menu);
     }
@@ -1630,7 +1727,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
   /* ───────── 안내 패널 ───────── */
   const JUMP = [
     ['홈', ['U-10']],
-    ['커뮤니티 (소그룹 합침)', ['U-60', 'U-72', 'U-73', 'U-74', 'U-75', 'U-61', 'U-62', 'U-63', 'U-66', 'U-68']],
+    ['커뮤니티 (소그룹 합침)', ['U-60', 'U-80', 'U-72', 'U-73', 'U-74', 'U-75', 'U-61', 'U-62', 'U-63', 'U-66', 'U-68']],
     ['소식', ['U-77', 'U-76', 'U-78', 'U-79']],
     ['MY', ['U-50', 'U-51', 'U-53', 'U-54', 'U-56', 'U-57', 'U-40']],
     ['헌금·재정 (부가 기능 · MY 맨 위, 홈 아래쪽)', ['U-70', 'U-11', 'U-14', 'U-15', 'U-16', 'U-20', 'U-21', 'U-22', 'U-23', 'U-24', 'U-25', 'U-30', 'U-31', 'U-32', 'U-33', 'U-34', 'U-35', 'U-71']]
@@ -1649,7 +1746,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     if (id === 'U-24') return go(id, { y: 2025 });
     if (id === 'U-31') return go(id, { m: 9 });
     if (id === 'U-33') return go(id, { id: 'p1' });
-    if (id === 'U-62') return go(id, { id: 'a2' });
+    if (id === 'U-62') return go(id, { id: 'a7' });
     if (id === 'U-61') return go(id, { b: 'free' });
     if (id === 'U-11') return go(id, { fresh: true });
     return go(id);
@@ -1664,8 +1761,8 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
   document.getElementById('idToggle2').addEventListener('click', () => setIds(!phone.classList.contains('show-ids')));
   document.getElementById('resetBtn').addEventListener('click', () => {
     DB = freshDB(); DB.v2 = v2Data();
-    Object.assign(S, { tab: 'home', stacks: { home: [{ id: 'U-10' }], community: [{ id: 'U-60' }], news: [{ id: 'U-77' }], my: [{ id: 'U-50' }] }, histSub: 'list', month: '2026-10', filter: '전체', pubSub: 'report', q: '', draft: null, give: null, rec: null });
-    setSection('give'); store.set('recent', []);
+    Object.assign(S, { tab: 'home', stacks: { home: [{ id: 'U-10' }], community: [{ id: 'U-60' }], news: [{ id: 'U-77' }], my: [{ id: 'U-50' }] }, histSub: 'list', month: '2026-10', filter: '전체', pubSub: 'report', q: '', cq: '', cf: 'all', draft: null, give: null, rec: null });
+    setSection('give'); store.set('recent', []); store.set('crecent', []);
     render();
     toast('처음 상태로 돌렸어요');
   });
