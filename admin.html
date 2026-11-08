@@ -393,7 +393,7 @@ svg.i.xs { width: 15px; height: 15px; }
 </head>
 <body class="show-ids">
 <div class="proto" role="region" aria-label="프로토타입 안내">
-  <b>감사교회 관리자 웹 프로토타입 v2.0 · 커뮤니티 중심</b>
+  <b>감사교회 관리자 웹 프로토타입 v2.1 · 커뮤니티 중심</b>
   <span>디자인 시안 C · 예시 데이터 · 입력한 내용은 이 창에만 남고 실제로 저장·발송·결제되지 않습니다</span>
   <span class="sp"></span>
   <a class="proto-link" href="member.html">신도 앱 프로토타입 ↗</a>
@@ -808,7 +808,7 @@ svg.i.xs { width: 15px; height: 15px; }
     { h: 'aw-87', id: 'AW-87', t: '조직 관리', g: 'org' },
     { h: 'aw-88', id: 'AW-88', t: '조직도', g: 'org' },
     { h: 'aw-89', id: 'AW-89', t: '직분·임원', g: 'org' },
-    { h: 'aw-95', id: 'AW-95', t: '소그룹 현황', g: 'org' },
+    { h: 'aw-95', id: 'AW-95', t: '소그룹 현황', g: 'com' },
     { h: 'aw-77', id: 'AW-77', t: '신고·게시글 관리', g: 'com' },
     { h: 'aw-75', id: 'AW-75', t: '게시판 설정', g: 'com' },
     { h: 'aw-76', id: 'AW-76·78', t: '계정 레벨·확인 기록', g: 'com' },
@@ -825,7 +825,7 @@ svg.i.xs { width: 15px; height: 15px; }
     { h: 'aw-03', id: 'AW-03', t: '심사 대기', g: 'start', bare: true }
   ];
   const GROUPS = [
-    ['dash', '대시보드', 'grid', 'aw-10'], ['mem', '교인', 'users', 'aw-70'], ['org', '조직·소그룹', 'tree', 'aw-87'], ['com', '커뮤니티 운영', 'chat', 'aw-77'],
+    ['dash', '대시보드', 'grid', 'aw-10'], ['mem', '교인', 'users', 'aw-70'], ['org', '조직', 'tree', 'aw-87'], ['com', '커뮤니티·소그룹', 'chat', 'aw-95'],
     ['news', '소식·일정', 'bell', 'aw-91'], ['set', '설정', 'sliders', 'aw-80'], ['-', '부가 기능 · 재정'], ['erp', '재정 연동', 'bank', 'aw-94'],
     ['off', '헌금', 'coins', 'aw-20'], ['led', '장부·결산', 'book', 'aw-30'], ['rcp', '기부금영수증', 'file', 'aw-40'], ['open', '재정 공개', 'pie', 'aw-60'],
     ['bud', '예산·집행', 'wallet', 'later-budget'], ['uni', '교단', 'bank', 'later-union']
@@ -1454,7 +1454,7 @@ svg.i.xs { width: 15px; height: 15px; }
       const subs = SCREENS.filter((x) => x.g === g[0] && !x.hide && !x.later);
       if (on && subs.length > 1) s += '<div class="sub">' + subs.map((x) => '<a href="#' + x.h + '" class="' + (x.h === sc.h || (sc.h === 'aw-71' && x.h === 'aw-70') ? 'on' : '') + '">' + x.t + '</a>').join('') + '</div>';
     });
-    s += '</nav><div class="foot">커뮤니티 중심 v2.0(D-24) · 재정은 부가 기능 · 예산·집행·교단은 계획만 보여 줍니다</div>';
+    s += '</nav><div class="foot">커뮤니티 중심 v2.1(D-24·D-25) · 재정은 부가 기능 · 예산·집행·교단은 계획만 보여 줍니다</div>';
     $('#side').innerHTML = s;
     const P0 = actor(); $('#who').innerHTML = '<span class="cname">' + esc(DB.church.name) + '</span><span class="sep"></span><span class="avatar">' + P0.name[0] + '</span><b>' + P0.name + '</b><span class="role">' + P0.role + '</span><button type="button" class="btn btn-g sm" data-act="logout" title="로그아웃" aria-label="로그아웃">' + ic('logout', 's') + '</button>';
   }
@@ -2048,8 +2048,8 @@ svg.i.xs { width: 15px; height: 15px; }
     const quiet = D.org.nodes.find((n) => n.name === '6교구 3구역'); if (quiet && quiet.stats) { quiet.stats.posts7 = 0; quiet.stats.prayers7 = 0; quiet.stats.last = 19; quiet.stats.rsvp = 18; }
     D.boards = [
       { id: 'free', name: '자유게시판', aud: '전 교인', anon: true, lv: 1, posts7: 34 },
-      { id: 'pray', name: '기도 제목', aud: '전 교인', anon: true, lv: 1, posts7: 21 },
-      { id: 'young', name: '청년부', aud: '그룹: 청년부', anon: true, lv: 1, posts7: 18 },
+      // v2.1(A-201·A-202): 기도 제목은 '교회 전체·소그룹' 중 올릴 때 고르는 하나의 공간. 청년부 게시판은 청년부 소그룹 공간으로 합쳤다
+      { id: 'pray', name: '기도 제목', aud: '교회 전체 또는 내 소그룹 (올릴 때 고름)', anon: true, lv: 1, posts7: 21 },
       { id: 'teen', name: '중고등부', aud: '그룹: 중고등부 (보호자 동의)', anon: false, lv: 1, posts7: 6 },
       { id: 'share', name: '나눔·장터', aud: '전 교인', anon: false, lv: 2, posts7: 9 },
       { id: 'union', name: '연합 게시판', aud: '여러 교회 함께 (2차)', anon: true, lv: 3, posts7: 0 }
@@ -2060,7 +2060,7 @@ svg.i.xs { width: 15px; height: 15px; }
       { id: 'r3', title: '○○ 세미나 무료 초대 (외부 단체)', board: '자유게시판', reason: '외부 홍보', count: 2, at: '2026-11-06 09:45', excerpt: '성경을 새롭게 배우는 무료 세미나에 초대합니다. 연락처는…', anon: true, status: 'pending' }
     ];
     D.levelCfg = { reportLv: 3, revealLv: 5 };
-    D.reveals = [{ at: '2026-10-29 23:40', who: '정목양 담임목사', post: '기도 제목 게시판 · "다 그만두고 싶어요"', reason: '자해 우려가 있어 담당 교역자가 직접 연락하기 위해' }];
+    D.reveals = [{ at: '2026-10-29 23:40', who: '정목양 담임목사', post: '기도 제목(교회 전체) · "다 그만두고 싶어요"', reason: '자해 우려가 있어 담당 교역자가 직접 연락하기 위해' }];
     D.notices = [
       { id: 'n1', title: '추수감사주일 연합 예배 안내 (11월 15일)', aud: '전 교인', pin: true, at: '2026-11-02 10:00', push: true, read: 0.58 },
       { id: 'n2', title: '김장 나눔 봉사자 모집 (11월 22일)', aud: '전 교인', pin: false, at: '2026-11-01 09:30', push: true, read: 0.47 },
@@ -2120,7 +2120,7 @@ svg.i.xs { width: 15px; height: 15px; }
 
   /* AW-75 게시판 설정 */
   function vBoards(sc) {
-    return '<div class="page" style="max-width:980px">' + head(sc, '게시판 설정', '교회 전체 게시판을 만들고, 누가 볼지와 익명을 켤지 정합니다(D-13). 소그룹 공간은 조직에서 자동으로 생기므로 여기서 만들지 않습니다.', '<button type="button" class="btn btn-p" data-act="boardAdd">' + ic('plus', 's') + '게시판 만들기</button>') +
+    return '<div class="page" style="max-width:980px">' + head(sc, '게시판 설정', '교회 전체 게시판을 만들고, 누가 볼지와 익명을 켤지 정합니다(D-13). 신도 앱에서는 소그룹과 게시판이 커뮤니티 한 메뉴에 함께 보입니다. 구역·셀·부서 공간은 조직에서 자동으로 생기므로 여기서 만들지 않습니다(A-202).', '<button type="button" class="btn btn-p" data-act="boardAdd">' + ic('plus', 's') + '게시판 만들기</button>') +
       '<div class="card"><div class="tw"><table class="t"><thead><tr><th>게시판</th><th>이용 대상</th><th>익명 허용</th><th>글쓰기 레벨</th><th class="r">지난 7일 글</th></tr></thead><tbody>' +
       DB.boards.map((b, i) => '<tr><td><b>' + esc(b.name) + '</b></td><td>' + esc(b.aud) + '</td><td><button type="button" class="tog" role="switch" aria-checked="' + b.anon + '" aria-label="' + esc(b.name) + ' 익명" data-act="boardAnon" data-i="' + i + '"></button></td><td><select class="in sm" style="width:auto" data-chg="boardLv" data-i="' + i + '" aria-label="글쓰기 레벨">' + [1, 2, 3].map((l) => opt(l, 'Lv.' + l + ' 이상', b.lv)).join('') + '</select></td><td class="r num">' + b.posts7 + '</td></tr>').join('') + '</tbody></table></div>' +
       '<p class="hint" style="margin:12px 0 0">익명을 꺼도 지난 익명 글은 그대로 익명입니다. 중고등부 게시판은 보호자 동의를 받은 청소년과 교역자만 봅니다(D-15).</p></div></div>';
