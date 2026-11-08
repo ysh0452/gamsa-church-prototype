@@ -78,6 +78,7 @@ body.bare #bare { display: block; }
 .nav a.on { background: var(--primary-soft); color: var(--primary); font-weight: 700; }
 .nav .cnt { margin-left: auto; min-width: 20px; height: 20px; border-radius: 10px; background: var(--danger); color: #fff; font-size: 11px; font-weight: 700; display: grid; place-items: center; padding: 0 6px; }
 .nav .ph2 { margin-left: auto; font-size: 10px; line-height: 14px; font-weight: 700; color: var(--text-faint); border: 1px solid var(--line); border-radius: 6px; padding: 1px 5px; }
+.nav-div { font-size: 11px; line-height: 16px; font-weight: 700; color: var(--text-faint); padding: 16px 12px 6px; margin-top: 6px; border-top: 1px solid var(--line); }
 .nav .sub { display: flex; flex-direction: column; gap: 1px; margin: 2px 0 8px 36px; }
 .nav .sub a { font-size: 13px; line-height: 18px; padding: 6px 10px; }
 .nav .sub a.on { background: transparent; color: var(--primary); font-weight: 700; }
@@ -312,6 +313,8 @@ textarea.in { height: auto; min-height: 84px; padding: 10px 12px; resize: vertic
   .side { padding: 16px 10px; }
   .side .brand { justify-content: center; padding: 4px 0 18px; }
   .side .brand .bt, .nav .lbl, .nav .sub, .nav .ph2, .side .foot { display: none; }
+  .nav-div { font-size: 0; padding: 0; margin: 8px 6px; }
+  .side.open .nav-div { font-size: 11px; padding: 16px 12px 6px; }
   .nav a { justify-content: center; padding: 11px 0; position: relative; }
   .nav .cnt { position: absolute; top: 4px; right: 6px; min-width: 18px; height: 18px; font-size: 10px; padding: 0 5px; }
   .g3, .g-pair, .g-list { grid-template-columns: minmax(0, 1fr); }
@@ -390,7 +393,7 @@ svg.i.xs { width: 15px; height: 15px; }
 </head>
 <body class="show-ids">
 <div class="proto" role="region" aria-label="프로토타입 안내">
-  <b>감사교회 관리자 웹 프로토타입 v1.1</b>
+  <b>감사교회 관리자 웹 프로토타입 v2.0 · 커뮤니티 중심</b>
   <span>디자인 시안 C · 예시 데이터 · 입력한 내용은 이 창에만 남고 실제로 저장·발송·결제되지 않습니다</span>
   <span class="sp"></span>
   <a class="proto-link" href="member.html">신도 앱 프로토타입 ↗</a>
@@ -694,6 +697,7 @@ svg.i.xs { width: 15px; height: 15px; }
       notices: 0
     };
     addOrgAndPub(D, R);
+    addCommunity(D, R);
     return D;
   }
 
@@ -773,11 +777,13 @@ svg.i.xs { width: 15px; height: 15px; }
     if (!type && out[0]) { const cnt = {}; DB.offerings.forEach((o) => { if (o.memberId === out[0].m.id) cnt[o.type] = (cnt[o.type] || 0) + 1; }); type = Object.keys(cnt).sort((a, b) => cnt[b] - cnt[a])[0] || '감사'; }
     return { list: out, type: type || '주일', kw };
   }
-  function logA(action, target, detail) { DB.audit.unshift({ at: TODAY + ' ' + nowTime(), who: ME.id, action, target, detail: detail || '' }); }
+  function logA(action, target, detail) { DB.audit.unshift({ at: TODAY + ' ' + nowTime(), who: actor().id, action, target, detail: detail || '' }); }
 
   /* ───────── 화면 목록 ───────── */
   const SCREENS = [
-    { h: 'aw-10', id: 'AW-10', t: '대시보드', g: 'dash' },
+    { h: 'aw-10', id: 'AW-10', t: '참여 대시보드', g: 'dash' },
+    { h: 'aw-94', id: 'AW-94', t: 'ERP 연동', g: 'erp' },
+    { h: 'aw-96', id: 'AW-96', t: '재정 요약', g: 'erp' },
     { h: 'aw-20', id: 'AW-20', t: '헌금 내역', g: 'off' },
     { h: 'aw-21', id: 'AW-21', t: '봉투 헌금 입력', g: 'off' },
     { h: 'aw-22', id: 'AW-22', t: '미확인 입금', g: 'off' },
@@ -802,7 +808,13 @@ svg.i.xs { width: 15px; height: 15px; }
     { h: 'aw-87', id: 'AW-87', t: '조직 관리', g: 'org' },
     { h: 'aw-88', id: 'AW-88', t: '조직도', g: 'org' },
     { h: 'aw-89', id: 'AW-89', t: '직분·임원', g: 'org' },
-    { h: 'later-community', id: 'AW-75~78', t: '커뮤니티 관리', g: 'com', later: '2차' },
+    { h: 'aw-95', id: 'AW-95', t: '소그룹 현황', g: 'org' },
+    { h: 'aw-77', id: 'AW-77', t: '신고·게시글 관리', g: 'com' },
+    { h: 'aw-75', id: 'AW-75', t: '게시판 설정', g: 'com' },
+    { h: 'aw-76', id: 'AW-76·78', t: '계정 레벨·확인 기록', g: 'com' },
+    { h: 'aw-91', id: 'AW-91', t: '공지 관리', g: 'news' },
+    { h: 'aw-92', id: 'AW-92', t: '주보 관리', g: 'news' },
+    { h: 'aw-93', id: 'AW-93', t: '행사·일정 관리', g: 'news' },
     { h: 'aw-80', id: 'AW-80', t: '교회 정보', g: 'set' },
     { h: 'aw-81', id: 'AW-81', t: '헌금 종류', g: 'set' },
     { h: 'aw-83', id: 'AW-83', t: '역할·권한', g: 'set' },
@@ -813,9 +825,10 @@ svg.i.xs { width: 15px; height: 15px; }
     { h: 'aw-03', id: 'AW-03', t: '심사 대기', g: 'start', bare: true }
   ];
   const GROUPS = [
-    ['dash', '대시보드', 'grid', 'aw-10'], ['off', '헌금', 'coins', 'aw-20'], ['led', '장부·결산', 'book', 'aw-30'],
-    ['rcp', '기부금영수증', 'file', 'aw-40'], ['bud', '예산·집행', 'wallet', 'later-budget'], ['open', '재정 공개', 'pie', 'aw-60'],
-    ['mem', '교인', 'users', 'aw-70'], ['org', '조직', 'tree', 'aw-87'], ['com', '커뮤니티', 'chat', 'later-community'], ['set', '설정', 'sliders', 'aw-80'], ['uni', '교단', 'bank', 'later-union']
+    ['dash', '대시보드', 'grid', 'aw-10'], ['mem', '교인', 'users', 'aw-70'], ['org', '조직·소그룹', 'tree', 'aw-87'], ['com', '커뮤니티 운영', 'chat', 'aw-77'],
+    ['news', '소식·일정', 'bell', 'aw-91'], ['set', '설정', 'sliders', 'aw-80'], ['-', '부가 기능 · 재정'], ['erp', '재정 연동', 'bank', 'aw-94'],
+    ['off', '헌금', 'coins', 'aw-20'], ['led', '장부·결산', 'book', 'aw-30'], ['rcp', '기부금영수증', 'file', 'aw-40'], ['open', '재정 공개', 'pie', 'aw-60'],
+    ['bud', '예산·집행', 'wallet', 'later-budget'], ['uni', '교단', 'bank', 'later-union']
   ];
 
   /* ───────── 화면 상태 ───────── */
@@ -829,7 +842,7 @@ svg.i.xs { width: 15px; height: 15px; }
       f31: { kind: 'expense', date: TODAY, acc: '', amount: '', desc: '', cp: '', method: '', files: [], noEv: false, reason: '', checker: '', err: {} },
       upload: null, cand22: {}, type22: {},
       orgSel: (DB.org.nodes.find((n) => n.name === '1교구') || DB.org.nodes[0]).id, orgOpen: (() => { const o = {}; DB.org.nodes.forEach((n) => { if (!n.parent || n.name === '1교구') o[n.id] = true; }); return o; })(),
-      orgQ: '', orgP: { page: 1 }, ocAll: '', rep61: '2026-09', qa64: 'q4', f79: { month: '2026-10', st: 'pending', card: '' }, ctLv: 'open'
+      orgQ: '', orgP: { page: 1 }, ocAll: '', rep61: '2026-09', qa64: 'q4', f79: { month: '2026-10', st: 'pending', card: '' }, ctLv: 'open', f95: ''
     };
   }
   function blankRow() { return { label: '', mid: '', anon: false, type: '주일', amount: '' }; }
@@ -882,7 +895,7 @@ svg.i.xs { width: 15px; height: 15px; }
     }).join('');
     const task = (label, n, go, set, primary, done) => '<div class="task"><span class="grow">' + label + '</span>' + (done ? chip(done, 'c-ok') : '<span class="n num ' + (n && primary ? 'red' : '') + '">' + n + '건</span><button type="button" class="btn sm ' + (n && primary ? 'btn-p' : '') + '" data-go="' + go + '"' + (set ? ' data-set="' + set + '"' : '') + '>' + (primary ? '처리하기' : '확인하기') + '</button>') + '</div>';
     return '<div class="page">' +
-      head(sc, '대시보드', '2026년 11월 3일(화) 기준 · ' + esc(DB.church.name), '<button type="button" class="btn btn-l" data-go="aw-34">결산 보고서</button><button type="button" class="btn btn-p" data-go="aw-21">' + ic('plus', 's') + '봉투 헌금 입력</button>') +
+      head(sc, '재정 요약 (부가 기능)', '내장 재정 모듈 기준 · 2026년 11월 3일(화) · ' + esc(DB.church.name), '<button type="button" class="btn btn-l" data-go="aw-34">결산 보고서</button><button type="button" class="btn btn-p" data-go="aw-21">' + ic('plus', 's') + '봉투 헌금 입력</button>') +
       '<div class="grid g4">' +
       '<div class="card kpi"><div class="lab">10월 헌금<span class="ic-b">' + ic('coins', 's') + '</span></div><div class="val num">' + esc(manwon(cur).replace(' 원', '')) + ' <span style="font-size:20px">원</span></div><div class="sub ' + (diff >= 0 ? 'green' : 'red') + '">9월보다 ' + (diff >= 0 ? '+' : '') + diff.toFixed(1) + '%</div></div>' +
       '<div class="card kpi"><div class="lab">처리할 일<span class="ic-b">' + ic('clip', 's') + '</span></div><div class="val num ' + (all ? 'red' : 'green') + '">' + all + '건</div><div class="sub">입금 ' + un + ' · 가입 ' + jn + ' · 지출 ' + pe + ' · 카드 ' + cpn + ' · Q&A ' + qn + '</div></div>' +
@@ -1431,18 +1444,19 @@ svg.i.xs { width: 15px; height: 15px; }
 
   /* ───────── 뼈대 그리기 ───────── */
   function renderNav(sc) {
-    const counts = { off: unmatched().length, mem: pendingJoins().length, led: pendingEntries().length, open: cardPending().length + qnaOpen().length };
+    const counts = { off: unmatched().length, mem: pendingJoins().length, led: pendingEntries().length, open: cardPending().length + qnaOpen().length, com: DB.reports ? reportsPending().length : 0 };
     let s = brandBlock() + '<nav class="nav" aria-label="메뉴">';
     GROUPS.forEach((g) => {
+      if (g[0] === '-') { s += '<div class="nav-div">' + g[1] + '</div>'; return; }
       const on = sc.g === g[0];
       const later = SCREENS.find((x) => x.h === g[3]).later;
       s += '<a href="#' + g[3] + '" class="' + (on ? 'on' : '') + '" title="' + g[1] + '"' + (on ? ' aria-current="page"' : '') + '>' + ic(g[2]) + '<span class="lbl">' + g[1] + '</span>' + (counts[g[0]] ? '<span class="cnt">' + counts[g[0]] + '</span>' : '') + (later ? '<span class="ph2">' + later + '</span>' : '') + '</a>';
       const subs = SCREENS.filter((x) => x.g === g[0] && !x.hide && !x.later);
       if (on && subs.length > 1) s += '<div class="sub">' + subs.map((x) => '<a href="#' + x.h + '" class="' + (x.h === sc.h || (sc.h === 'aw-71' && x.h === 'aw-70') ? 'on' : '') + '">' + x.t + '</a>').join('') + '</div>';
     });
-    s += '</nav><div class="foot">1차 출시 범위 · 2·3차 메뉴는 계획만 보여 줍니다</div>';
+    s += '</nav><div class="foot">커뮤니티 중심 v2.0(D-24) · 재정은 부가 기능 · 예산·집행·교단은 계획만 보여 줍니다</div>';
     $('#side').innerHTML = s;
-    $('#who').innerHTML = '<span class="cname">' + esc(DB.church.name) + '</span><span class="sep"></span><span class="avatar">' + ME.name[0] + '</span><b>' + ME.name + '</b><span class="role">' + ME.role + '</span><button type="button" class="btn btn-g sm" data-act="logout" title="로그아웃" aria-label="로그아웃">' + ic('logout', 's') + '</button>';
+    const P0 = actor(); $('#who').innerHTML = '<span class="cname">' + esc(DB.church.name) + '</span><span class="sep"></span><span class="avatar">' + P0.name[0] + '</span><b>' + P0.name + '</b><span class="role">' + P0.role + '</span><button type="button" class="btn btn-g sm" data-act="logout" title="로그아웃" aria-label="로그아웃">' + ic('logout', 's') + '</button>';
   }
   let lastRoute = '';
   function render() {
@@ -1492,7 +1506,7 @@ svg.i.xs { width: 15px; height: 15px; }
     menu: () => $('#side').classList.toggle('open'),
     logout: () => { S.login = { step: 1, err: '' }; go('aw-01'); },
     screens: () => {
-      const tour = [['aw-10', '대시보드에서 처리할 일 확인'], ['aw-22', '미확인 입금 3건을 교인과 연결 (후보 추천)'], ['aw-30', '확인·승인 대기 지출 2건 처리 (2인 확인)'], ['aw-79', '교회 카드 사용 내역 확인 — 구제 물품은 과목을 바꾸면 자동 가림 (v1.1)'], ['aw-33', '10월 월 마감'], ['aw-60', '공개 설정: 카드 사용 내역 공개 켜기·대상 고르기 (v1.1)'], ['aw-61', '10월 재정 리포트 발행 (v1.1)'], ['aw-87', '조직 관리: 그룹 추가·옮기기·담당자 (v1.1)'], ['aw-88', '조직도 보기 (v1.1)'], ['aw-64', '재정 Q&A 답변 (v1.1)'], ['aw-40', '영수증 점검 → \'발급 시기 가정\'으로 일괄 발급'], ['aw-85', '감사 로그에서 방금 한 일 확인']];
+      const tour = [['aw-10', '참여 대시보드: 주간 활동 교인·소그룹 활성·공지 열람 (v2.0)'], ['aw-95', '소그룹 현황: 조용한 그룹 담당자에게 알림 (v2.0)'], ['aw-77', '커뮤니티 신고 3건 처리 (v2.0)'], ['aw-91', '공지 쓰기 → 열람률 보기 (v2.0)'], ['aw-93', '행사 만들기·신청자 명단 (v2.0)'], ['aw-92', '주보 복사·발행 (v2.0)'], ['aw-87', '조직 관리: 그룹 = 소그룹 (v1.1)'], ['aw-72', '앱 가입 신청 승인'], ['aw-94', '부가 기능: ERP 연동 방식 고르기 (v2.0)'], ['aw-22', '부가 기능: 미확인 입금 연결'], ['aw-33', '부가 기능: 월 마감'], ['aw-85', '감사 로그에서 방금 한 일 확인']];
       let s = '<div class="mh"><h3>화면 목록·체험 순서</h3><button type="button" class="btn btn-g sm x" data-act="close" aria-label="닫기">' + ic('close', 's') + '</button></div><div class="grid g2" style="align-items:start"><div class="stack"><div class="lab-t">추천 체험 순서 (약 5분)</div>' + tour.map((t, i) => '<button type="button" class="li" style="width:100%;background:none;border-left:0;border-right:0;border-top:0;text-align:left;padding:10px 0" data-go="' + t[0] + '"><span class="dot info" style="font-size:11px;font-weight:700">' + (i + 1) + '</span><span class="grow">' + esc(t[1]) + '</span>' + ic('chev', 'xs') + '</button>').join('') + '</div><div class="stack"><div class="lab-t">모든 화면 (' + SCREENS.length + '개)</div><div class="stack" style="gap:2px">';
       SCREENS.forEach((x) => { s += '<a href="#' + x.h + '" class="row" style="text-decoration:none;color:var(--text);padding:5px 0" data-go="' + x.h + '"><span class="sid" style="display:inline-block;min-width:76px">' + x.id + '</span>' + esc(x.t) + (x.later ? ' ' + chip(x.later, 'c-mute') : '') + '</a>'; });
       s += '</div></div></div>';
@@ -1565,7 +1579,7 @@ svg.i.xs { width: 15px; height: 15px; }
     typeHide: (b) => { const i = Number(b.dataset.i); const t = DB.types[i]; const used = DB.offerings.some((o) => o.type === t.name); if (!t.hidden && !used) { DB.types.splice(i, 1); DB.accounts.income[0].items = DB.accounts.income[0].items.filter((x) => x.type !== t.name); logA('헌금 종류 삭제', t.name, '사용 기록 없음'); render(); toast('지웠습니다'); return; } t.hidden = !t.hidden; logA(t.hidden ? '헌금 종류 숨김' : '헌금 종류 다시 쓰기', t.name, ''); render(); },
     typeAdd: () => ask('헌금 종류 추가', '추가하면 장부에 \'헌금 수입 › (이름)헌금\' 과목이 함께 생깁니다.', '추가', (v) => { if (DB.types.some((t) => t.name.replace(/\s/g, '') === v.replace(/\s/g, ''))) { $('#askErr').textContent = '같은 이름이 이미 있습니다(띄어쓰기 무시)'; return false; } if (len(v) > 20) { $('#askErr').textContent = '20자까지 적을 수 있습니다'; return false; } DB.types.push({ name: v, app: true, hidden: false, basic: false }); DB.accounts.income[0].items.push({ name: accName(v), type: v, hidden: false }); logA('헌금 종류 추가', v, '계정과목 함께 생성'); toast('\'' + v + '\'를 추가했습니다'); }, { input: '종류 이름', ph: '예: 새벽기도', max: 20 }),
     invite: () => ask('관리자 초대', '초대 문자를 받은 분이 링크로 비밀번호와 2단계 인증을 설정하면 관리자가 됩니다.', '초대 보내기', (v) => { logA('관리자 초대', v, $('#invRole').value + ' (예시 — 실제로 보내지 않음)'); toast(v + ' 님을 초대한 것으로 기록했습니다 (실제로 보내지 않음)'); }, { input: '이름', ph: '예: 오집사', extra: '<div class="fld"><label for="invRole">역할</label><select class="in" id="invRole">' + ['재정 담당자', '감사', '담임목사', '교회 관리자'].map((r) => opt(r, r, '재정 담당자')).join('') + '</select></div>' }),
-    roleEdit: () => toast('역할 바꾸기는 교회 관리자 권한입니다. 지금 로그인한 재정부장은 볼 수만 있습니다'),
+    roleEdit: () => toast('역할 바꾸기 화면은 프로토타입에서 생략했습니다. 교회 관리자(R7)가 바꿉니다'),
     orgAddOld: (b) => { const k = b.dataset.k; ask(({ dept: '부서', districts: '교구', titles: '직분' })[k] + ' 추가', '교회가 쓰는 이름 그대로 적습니다.', '추가', (v) => { if (DB[k].indexOf(v) >= 0) { $('#askErr').textContent = '이미 있습니다'; return false; } DB[k].push(v); logA('조직 설정', ({ dept: '부서', districts: '교구', titles: '직분' })[k] + ' 추가', v); toast('추가했습니다'); }, { input: '이름', max: 20 }); },
     login0: () => { S.login = { step: 1, err: '' }; render(); },
     login1: () => { S.login = { step: 2, err: '' }; render(); const c = $('#lg-code'); if (c) c.focus(); },
@@ -2022,6 +2036,165 @@ svg.i.xs { width: 15px; height: 15px; }
   });
   Object.assign(VIEWS, { 'aw-87': vOrgTree, 'aw-88': vOrgChart, 'aw-89': vTitles, 'aw-60': vPubSettings, 'aw-61': vReports, 'aw-62': vProjects, 'aw-64': vQna, 'aw-79': vCards });
 
+  /* 화면 영역에 따라 일하는 사람이 다르다: 핵심(교인·소그룹·커뮤니티·소식)은 교회 관리자, 부가 기능(재정)은 재정부장 */
+  ADMINS.push({ id: 'a6', name: '오은총', title: '목사', role: '교회 관리자 · 교구 담당 부목사', code: 'R7' });
+  const FIN_G = ['off', 'led', 'rcp', 'open', 'erp', 'bud'];
+  const actor = () => (FIN_G.indexOf((SCREENS.find((x) => x.h === S.route) || {}).g) >= 0 ? ME : adminById('a6'));
+  /* ═════════ v2.0 커뮤니티 중심 (D-24): 참여 대시보드·커뮤니티 운영·소식·일정·소그룹 현황·ERP 연동 ═════════ */
+  function addCommunity(D, R) {
+    const ri = (a, b) => a + Math.floor(R() * (b - a + 1));
+    D.members.forEach((m) => { m.active7 = m.app && R() < (m.dept === '청년부' ? 0.52 : m.dept === '중고등부' ? 0.3 : 0.36); m.lv = m.app ? (R() < 0.08 ? 5 : R() < 0.2 ? 4 : R() < 0.5 ? 3 : R() < 0.75 ? 2 : 1) : 0; });
+    D.org.nodes.forEach((n) => { const size = n.members.length; n.stats = size ? { posts7: Math.max(0, Math.round(size / 6 + ri(-2, 4))), prayers7: Math.max(0, Math.round(size / 10 + ri(-1, 3))), rsvp: size ? Math.min(100, ri(30, 95)) : 0, last: ri(0, 12) } : null; });
+    const quiet = D.org.nodes.find((n) => n.name === '6교구 3구역'); if (quiet && quiet.stats) { quiet.stats.posts7 = 0; quiet.stats.prayers7 = 0; quiet.stats.last = 19; quiet.stats.rsvp = 18; }
+    D.boards = [
+      { id: 'free', name: '자유게시판', aud: '전 교인', anon: true, lv: 1, posts7: 34 },
+      { id: 'pray', name: '기도 제목', aud: '전 교인', anon: true, lv: 1, posts7: 21 },
+      { id: 'young', name: '청년부', aud: '그룹: 청년부', anon: true, lv: 1, posts7: 18 },
+      { id: 'teen', name: '중고등부', aud: '그룹: 중고등부 (보호자 동의)', anon: false, lv: 1, posts7: 6 },
+      { id: 'share', name: '나눔·장터', aud: '전 교인', anon: false, lv: 2, posts7: 9 },
+      { id: 'union', name: '연합 게시판', aud: '여러 교회 함께 (2차)', anon: true, lv: 3, posts7: 0 }
+    ];
+    D.reports = [
+      { id: 'r1', title: '○○ 집사님 사업 얘기 들으셨나요', board: '자유게시판', reason: '특정인 비방·소문', count: 3, at: '2026-11-07 21:10', excerpt: '요즘 ○○ 집사님 가게가 어렵다던데 교회 돈을 빌렸다는 얘기가…', anon: true, status: 'pending' },
+      { id: 'r2', title: '아이폰 반값에 팝니다 (선입금)', board: '나눔·장터', reason: '거래 사기 의심', count: 1, at: '2026-11-07 14:02', excerpt: '선입금 주시면 택배로 보내 드려요. 계좌는 댓글로…', anon: false, status: 'pending' },
+      { id: 'r3', title: '○○ 세미나 무료 초대 (외부 단체)', board: '자유게시판', reason: '외부 홍보', count: 2, at: '2026-11-06 09:45', excerpt: '성경을 새롭게 배우는 무료 세미나에 초대합니다. 연락처는…', anon: true, status: 'pending' }
+    ];
+    D.levelCfg = { reportLv: 3, revealLv: 5 };
+    D.reveals = [{ at: '2026-10-29 23:40', who: '정목양 담임목사', post: '기도 제목 게시판 · "다 그만두고 싶어요"', reason: '자해 우려가 있어 담당 교역자가 직접 연락하기 위해' }];
+    D.notices = [
+      { id: 'n1', title: '추수감사주일 연합 예배 안내 (11월 15일)', aud: '전 교인', pin: true, at: '2026-11-02 10:00', push: true, read: 0.58 },
+      { id: 'n2', title: '김장 나눔 봉사자 모집 (11월 22일)', aud: '전 교인', pin: false, at: '2026-11-01 09:30', push: true, read: 0.47 },
+      { id: 'n3', title: '앱이 커뮤니티 중심으로 바뀌었어요', aud: '전 교인', pin: false, at: '2026-11-03 08:00', push: false, read: 0.21 },
+      { id: 'n4', title: '청년부 겨울 수련회 신청 안내', aud: '그룹: 청년부', pin: false, at: '2026-10-30 19:00', push: true, read: 0.72 }
+    ];
+    D.bulletin = { date: '2026-11-08', week: '추수감사절 전 주일', status: '발행됨 · 11월 6일 18:00',
+      order: [['예배로 부름', '인도자'], ['찬송', '588장 공중 나는 새를 보라'], ['대표 기도', '이믿음 장로'], ['성경 봉독', '시편 100편 1~5절'], ['찬양', '시온 찬양대'], ['설교', '감사로 그 문에 들어가며 — 정목양 목사'], ['봉헌', '감사 헌금'], ['교회 소식', '광고'], ['축도', '정목양 목사']],
+      ads: ['추수감사주일 연합 예배 11월 15일(일) 오후 2시, 셀별 특송 신청', '김장 나눔 봉사자 모집 11월 22일(토) — 앱에서 신청', '새가족 환영회 11월 29일(일) 오후 1시, 교육관', '청년부 겨울 수련회 신청 12월 10일까지'] };
+    const pickIds = (n, f) => D.members.filter(f).slice(0, n).map((m) => m.id);
+    D.events = [
+      { id: 'e1', title: '김장 나눔 봉사', when: '2026-11-22 09:00', place: '교회 마당', cap: 40, deadline: '2026-11-18', fee: '무료', applicants: pickIds(27, (m) => m.dept === '장년부' && m.app), aud: '전 교인' },
+      { id: 'e2', title: '청년부 겨울 수련회', when: '2026-12-26 ~ 12-28', place: '양평 수련원', cap: 80, deadline: '2026-12-10', fee: '8만 원(현장)', applicants: pickIds(64, (m) => m.dept === '청년부'), aud: '그룹: 청년부' },
+      { id: 'e3', title: '새가족 환영회', when: '2026-11-29 13:00', place: '교육관 1층', cap: 30, deadline: '2026-11-26', fee: '무료', applicants: pickIds(11, (m) => m.joined >= '2025-01-01'), aud: '전 교인' }
+    ];
+    D.finMode = 'builtin';
+  }
+  const activeRate = () => DB.members.filter((m) => m.active7).length / DB.members.length;
+  const appRate = () => DB.members.filter((m) => m.app).length / DB.members.length;
+  const groupNodes = () => DB.org.nodes.filter((n) => n.stats && !n.hidden);
+  const groupState = (st) => !st ? ['–', 'c-mute'] : (st.posts7 + st.prayers7 >= 4 && st.last <= 7) ? ['활발', 'c-ok'] : (st.posts7 + st.prayers7 >= 1 && st.last <= 14) ? ['보통', 'c-info'] : ['조용함', 'c-warn'];
+  const reportsPending = () => DB.reports.filter((r) => r.status === 'pending');
+  const pct0 = (x) => Math.round(x * 100) + '%';
+  const finOn = () => DB.finMode !== 'off';
+
+  /* AW-10 참여 대시보드 (v2.0) */
+  function vDash2(sc) {
+    const gs = groupNodes(); const activeG = gs.filter((n) => groupState(n.stats)[0] !== '조용함');
+    const lastN = DB.notices.slice().sort((a, b) => b.at.localeCompare(a.at))[0];
+    const quiet = gs.filter((n) => groupState(n.stats)[0] === '조용함');
+    const top = gs.slice().sort((a, b) => (b.stats.posts7 + b.stats.prayers7) - (a.stats.posts7 + a.stats.prayers7)).slice(0, 6);
+    const evSoon = DB.events.filter((e) => e.deadline >= TODAY && e.deadline <= '2026-11-20');
+    const task = (label, n, go, set, primary) => '<div class="task"><span class="grow">' + label + '</span><span class="n num ' + (n && primary ? 'red' : '') + '">' + n + '건</span><button type="button" class="btn sm ' + (n && primary ? 'btn-p' : '') + '" data-go="' + go + '"' + (set ? ' data-set="' + set + '"' : '') + '>' + (primary ? '처리하기' : '확인하기') + '</button></div>';
+    const kpi = (lab, icn, val, sub, cls) => '<div class="card kpi"><div class="lab">' + lab + '<span class="ic-b">' + ic(icn, 's') + '</span></div><div class="val num ' + (cls || '') + '">' + val + '</div><div class="sub">' + sub + '</div></div>';
+    return '<div class="page">' + head(sc, '대시보드', '2026년 11월 3일(화) 기준 · ' + esc(DB.church.name) + ' · 교인들이 실제로 모이고 있는지 봅니다', '<button type="button" class="btn btn-l" data-go="aw-93">행사 관리</button><button type="button" class="btn btn-p" data-act="noticeNew">' + ic('plus', 's') + '공지 쓰기</button>') +
+      '<div class="grid g4">' + kpi('주간 활동 교인', 'users', pct0(activeRate()), '지난 7일 글·기도·참석 응답·신청한 교인 ' + comma(DB.members.filter((m) => m.active7).length) + '명 · 북극성 지표', '') +
+      kpi('앱 연결률', 'okc', pct0(appRate()), '교적 ' + comma(DB.members.length) + '명 중 ' + comma(DB.members.filter((m) => m.app).length) + '명 연결', '') +
+      kpi('소그룹 활성률', 'tree', pct0(activeG.length / Math.max(1, gs.length)), '그룹 ' + gs.length + '개 중 조용한 그룹 ' + quiet.length + '개', quiet.length ? '' : 'green') +
+      kpi('최근 공지 열람률', 'bell', pct0(lastN.read), esc(lastN.title.slice(0, 18)) + '… · 7일 목표 50%', lastN.read < 0.5 ? 'amber' : 'green') + '</div>' +
+      '<div class="grid g-main"><div class="card"><div class="ch"><h2>소그룹 활동 (지난 7일)</h2><button type="button" class="link faint r" data-go="aw-95">전체 ' + ic('chev', 'xs') + '</button></div><div class="tw"><table class="t"><thead><tr><th>그룹</th><th class="r">인원</th><th class="r">글</th><th class="r">기도</th><th class="r">모임 응답</th><th>상태</th></tr></thead><tbody>' +
+      top.map((n) => { const st = groupState(n.stats); return '<tr class="click" data-go="aw-87" data-set="orgSel=' + n.id + '"><td>' + esc(n.name) + ' <span class="faint small">' + esc(orgPath(n).slice(0, -1).map((x) => x.name).join(' › ')) + '</span></td><td class="r num">' + n.members.length + '</td><td class="r num">' + n.stats.posts7 + '</td><td class="r num">' + n.stats.prayers7 + '</td><td class="r num">' + n.stats.rsvp + '%</td><td>' + chip(st[0], st[1]) + '</td></tr>'; }).join('') + '</tbody></table></div>' +
+      (quiet.length ? '<div class="note warn" style="margin-top:12px">' + ic('alert', 's') + '<span class="grow">2주 넘게 조용한 그룹이 <b>' + quiet.length + '개</b> 있습니다: ' + quiet.slice(0, 3).map((n) => esc(n.name)).join(', ') + '. 담당 교역자에게 알림을 보낼 수 있습니다.</span><button type="button" class="btn sm btn-l" data-go="aw-95" data-set="f95=quiet">보기</button></div>' : '') + '</div>' +
+      '<div class="card"><div class="ch"><h2>처리할 일</h2></div>' + task('가입 신청', pendingJoins().length, 'aw-72', '', true) + task('커뮤니티 신고', reportsPending().length, 'aw-77', '', true) + task('행사 신청 마감 임박', evSoon.length, 'aw-93', '', false) +
+      (finOn() ? '<div class="lab-t" style="margin-top:14px">부가 기능 · 재정</div>' + task('미확인 입금', unmatched().length, 'aw-22', '', false) + task('카드 사용 확인', cardPending().length, 'aw-79', 'f79.st=pending', false) + task('재정 Q&A 미답변', qnaOpen().length, 'aw-64', '', false) : '') + '</div></div>' +
+      '<div class="grid g2"><div class="card"><div class="ch"><h2>다가오는 행사</h2><button type="button" class="link faint r" data-go="aw-93">행사 관리 ' + ic('chev', 'xs') + '</button></div>' + DB.events.map((e) => '<div class="li"><span class="grow"><span class="t1">' + esc(e.title) + '</span><br><span class="t2">' + esc(e.when) + ' · ' + esc(e.place) + ' · 마감 ' + fmtD(e.deadline) + '</span></span><b class="num">' + e.applicants.length + '/' + e.cap + '</b></div>').join('') + '</div>' +
+      '<div class="card"><div class="ch"><h2>공지 열람</h2><button type="button" class="link faint r" data-go="aw-91">공지 관리 ' + ic('chev', 'xs') + '</button></div>' + DB.notices.slice().sort((a, b) => b.at.localeCompare(a.at)).map((n) => '<div class="li"><span class="grow"><span class="t1">' + (n.pin ? chip('고정', 'c-bad') + ' ' : '') + esc(n.title) + '</span><br><span class="t2">' + esc(n.aud) + ' · ' + esc(n.at.slice(5, 16)) + '</span></span><div style="width:120px"><div class="meter" style="margin:0"><i style="width:' + (n.read * 100) + '%"></i></div><span class="small faint num">' + pct0(n.read) + ' 읽음</span></div></div>').join('') + '</div></div></div>';
+  }
+
+  /* AW-95 소그룹 현황 */
+  function vGroups(sc) {
+    const f = S.f95 || ''; const list = groupNodes().filter((n) => !f || (f === 'quiet' ? groupState(n.stats)[0] === '조용함' : true)).sort((a, b) => orgPath(a).map((x) => x.name).join().localeCompare(orgPath(b).map((x) => x.name).join()));
+    return '<div class="page">' + head(sc, '소그룹 현황', '조직 관리의 그룹이 그대로 신도 앱의 소그룹이 됩니다(A-190). 그룹마다 지난 7일 활동을 봅니다. 글 내용은 보지 않습니다.', '<button type="button" class="btn btn-l" data-go="aw-87">조직 관리</button>') +
+      '<div class="card"><div class="filters" style="margin-bottom:14px"><div class="seg" role="group" aria-label="상태">' + [['', '전체 ' + groupNodes().length], ['quiet', '조용한 그룹']].map((x) => '<button type="button" class="' + (f === x[0] ? 'on' : '') + '" data-act="setf" data-k="f95" data-v="' + x[0] + '">' + x[1] + '</button>').join('') + '</div><span class="hint">조용함 = 2주 넘게 글·기도가 거의 없음</span></div>' +
+      '<div class="tw"><table class="t"><thead><tr><th>그룹</th><th>단계</th><th>담당</th><th class="r">인원</th><th class="r">글</th><th class="r">기도</th><th class="r">모임 응답</th><th class="r">마지막 활동</th><th>상태</th><th></th></tr></thead><tbody>' +
+      list.map((n) => { const st = groupState(n.stats); return '<tr><td><b>' + esc(n.name) + '</b> <span class="faint small">' + esc(orgPath(n).slice(0, -1).map((x) => x.name).join(' › ')) + '</span></td><td>' + orgDepth(n) + '단계</td><td class="small">' + esc(leadersText(n)) + '</td><td class="r num">' + n.members.length + '</td><td class="r num">' + n.stats.posts7 + '</td><td class="r num">' + n.stats.prayers7 + '</td><td class="r num">' + n.stats.rsvp + '%</td><td class="r num">' + (n.stats.last ? n.stats.last + '일 전' : '오늘') + '</td><td>' + chip(st[0], st[1]) + '</td><td>' + (st[0] === '조용함' ? '<button type="button" class="btn btn-l xs" data-act="nudge" data-id="' + n.id + '">담당자에게 알림</button>' : '') + '</td></tr>'; }).join('') + '</tbody></table></div></div></div>';
+  }
+
+  /* AW-75 게시판 설정 */
+  function vBoards(sc) {
+    return '<div class="page" style="max-width:980px">' + head(sc, '게시판 설정', '교회 전체 게시판을 만들고, 누가 볼지와 익명을 켤지 정합니다(D-13). 소그룹 공간은 조직에서 자동으로 생기므로 여기서 만들지 않습니다.', '<button type="button" class="btn btn-p" data-act="boardAdd">' + ic('plus', 's') + '게시판 만들기</button>') +
+      '<div class="card"><div class="tw"><table class="t"><thead><tr><th>게시판</th><th>이용 대상</th><th>익명 허용</th><th>글쓰기 레벨</th><th class="r">지난 7일 글</th></tr></thead><tbody>' +
+      DB.boards.map((b, i) => '<tr><td><b>' + esc(b.name) + '</b></td><td>' + esc(b.aud) + '</td><td><button type="button" class="tog" role="switch" aria-checked="' + b.anon + '" aria-label="' + esc(b.name) + ' 익명" data-act="boardAnon" data-i="' + i + '"></button></td><td><select class="in sm" style="width:auto" data-chg="boardLv" data-i="' + i + '" aria-label="글쓰기 레벨">' + [1, 2, 3].map((l) => opt(l, 'Lv.' + l + ' 이상', b.lv)).join('') + '</select></td><td class="r num">' + b.posts7 + '</td></tr>').join('') + '</tbody></table></div>' +
+      '<p class="hint" style="margin:12px 0 0">익명을 꺼도 지난 익명 글은 그대로 익명입니다. 중고등부 게시판은 보호자 동의를 받은 청소년과 교역자만 봅니다(D-15).</p></div></div>';
+  }
+
+  /* AW-76 계정 레벨 (+ AW-78 작성자 확인 기록) */
+  function vLevels(sc) {
+    const cnt = (l) => DB.members.filter((m) => m.lv === l).length;
+    const L = [[1, '새로 가입', '읽기·댓글·공감'], [2, '활동 교인', '글쓰기'], [3, '신뢰 교인', '신고하기 (D-17 기본)'], [4, '리더', '소그룹 공지·모임 만들기'], [5, '교역자·운영', '익명 작성자 확인 (D-12 기본, 사유·기록 필수)']];
+    return '<div class="page" style="max-width:980px">' + head(sc, '계정 레벨', '레벨에 따라 할 수 있는 일이 늘어납니다. 신고와 익명 작성자 확인은 정한 레벨 이상만 할 수 있습니다(D-12·D-17).') +
+      '<div class="card"><div class="tw"><table class="t"><thead><tr><th>레벨</th><th>이름</th><th>할 수 있는 일</th><th class="r">인원</th></tr></thead><tbody>' + L.map((x) => '<tr><td><b>Lv.' + x[0] + '</b></td><td>' + x[1] + '</td><td>' + x[2] + '</td><td class="r num">' + comma(cnt(x[0])) + '명</td></tr>').join('') + '</tbody></table></div></div>' +
+      '<div class="card stack"><h2 style="margin:0">기준 레벨</h2><div class="grid g2"><div class="fld"><label for="lvRep">신고할 수 있는 레벨</label><select class="in" id="lvRep" data-chg="lvCfg" data-k="reportLv">' + [3, 4, 5].map((l) => opt(l, 'Lv.' + l + ' 이상', DB.levelCfg.reportLv)).join('') + '</select><span class="hint">기본 Lv.3 (가안 A-134)</span></div><div class="fld"><label for="lvRev">익명 작성자를 확인할 수 있는 레벨</label><select class="in" id="lvRev" data-chg="lvCfg" data-k="revealLv">' + [3, 4, 5].map((l) => opt(l, 'Lv.' + l + ' 이상', DB.levelCfg.revealLv)).join('') + '</select><span class="hint">기본 Lv.5 · 확인할 때마다 사유가 기록됩니다</span></div></div></div>' +
+      '<div class="card"><div class="ch"><h2>익명 작성자 확인 기록</h2><span class="sid">AW-78</span><small>지울 수 없습니다</small></div><div class="tw"><table class="t"><thead><tr><th>일시</th><th>확인한 사람</th><th>글</th><th>사유</th></tr></thead><tbody>' + DB.reveals.map((r) => '<tr><td class="num">' + esc(r.at) + '</td><td>' + esc(r.who) + '</td><td class="wrap">' + esc(r.post) + '</td><td class="wrap">' + esc(r.reason) + '</td></tr>').join('') + '</tbody></table></div></div></div>';
+  }
+
+  /* AW-77 신고·게시글 관리 */
+  function vReportsMod(sc) {
+    const RS = { pending: ['처리 대기', 'c-bad'], hidden: ['숨김', 'c-mute'], kept: ['유지', 'c-ok'], limited: ['숨김 + 이용 제한', 'c-warn'] };
+    return '<div class="page" style="max-width:1000px">' + head(sc, '신고·게시글 관리', 'Lv.' + DB.levelCfg.reportLv + ' 이상 교인이 신고한 글을 3일 안에 처리합니다. 결과는 신고한 사람에게 알려 줍니다. 익명 글도 작성자를 보지 않고 처리할 수 있습니다.') +
+      (reportsPending().length ? '' : '<div class="note ok">' + ic('okc', 's') + '<span>처리할 신고가 없습니다.</span></div>') +
+      DB.reports.map((r) => '<div class="card stack"><div class="row">' + chip(RS[r.status][0], RS[r.status][1]) + '<b>' + esc(r.title) + '</b><span class="faint small">' + esc(r.board) + ' · ' + (r.anon ? '익명 글' : '실명 글') + ' · ' + esc(r.at) + '</span></div><div class="note gray">' + esc(r.excerpt) + '</div><div class="row"><span class="small">신고 사유: <b>' + esc(r.reason) + '</b> · ' + r.count + '명 신고</span>' +
+        (r.status === 'pending' ? '<span style="margin-left:auto" class="row"><button type="button" class="btn btn-l sm" data-act="repDo" data-id="' + r.id + '" data-v="kept">문제없음 · 유지</button><button type="button" class="btn btn-l sm" data-act="repDo" data-id="' + r.id + '" data-v="hidden">글 숨기기</button><button type="button" class="btn btn-d sm" data-act="repDo" data-id="' + r.id + '" data-v="limited">숨기고 7일 이용 제한</button></span>' : '') + '</div></div>').join('') +
+      '<div class="note gray">' + ic('info', 's') + '<span>익명 작성자 확인이 꼭 필요하면(자해 우려 등) Lv.' + DB.levelCfg.revealLv + ' 이상이 사유를 적고 확인하며, 계정 레벨 화면의 확인 기록에 남습니다.</span></div></div>';
+  }
+
+  /* AW-91 공지 관리 */
+  function vNotices(sc) {
+    return '<div class="page" style="max-width:1000px">' + head(sc, '공지 관리', '교회 공지를 신도 앱 \'소식\'과 홈에 올립니다. 누가 읽었는지가 아니라 얼마나 읽혔는지를 봅니다.', '<button type="button" class="btn btn-p" data-act="noticeNew">' + ic('plus', 's') + '공지 쓰기</button>') +
+      '<div class="card"><div class="tw"><table class="t"><thead><tr><th>공지</th><th>대상</th><th>올린 시각</th><th>앱 알림</th><th>열람률</th><th></th></tr></thead><tbody>' +
+      DB.notices.slice().sort((a, b) => (b.pin - a.pin) || b.at.localeCompare(a.at)).map((n) => '<tr><td class="wrap">' + (n.pin ? chip('고정', 'c-bad') + ' ' : '') + '<b>' + esc(n.title) + '</b></td><td>' + esc(n.aud) + '</td><td class="num">' + esc(n.at.slice(5)) + '</td><td>' + (n.push ? chip('보냄', 'c-info') : chip('안 보냄', 'c-mute')) + '</td><td style="min-width:140px"><div class="meter" style="margin:0"><i style="width:' + (n.read * 100) + '%"></i></div><span class="small faint num">' + pct0(n.read) + '</span></td><td><button type="button" class="btn btn-g xs" data-act="noticePin" data-id="' + n.id + '">' + (n.pin ? '고정 해제' : '고정') + '</button></td></tr>').join('') + '</tbody></table></div></div></div>';
+  }
+
+  /* AW-92 주보 관리 */
+  function vBulletin(sc) {
+    const b = DB.bulletin;
+    return '<div class="page" style="max-width:980px">' + head(sc, '주보 관리', '이번 주 주보를 만들어 신도 앱에 올립니다. 지난주 주보를 복사해 바뀐 줄만 고치면 됩니다.', '<button type="button" class="btn btn-l" data-act="bulCopy">지난주 주보 복사</button><button type="button" class="btn btn-p" data-act="bulPub">발행</button>') +
+      '<div class="card stack"><div class="row"><b>' + esc(b.date) + ' · ' + esc(b.week) + '</b>' + chip(b.status, b.status.indexOf('발행됨') === 0 ? 'c-ok' : 'c-warn') + '</div>' +
+      '<div class="lab-t">예배 순서</div><div class="stack" style="gap:6px">' + b.order.map((o, i) => '<div class="row" style="flex-wrap:nowrap"><input class="in sm" style="width:130px" id="bo-k' + i + '" value="' + esc(o[0]) + '" data-inp="bulK" data-i="' + i + '" aria-label="순서 이름"><input class="in sm" id="bo-v' + i + '" value="' + esc(o[1]) + '" data-inp="bulV" data-i="' + i + '" aria-label="내용"></div>').join('') + '</div>' +
+      '<div class="lab-t">교회 소식</div><div class="stack" style="gap:6px">' + b.ads.map((a, i) => '<input class="in sm" id="bo-a' + i + '" value="' + esc(a) + '" data-inp="bulA" data-i="' + i + '" aria-label="교회 소식 ' + (i + 1) + '">').join('') + '</div>' +
+      '<span class="hint">프로토타입에서는 PDF·이미지 주보 올리기 대신 글로 만듭니다. 실제 서비스에서는 둘 다 지원합니다.</span></div></div>';
+  }
+
+  /* AW-93 행사·일정 관리 */
+  function vEvents(sc) {
+    return '<div class="page" style="max-width:1000px">' + head(sc, '행사·일정 관리', '행사를 만들면 신도 앱 \'소식 › 행사\'에서 신청을 받습니다. 정원·마감·대상(전 교인 또는 그룹)을 정합니다.', '<button type="button" class="btn btn-p" data-act="eventNew">' + ic('plus', 's') + '행사 만들기</button>') +
+      '<div class="grid g3">' + DB.events.map((e) => { const r = e.applicants.length / e.cap; return '<div class="card stack"><div class="row"><b style="font-size:16px">' + esc(e.title) + '</b>' + (e.deadline < TODAY ? chip('마감', 'c-mute') : e.deadline <= '2026-11-20' ? chip('마감 임박', 'c-warn') : chip('신청 중', 'c-teal')) + '</div><span class="small muted">' + esc(e.when) + ' · ' + esc(e.place) + '<br>대상 ' + esc(e.aud) + ' · ' + esc(e.fee) + ' · 마감 ' + esc(e.deadline) + '</span><div class="meter" style="height:10px;margin:0"><i style="width:' + Math.min(100, r * 100) + '%"></i></div><div class="row"><b class="num">' + e.applicants.length + '/' + e.cap + '명</b><button type="button" class="btn btn-l sm" style="margin-left:auto" data-act="eventList" data-id="' + e.id + '">신청자 명단</button></div></div>'; }).join('') + '</div></div>';
+  }
+
+  /* AW-94 ERP 연동 (부가 기능) */
+  function vErp(sc) {
+    const M = [['erp', 'ERP 연동', '교회가 쓰는 ERP의 헌금 내역·기부금영수증을 받아 신도 앱에 보여 줍니다. 장부는 ERP에 그대로 둡니다.'], ['builtin', '내장 재정 모듈', 'ERP가 없는 교회용. 헌금·장부·월 마감·영수증 발급을 감사교회에서 합니다(기존 기능).'], ['off', '사용 안 함', '신도 앱에서 헌금·영수증 메뉴를 숨깁니다.']];
+    return '<div class="page" style="max-width:960px">' + head(sc, 'ERP 연동', '고객 인터뷰에서 대부분의 교회가 이미 ERP로 헌금·자산을 관리한다고 확인했습니다(D-24). 재정은 부가 기능이며, 교회가 방식을 고릅니다(A-193).') +
+      '<div class="stack">' + M.map((x) => '<label class="card row" style="cursor:pointer;align-items:flex-start;flex-wrap:nowrap;gap:14px;border:2px solid ' + (DB.finMode === x[0] ? 'var(--primary)' : 'transparent') + '"><input type="radio" name="finMode" value="' + x[0] + '" data-chg="finMode" ' + (DB.finMode === x[0] ? 'checked' : '') + ' style="margin-top:4px;accent-color:var(--primary)"><span style="flex:1"><b>' + x[1] + '</b><div class="muted small">' + x[2] + '</div></span>' + (DB.finMode === x[0] ? chip('사용 중', 'c-ok') : '') + '</label>').join('') + '</div>' +
+      (DB.finMode === 'erp' ? '<div class="card stack"><h2 style="margin:0">ERP 연결</h2><div class="grid g2"><div class="fld"><label for="erpSel">사용 중인 ERP</label><select class="in" id="erpSel"><option>A사 교회 ERP (예시)</option><option>B사 교회 재정 (예시)</option><option>목록에 없음 — 엑셀로 올리기</option></select></div><div class="fld"><span class="lab-t">받을 정보</span><label class="chk"><input type="checkbox" checked disabled>교인별 헌금 내역</label><label class="chk"><input type="checkbox" checked disabled>기부금영수증 (PDF)</label><label class="chk"><input type="checkbox">재정 리포트 (재정 공개용)</label></div></div><div class="note warn">' + ic('alert', 's') + '<span>ERP 업체별 연동(API·내보내기 파일) 가능 여부는 확인 전입니다. 업체 문의는 무료, 연동 개발·제휴는 비용이 생길 수 있어 대표 승인이 필요합니다(H2-4).</span></div></div>' : '') +
+      '<div class="note gray">' + ic('info', 's') + '<span>' + (DB.finMode === 'off' ? '부가 기능을 껐습니다. 왼쪽 메뉴의 재정 화면은 프로토타입이라 그대로 보입니다.' : '왼쪽 메뉴 \'부가 기능 · 재정\'의 화면들이 이 설정에 따라 신도 앱에 보입니다.') + '</span></div></div>';
+  }
+
+  Object.assign(ACT, {
+    nudge: (b) => { const n = orgNode(b.dataset.id); logA('소그룹 알림', n.name, '담당자에게 활동 확인 요청 (예시)'); toast(n.name + ' 담당자에게 알림을 보낸 것으로 기록했습니다 (실제로 보내지 않음)'); },
+    boardAnon: (b) => { const x = DB.boards[Number(b.dataset.i)]; x.anon = !x.anon; logA('게시판 설정', x.name, '익명 ' + (x.anon ? '켜기' : '끄기')); render(); },
+    boardAdd: () => ask('게시판 만들기', '교회 전체 게시판입니다. 소그룹 공간은 조직에서 자동으로 생깁니다.', '만들기', (v) => { if (DB.boards.some((x) => x.name === v)) { $('#askErr').textContent = '같은 이름이 있습니다'; return false; } DB.boards.splice(DB.boards.length - 1, 0, { id: 'b' + DB.boards.length, name: v, aud: '전 교인', anon: false, lv: 1, posts7: 0 }); logA('게시판 만들기', v, ''); toast('\'' + v + '\' 게시판을 만들었습니다'); }, { input: '게시판 이름', max: 20, ph: '예: 육아 나눔' }),
+    repDo: (b) => { const r = DB.reports.find((x) => x.id === b.dataset.id); r.status = b.dataset.v; logA('신고 처리', r.title, ({ kept: '유지', hidden: '숨김', limited: '숨김 + 7일 이용 제한' })[r.status]); render(); toast('처리했습니다. 신고한 교인에게 결과를 알립니다'); },
+    noticeNew: () => openModal('<div class="mh"><h3>공지 쓰기 <span class="sid">AW-91</span></h3><button type="button" class="btn btn-g sm x" data-act="close" aria-label="닫기">' + ic('close', 's') + '</button></div><div class="fld"><label for="nt-t" class="req">제목</label><input class="in" id="nt-t" maxlength="60"></div><div class="fld"><label for="nt-b" class="req">내용</label><textarea class="in" id="nt-b" maxlength="2000"></textarea></div><div class="grid g2"><div class="fld"><label for="nt-a">대상</label><select class="in" id="nt-a"><option>전 교인</option>' + DB.org.nodes.filter((n) => orgDepth(n) <= 2).map((n) => '<option>그룹: ' + esc(n.name) + '</option>').join('') + '</select></div><div class="fld"><span class="lab-t">옵션</span><label class="chk"><input type="checkbox" id="nt-p" checked>앱 알림 보내기</label><label class="chk"><input type="checkbox" id="nt-pin">맨 위에 고정</label></div></div><span class="err-t" id="ntErr"></span><div class="mf"><button type="button" class="btn btn-l" data-act="close">취소</button><button type="button" class="btn btn-p" data-act="noticeSave">올리기</button></div>', 'wide'),
+    noticeSave: () => { const t = $('#nt-t').value.trim(), body = $('#nt-b').value.trim(); if (!t || !body) { $('#ntErr').textContent = '제목과 내용을 적어 주세요'; return; } const n = { id: 'n' + (DB.notices.length + 10), title: t, aud: $('#nt-a').value, pin: $('#nt-pin').checked, at: TODAY + ' ' + nowTime(), push: $('#nt-p').checked, read: 0 }; DB.notices.push(n); logA('공지 올리기', t, n.aud + (n.push ? ' · 앱 알림(예시)' : '')); closeLayer(); go('aw-91'); toast('공지를 올렸습니다' + (n.push ? ' (알림은 실제로 보내지 않음)' : '')); },
+    noticePin: (b) => { const n = DB.notices.find((x) => x.id === b.dataset.id); n.pin = !n.pin; logA('공지 고정', n.title, n.pin ? '고정' : '해제'); render(); },
+    bulCopy: () => { DB.bulletin.date = '2026-11-15'; DB.bulletin.week = '추수감사주일'; DB.bulletin.status = '작성 중 (지난주 복사)'; DB.bulletin.order[5][1] = '(설교 제목을 적어 주세요) — 정목양 목사'; logA('주보 작성', '2026-11-15', '지난주 주보 복사'); render(); toast('지난주 주보를 복사했습니다. 바뀐 줄만 고치세요'); },
+    bulPub: () => { DB.bulletin.status = '발행됨 · ' + TODAY.slice(5) + ' ' + nowTime(); logA('주보 발행', DB.bulletin.date + ' ' + DB.bulletin.week, '신도 앱 소식 › 주보'); render(); toast('주보를 발행했습니다'); },
+    eventNew: () => openModal('<div class="mh"><h3>행사 만들기 <span class="sid">AW-93</span></h3><button type="button" class="btn btn-g sm x" data-act="close" aria-label="닫기">' + ic('close', 's') + '</button></div><div class="fld"><label for="ev-t" class="req">행사 이름</label><input class="in" id="ev-t" maxlength="40" placeholder="예: 성탄 장식 봉사"></div><div class="grid g2"><div class="fld"><label for="ev-w" class="req">일시</label><input class="in" id="ev-w" placeholder="2026-12-19 10:00"></div><div class="fld"><label for="ev-pl">장소</label><input class="in" id="ev-pl" placeholder="본당"></div><div class="fld"><label for="ev-c" class="req">정원</label><input class="in num" id="ev-c" inputmode="numeric" value="30"></div><div class="fld"><label for="ev-d" class="req">신청 마감</label><input class="in" id="ev-d" type="date" min="' + TODAY + '"></div></div><span class="err-t" id="evErr"></span><div class="mf"><button type="button" class="btn btn-l" data-act="close">취소</button><button type="button" class="btn btn-p" data-act="eventSave">만들기</button></div>', 'wide'),
+    eventSave: () => { const t = $('#ev-t').value.trim(), w = $('#ev-w').value.trim(), c = Number($('#ev-c').value), d = $('#ev-d').value; if (!t || !w || !c || !d) { $('#evErr').textContent = '이름·일시·정원·마감을 모두 적어 주세요'; return; } DB.events.push({ id: 'e' + (DB.events.length + 10), title: t, when: w, place: $('#ev-pl').value.trim() || '교회', cap: c, deadline: d, fee: '무료', applicants: [], aud: '전 교인' }); logA('행사 만들기', t, '정원 ' + c + '명 · 마감 ' + d); closeLayer(); render(); toast('행사를 만들었습니다. 신도 앱 소식 › 행사에 보입니다'); },
+    eventList: (b) => { const e = DB.events.find((x) => x.id === b.dataset.id); openDrawer('<div class="mh"><h3>' + esc(e.title) + ' 신청자</h3><button type="button" class="btn btn-g sm x" data-act="close" aria-label="닫기">' + ic('close', 's') + '</button></div><span class="muted">' + e.applicants.length + '/' + e.cap + '명 · 마감 ' + esc(e.deadline) + '</span><div class="stack" style="gap:0">' + e.applicants.map((id, i) => { const m = mem(id); return '<div class="li"><span class="faint num" style="width:24px">' + (i + 1) + '</span><span class="grow"><span class="t1">' + esc(m.name) + ' ' + esc(m.title) + '</span><br><span class="t2">' + esc(memShort(m)) + '</span></span></div>'; }).join('') + '</div><button type="button" class="btn btn-l" data-act="eventCsv" data-id="' + e.id + '">' + ic('download', 's') + '명단 CSV</button>'); },
+    eventCsv: (b) => { const e = DB.events.find((x) => x.id === b.dataset.id); csvModal(e.title + ' 신청자', [['순번', '이름', '직분', '소속']].concat(e.applicants.map((id, i) => { const m = mem(id); return [i + 1, m.name, m.title, memShort(m)]; }))); }
+  });
+  Object.assign(VIEWS, { 'aw-10': vDash2, 'aw-96': vDash, 'aw-95': vGroups, 'aw-75': vBoards, 'aw-76': vLevels, 'aw-77': vReportsMod, 'aw-91': vNotices, 'aw-92': vBulletin, 'aw-93': vEvents, 'aw-94': vErp });
+
   /* ───────── 이벤트 연결 ───────── */
   document.addEventListener('click', (e) => {
     const sc = e.target.closest('[data-scrim]'); if (sc && e.target === sc) { closeLayer(); return; }
@@ -2042,6 +2215,9 @@ svg.i.xs { width: 15px; height: 15px; }
     if (k === 'f31noev') { S.f31.noEv = el.checked; if (el.checked) S.f31.files = []; render(); return; }
     if (k === 'upFile') { if (el.files.length) { S.upload = { file: el.files[0].name, done: false }; render(); } return; }
     if (k === 'pubAud') { const st = DB.pub.stages[el.dataset.k]; st.aud = el.value; logA('공개 대상 변경', el.dataset.k, audLabel(st)); render(); if (st.aud === 'groups' && !st.groups.length) ACT.pubGroups(el); return; }
+    if (k === 'boardLv') { const x = DB.boards[i]; x.lv = Number(el.value); logA('게시판 설정', x.name, '글쓰기 Lv.' + x.lv + ' 이상'); render(); return; }
+    if (k === 'lvCfg') { DB.levelCfg[el.dataset.k] = Number(el.value); logA('계정 레벨 기준', el.dataset.k === 'reportLv' ? '신고' : '익명 작성자 확인', 'Lv.' + el.value + ' 이상'); render(); return; }
+    if (k === 'finMode') { DB.finMode = el.value; logA('재정 부가 기능', 'ERP 연동 설정', ({ erp: 'ERP 연동', builtin: '내장 재정 모듈', off: '사용 안 함' })[el.value]); render(); return; }
     if (k === 'envName') return;
     setPath(k, el.value); const root = k.split('.')[0]; if (S[root] && typeof S[root] === 'object' && 'page' in S[root]) S[root].page = 1;
     if (k.indexOf('f31.') !== 0) render();
@@ -2057,6 +2233,7 @@ svg.i.xs { width: 15px; height: 15px; }
     if (k === 'f31amt') { S.f31.amount = num(el.value); el.value = S.f31.amount ? comma(S.f31.amount) : ''; return; }
     if (k === 'c22q') { const q = el.value.trim(); const box = $('#c22dd'); if (!q) { box.innerHTML = ''; return; } const l = DB.members.filter((m) => m.name.indexOf(q) >= 0).slice(0, 6); box.innerHTML = '<div class="dd" style="position:static;margin-top:4px">' + (l.map((m) => '<button type="button" data-act="c22pick" data-id="' + el.dataset.id + '" data-mid="' + m.id + '">' + esc(m.name) + ' <small>' + esc(memShort(m)) + ' · ' + m.birth.slice(2, 4) + '년생</small></button>').join('') || '<div class="hint" style="padding:8px">맞는 교인이 없습니다</div>') + '</div>'; return; }
     if (k === 'indQ') { const q = el.value.trim(); const t = totals2026(); const l = q ? DB.members.filter((m) => m.name.indexOf(q) >= 0).slice(0, 8) : []; $('#indList').innerHTML = l.map((m) => '<button type="button" class="li" style="width:100%;background:none;border-left:0;border-right:0;border-top:0;text-align:left;padding:10px 4px" data-act="indivPick" data-mid="' + m.id + '"><span class="grow"><span class="t1">' + esc(m.name) + '</span> <span class="t2">' + esc(memShort(m)) + ' · ' + m.birth.slice(2, 4) + '년생</span></span><span class="small num">' + won(t.get(m.id) || 0) + '</span>' + (m.info ? chip('정보 등록', 'c-ok') : chip('미등록', 'c-warn')) + '</button>').join('') || (q ? '<div class="hint">맞는 교인이 없습니다</div>' : ''); return; }
+    if (k === 'bulK' || k === 'bulV' || k === 'bulA') { const i = Number(el.dataset.i); if (k === 'bulA') DB.bulletin.ads[i] = el.value; else DB.bulletin.order[i][k === 'bulK' ? 0 : 1] = el.value; if (DB.bulletin.status.indexOf('발행됨') === 0) DB.bulletin.status = '고치는 중 (다시 발행 필요)'; return; }
     if (k === 'omQ') { const q = el.value.trim(); const n = orgNode(S.orgSel); const l = q ? DB.members.filter((m) => m.name.indexOf(q) >= 0).slice(0, 8) : []; $('#omList').innerHTML = l.map((m) => { const inG = n.members.indexOf(m.id) >= 0; const gs = memberGroups(m.id).map((g) => g.name).join(', '); return '<button type="button" class="li" style="width:100%;background:none;border-left:0;border-right:0;border-top:0;text-align:left;padding:10px 4px" data-act="orgMemPick" data-mid="' + m.id + '" ' + (inG ? 'disabled' : '') + '><span class="grow"><span class="t1">' + esc(m.name) + ' ' + esc(m.title) + '</span> <span class="t2">' + (inG ? '이미 이 그룹에 있음' : esc(gs || '소속 없음')) + '</span></span>' + ic('plus', 's') + '</button>'; }).join('') || (q ? '<div class="hint">맞는 교인이 없습니다</div>' : ''); return; }
     setPath(k, el.value);
     if (/^(f(20|42|70|85)\.q|orgQ)$/.test(k)) { const root = k.split('.')[0]; if (S[root] && typeof S[root] === 'object' && 'page' in S[root]) S[root].page = 1; clearTimeout(tmr); tmr = setTimeout(() => { const id = el.id; const pos = el.selectionStart; render(); const n = document.getElementById(id); if (n) { n.focus(); try { n.setSelectionRange(pos, pos); } catch (x) { /* 무시 */ } } }, 250); }
