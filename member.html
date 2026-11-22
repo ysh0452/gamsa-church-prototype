@@ -1165,7 +1165,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
       <div class="card" style="display:flex;justify-content:space-between;align-items:center"><span class="small">${m}월 합계</span><span class="amount-m num" style="color:var(--primary)">${won(sum(list))}</span></div>
       <div class="chips">${types.map((t) => `<button type="button" class="chip" aria-pressed="${S.filter === t}" data-filter="${t}">${t === '전체' ? t : short(t)}</button>`).join('')}</div>
       ${Object.keys(days).sort().reverse().map((d) => `<div class="micro" style="font-size:13px;margin-bottom:-8px">${dLabel(d)}</div><div class="card tight">${days[d].map((o) => row({ icon: ICON[o.kind], t: o.type, s: o.via, right: `<b class="num" style="font-size:15px">${won(o.amt)}</b>`, noChev: true, attr: goAttr('U-21', { id: o.id }) })).join('')}</div>`).join('') || '<div class="empty">이 달에는 헌금 내역이 없어요</div>'}
-      <div class="card tight">${row({ icon: 'chart', tone: 'teal', t: '나의 헌금 리포트', s: '올해 드린 헌금을 한눈에', attr: goAttr('U-25') })}</div>`;
+      <div class="card tight">${row({ icon: 'chart', tone: 'teal', t: '나의 헌금 리포트', s: '올해 드린 헌금을 달마다', attr: goAttr('U-25') })}</div>`;
   }
   const EXP = [['사역', 38, 'var(--chart-1)'], ['인건비', 27, 'var(--chart-2)'], ['선교', 15, 'var(--chart-3)'], ['구제', 8, 'var(--chart-4)'], ['운영', 12, 'var(--chart-5)']];
   function donut(parts, size) {
