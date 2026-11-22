@@ -26,7 +26,7 @@ function put(src, out, desc, fix) {
 }
 
 put(latest('관리자웹_v'), 'admin.html', '관리자 웹 클릭 프로토타입 (예시 데이터)', (s) =>
-  s.replace(/href="https:\/\/claude\.ai\/artifact\/[^"]+"/g, 'href="member.html"'));
+  s.replace(/href="신도앱_v[0-9.]+\.html"/g, 'href="member.html"'));
 
 put(latest('신도앱_v'), 'member.html', '신도 앱 클릭 프로토타입 (예시 데이터)', (s) =>
   s.replace('</aside>', '  <p class="micro"><a href="admin.html">관리자 웹 프로토타입 보기 →</a> · <a href="./">처음 화면</a></p>\n</aside>'));

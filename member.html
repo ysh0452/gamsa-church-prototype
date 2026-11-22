@@ -103,6 +103,7 @@ button { cursor: pointer; }
 .icon-btn .dot { position: absolute; top: 9px; right: 10px; width: 7px; height: 7px; border-radius: 50%; background: var(--danger); }
 svg.i { width: 24px; height: 24px; fill: none; stroke: currentColor; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; flex: none; }
 svg.i.s { width: 20px; height: 20px; }
+svg.i.xs { width: 13px; height: 13px; vertical-align: -2px; margin-right: 3px; }
 svg.i.xs { width: 16px; height: 16px; }
 .sid { display: none; font-size: 10px; line-height: 14px; font-weight: 700; color: var(--primary); background: var(--primary-soft); border-radius: 6px; padding: 2px 6px; flex: none; }
 .show-ids .sid { display: inline-block; }
@@ -310,7 +311,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
 .post .meta { flex-wrap: nowrap; overflow: hidden; white-space: nowrap; }
 .post .meta span { flex: none; }
 .post .meta span:nth-child(2) { flex: 0 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; display: block; }
-/* ── v2.4(D-28): 섞은 형태 홈 — 이번 주일+말씀 카드 · 바로가기 칩 · 소그룹 동그라미 · 사진 피드 ── */
+/* ── v2.4(D-28): 섞은 형태 홈: 이번 주일+말씀 카드 · 바로가기 칩 · 소그룹 동그라미 · 사진 피드 ── */
 .word { background: var(--primary); color: #fff; border-radius: 20px; padding: 16px 16px 14px; display: flex; flex-direction: column; gap: 10px; }
 .word .k { color: var(--on-hero-sub); font-size: 12px; line-height: 17px; font-weight: 600; display: flex; align-items: center; gap: 8px; }
 .word .k span { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -389,7 +390,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
       <li>글쓰기 → 사진 추가(휴대폰 사진 고르기 또는 '예시 사진 넣기')</li>
       <li>게시판에서 익명을 켜면 사진을 올릴 수 없는 것 확인</li>
       <li>아래 '홈 화면 방식'에서 '소식 위주' → 글이 적은 교회의 홈</li>
-      <li>커뮤니티 오른쪽 위 🔍 글 검색, 기도 · 모임</li>
+      <li>커뮤니티 오른쪽 위 돋보기(글 검색), 기도 · 모임</li>
       <li>MY 맨 위 '헌금·재정' → 헌금하기·내역·영수증 (부가 기능)</li>
     </ul>
   </div>
@@ -502,8 +503,8 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
       ],
       recurring: [{ id: 'r1', type: '선교헌금', amt: 5000, day: 5, next: '11월 5일' }],
       questions: [
-        { id: 'q1', title: '주차장 보수 비용은 어디에서 나가나요?', body: '9월 리포트에 시설비가 늘었던데 주차장 보수 때문인지 궁금합니다.', anon: true, date: '10월 10일', answer: '네, 9월 시설비 중 410만 원이 주차장 바닥 보수 비용입니다. 견적서 3곳을 비교해 가장 낮은 곳과 계약했고, 운영위원회 회의록에 기록되어 있습니다. — 재정부' },
-        { id: 'q2', title: '선교헌금은 어떤 선교지에 쓰이나요?', body: '매달 정기 헌금을 드리고 있는데 쓰임이 궁금합니다.', anon: false, date: '9월 28일', answer: '선교헌금은 협력 선교지 3곳의 정기 후원(월 420만 원)과 단기 선교 준비에 쓰입니다. 선교지별 금액은 10월 리포트부터 따로 보여 드리겠습니다. — 재정부' },
+        { id: 'q1', title: '주차장 보수 비용은 어디에서 나가나요?', body: '9월 리포트에 시설비가 늘었던데 주차장 보수 때문인지 궁금합니다.', anon: true, date: '10월 10일', answer: '네, 9월 시설비 중 410만 원이 주차장 바닥 보수 비용입니다. 견적서 3곳을 비교해 가장 낮은 곳과 계약했고, 운영위원회 회의록에 기록되어 있습니다. (재정부)' },
+        { id: 'q2', title: '선교헌금은 어떤 선교지에 쓰이나요?', body: '매달 정기 헌금을 드리고 있는데 쓰임이 궁금합니다.', anon: false, date: '9월 28일', answer: '선교헌금은 협력 선교지 3곳의 정기 후원(월 420만 원)과 단기 선교 준비에 쓰입니다. 선교지별 금액은 10월 리포트부터 따로 보여 드리겠습니다. (재정부)' },
         { id: 'q3', title: '리포트에 예산 대비 표를 넣어 주실 수 있나요?', body: '항목별로 예산과 실제 집행을 나란히 보고 싶습니다.', anon: true, date: '10월 18일', answer: null }
       ],
       projects: [
@@ -525,7 +526,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
         { id: 'a8', board: 'share', pin: true, title: '[운영 안내] 돈을 먼저 보내 달라는 거래 글은 신고해 주세요', body: '나눔·장터에서 선입금을 요구하는 글은 사기일 수 있어요. 직접 만나서 주고받고, 의심되는 글은 글 메뉴에서 신고해 주세요.', anon: false, author: '커뮤니티 운영팀', likes: 11, time: '3일 전', mine: false, comments: [] },
         // v2.4(A-212): photos = 첨부 사진 (예시 그림: g 색, i 아이콘, cap 설명 / 사용자가 고른 사진: src)
         { id: 'a9', board: 'free', title: '김장 나눔 봉사 준비 사진 공유해요', body: '배추 120포기 절이기 끝! 토요일에 함께해 주실 분들 미리 감사드려요. 앞치마와 고무장갑은 교회에서 준비했어요.', anon: false, author: '이○○ 집사', likes: 23, time: '1시간 전', mine: false, comments: [{ who: '김○○ 권사', text: '수고 많으셨어요!' }], photos: [{ g: 1, i: 'heart', cap: '배추 절이기' }, { g: 0, i: 'users', cap: '봉사팀' }] },
-        { id: 'a10', board: 'pastor', title: '이번 주 묵상 — 감사는 기억에서 시작됩니다', body: '추수감사주일을 앞두고 올해 우리 교회에 주신 은혜를 하나씩 적어 보았습니다. 새가족 42명, 다시 시작한 구역 예배, 김장 나눔을 준비하는 손길까지. 여러분의 감사도 소그룹에서 나눠 주세요.', anon: false, author: '정목양 담임목사', likes: 64, time: '5시간 전', mine: false, comments: [{ who: '김○○ 권사', text: '아멘. 감사합니다 목사님.' }], photos: [{ g: 3, i: 'bookmark', cap: '강단 꽃꽂이' }] },
+        { id: 'a10', board: 'pastor', title: '이번 주 묵상. 감사는 기억에서 시작됩니다', body: '추수감사주일을 앞두고 올해 우리 교회에 주신 은혜를 하나씩 적어 보았습니다. 새가족 42명, 다시 시작한 구역 예배, 김장 나눔을 준비하는 손길까지. 여러분의 감사도 소그룹에서 나눠 주세요.', anon: false, author: '정목양 담임목사', likes: 64, time: '5시간 전', mine: false, comments: [{ who: '김○○ 권사', text: '아멘. 감사합니다 목사님.' }], photos: [{ g: 3, i: 'bookmark', cap: '강단 꽃꽂이' }] },
         { id: 'a2', board: 'free', title: '이번 주 주일 주차 안내 정리했어요', body: '본당 주차장 공사로 이번 주는 길 건너 초등학교 운동장을 씁니다. 9시 30분부터 안내 봉사자가 계세요.', anon: false, author: '김○○ 권사', likes: 12, time: '5시간 전', mine: false, comments: [{ who: '익명1', text: '정리 감사합니다!' }] },
         { id: 'a3', board: 'free', title: '청년부 수련회 방 배정은 언제 나오나요?', body: '신청은 했는데 방 배정 공지가 아직 없어서요. 혹시 아시는 분?', anon: true, likes: 5, time: '어제', mine: false, comments: [{ who: '익명1', text: '이번 주 금요일에 단톡방에 올린다고 들었어요.' }] },
         { id: 'a4', board: 'share', title: '아기 카시트 나눔합니다 (신생아용)', body: '1년 정도 쓴 신생아용 카시트 나눔합니다. 주일 3부 예배 뒤 로비에서 드릴게요.', anon: false, author: '이○○ 집사', likes: 9, time: '어제', mine: false, comments: [], photos: [{ g: 5, i: 'home', cap: '카시트' }] },
@@ -666,7 +667,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
   const sid = (id) => `<span class="sid">${id}</span>`;
   const hdr = (title, id, right) => `<header class="hdr"><button class="icon-btn" data-act="back" aria-label="뒤로">${ic('back')}</button><div class="ttl">${title}</div>${sid(id)}${right || ''}</header>`;
   const bigHdr = (title, id, right) => `<header class="hdr big"><div class="ttl">${title}</div>${sid(id)}${right || ''}</header>`;
-  // 제목(t)·설명(s) 모두 한 줄, 넘치면 … (wrap: true면 전부 보임 — 댓글처럼 내용 자체인 경우)
+  // 제목(t)·설명(s) 모두 한 줄, 넘치면 … (wrap: true면 전부 보임: 댓글처럼 내용 자체인 경우)
   const row = (o) => `<button class="row${o.wrap ? ' wrap' : ''}" type="button" ${o.attr || ''}>${o.icon ? `<span class="ic-box ${o.tone || ''}">${ic(o.icon, 's')}</span>` : ''}<span class="grow"><span class="t">${o.t}</span>${o.s ? `<span class="s">${o.s}</span>` : ''}</span>${o.right || ''}${o.noChev ? '' : `<span class="chev">${ic('chev', 's')}</span>`}</button>`;
   const goAttr = (id, p) => `data-go="${id}"${p ? ` data-p='${esc(JSON.stringify(p))}'` : ''}`;
   const toast = (msg) => {
@@ -773,8 +774,8 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
         { id: 'n4', pin: false, t: '[공지] 연말정산 기부금영수증 안내', d: '10월 15일', read: true, body: '기부금영수증은 MY › 헌금·재정 › 내역·영수증에서 확인할 수 있어요. 발급 정보(주민등록번호)를 미리 등록해 주세요.' }
       ],
       bulletin: { date: '11월 8일 주일', week: '추수감사절 전 주일',
-        order: [['예배로 부름', '인도자'], ['찬송', '588장 공중 나는 새를 보라'], ['대표 기도', '이믿음 장로'], ['성경 봉독', '시편 100편 1~5절'], ['찬양', '시온 찬양대'], ['설교', '감사로 그 문에 들어가며 — 정목양 목사'], ['봉헌', '감사 헌금'], ['교회 소식', '광고'], ['축도', '정목양 목사']],
-        ads: ['추수감사주일 연합 예배 11월 15일(일) 오후 2시, 셀별 특송 신청', '김장 나눔 봉사자 모집 11월 22일(토) — 앱에서 신청', '새가족 환영회 11월 29일(일) 오후 1시, 교육관', '청년부 겨울 수련회 신청 12월 10일까지'] },
+        order: [['예배로 부름', '인도자'], ['찬송', '588장 공중 나는 새를 보라'], ['대표 기도', '이믿음 장로'], ['성경 봉독', '시편 100편 1~5절'], ['찬양', '시온 찬양대'], ['설교', '감사로 그 문에 들어가며: 정목양 목사'], ['봉헌', '감사 헌금'], ['교회 소식', '광고'], ['축도', '정목양 목사']],
+        ads: ['추수감사주일 연합 예배 11월 15일(일) 오후 2시, 셀별 특송 신청', '김장 나눔 봉사자 모집 11월 22일(토), 앱에서 신청', '새가족 환영회 11월 29일(일) 오후 1시, 교육관', '청년부 겨울 수련회 신청 12월 10일까지'] },
       events: [
         { id: 'e1', title: '김장 나눔 봉사', when: '11월 22일(토) 오전 9:00', place: '교회 마당', cap: 40, applied: 27, deadline: '11월 18일', fee: '무료', mine: false, desc: '지역 어르신 120가구에 드릴 김장을 함께 담급니다. 편한 옷차림으로 오세요. 점심은 교회에서 준비합니다.' },
         { id: 'e2', title: '청년부 겨울 수련회', when: '12월 26일(토)~28일(월)', place: '양평 수련원', cap: 80, applied: 64, deadline: '12월 10일', fee: '8만 원 (현장 납부, 지원 가능)', mine: false, desc: '"감사의 사람" 주제로 2박 3일 동안 말씀·찬양·소그룹 나눔을 합니다. 참가비가 부담되면 담당 전도사에게 연락해 주세요.' },
@@ -806,11 +807,11 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     DB.v2.groups.forEach((g) => g.prayers.forEach((p) => out.push({ gid: g.id, name: g.name, p })));
     return out;
   };
-  const scopeTag = (gid, name) => (gid === 'church' ? '<span class="scope all">교회 전체</span>' : `<span class="scope">🔒 ${esc(name)}</span>`);
+  const scopeTag = (gid, name) => (gid === 'church' ? '<span class="scope all">교회 전체</span>' : `<span class="scope">${ic('lock', 'xs')}${esc(name)}</span>`);
   // v2.3(A-210): 기도 제목은 40자(휴대폰에서 약 두 줄)까지만 보이고, 넘치면 … + '더보기'로 펼친다
   const PRAY_MAX = 40;
-  const prayCard = (gid, name, x, noTag) => `<div class="card" style="display:flex;flex-direction:column;gap:8px;padding:14px 16px">${noTag ? '' : scopeTag(gid, name)}<p style="margin:0">${esc(x.open ? x.text : cut(x.text, PRAY_MAX))}${x.text.length > PRAY_MAX ? `<button type="button" class="more" data-v2="pmore" data-g="${gid}" data-id="${x.id}">${x.open ? '접기' : '더보기'}</button>` : ''}</p><div style="display:flex;align-items:center;gap:8px"><span class="small clamp1" style="flex:1">🙏 <b>${x.count}</b>명 · ${x.anon ? '익명' : esc(x.who)} · ${x.time}</span><button type="button" class="btn sm ${x.prayed ? 'line' : 'sub'}" data-v2="pray" data-g="${gid}" data-id="${x.id}">${x.prayed ? '기도했어요 ✓' : '기도했어요'}</button></div></div>`;
-  const meetCard = (g, m, showG) => `<div class="card" style="display:flex;flex-direction:column;gap:8px;padding:14px 16px">${showG ? scopeTag(g.id, g.name) : ''}<b class="clamp1" style="font-size:16px">${esc(m.title)}</b><span class="small clamp1">📅 ${esc(m.when)} · 📍 ${esc(m.place)}</span><div class="bar" style="height:8px"><i style="width:${(m.yes / m.total) * 100}%;background:var(--accent)"></i></div><span class="micro">참석 ${m.yes} · 불참 ${m.no} · 응답 안 함 ${m.total - m.yes - m.no}</span><div style="display:flex;gap:8px"><button type="button" class="btn sm ${m.rsvp === 'yes' ? '' : 'line'}" style="flex:1" data-v2="rsvp" data-g="${g.id}" data-id="${m.id}" data-v="yes">${m.rsvp === 'yes' ? '참석 ✓' : '참석'}</button><button type="button" class="btn sm ${m.rsvp === 'no' ? '' : 'line'}" style="flex:1" data-v2="rsvp" data-g="${g.id}" data-id="${m.id}" data-v="no">${m.rsvp === 'no' ? '불참 ✓' : '불참'}</button></div></div>`;
+  const prayCard = (gid, name, x, noTag) => `<div class="card" style="display:flex;flex-direction:column;gap:8px;padding:14px 16px">${noTag ? '' : scopeTag(gid, name)}<p style="margin:0">${esc(x.open ? x.text : cut(x.text, PRAY_MAX))}${x.text.length > PRAY_MAX ? `<button type="button" class="more" data-v2="pmore" data-g="${gid}" data-id="${x.id}">${x.open ? '접기' : '더보기'}</button>` : ''}</p><div style="display:flex;align-items:center;gap:8px"><span class="small clamp1" style="flex:1">함께 기도 <b>${x.count}</b>명 · ${x.anon ? '익명' : esc(x.who)} · ${x.time}</span><button type="button" class="btn sm ${x.prayed ? 'line' : 'sub'}" data-v2="pray" data-g="${gid}" data-id="${x.id}">${x.prayed ? ic('check', 'xs') + '기도했어요' : '기도했어요'}</button></div></div>`;
+  const meetCard = (g, m, showG) => `<div class="card" style="display:flex;flex-direction:column;gap:8px;padding:14px 16px">${showG ? scopeTag(g.id, g.name) : ''}<b class="clamp1" style="font-size:16px">${esc(m.title)}</b><span class="small clamp1">${esc(m.when)} · ${esc(m.place)}</span><div class="bar" style="height:8px"><i style="width:${(m.yes / m.total) * 100}%;background:var(--accent)"></i></div><span class="micro">참석 ${m.yes} · 불참 ${m.no} · 응답 안 함 ${m.total - m.yes - m.no}</span><div style="display:flex;gap:8px"><button type="button" class="btn sm ${m.rsvp === 'yes' ? '' : 'line'}" style="flex:1" data-v2="rsvp" data-g="${g.id}" data-id="${m.id}" data-v="yes">${m.rsvp === 'yes' ? ic('check', 'xs') + '참석' : '참석'}</button><button type="button" class="btn sm ${m.rsvp === 'no' ? '' : 'line'}" style="flex:1" data-v2="rsvp" data-g="${g.id}" data-id="${m.id}" data-v="no">${m.rsvp === 'no' ? ic('check', 'xs') + '불참' : '불참'}</button></div></div>`;
   // v2.2(A-207): 홈의 작은 헌금 영역. 파란 주일 카드 바로 아래. 헌금하기 · 내 헌금 계좌 복사 · QR · 내역
   const giveStrip = () => `<section class="card give-strip" aria-label="헌금">
       <div class="gs-top"><span class="ic-box">${ic('heart', 's')}</span><span class="grow"><b>헌금</b><span class="micro">바로 드릴 수 있어요</span></span><button class="btn sm" type="button" ${goAttr('U-11')}>헌금하기</button></div>
@@ -823,7 +824,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
       <div class="addon">${[['U-11', 'heart', '', '헌금하기'], ['U-20', 'receipt', 'teal', '헌금 내역'], ['U-22', 'doc', 'gray', '영수증'], ['U-30', 'pie', 'gray', '교회 재정']].map(([to, i, tone, l]) => `<button type="button" ${goAttr(to)}><span class="ic-box ${tone}">${ic(i, 's')}</span>${l}</button>`).join('')}</div>
     </section>`;
 
-  /* ═════════ v2.4(D-28, A-211~A-216): 섞은 형태 홈 — 이번 주일+말씀 카드 · 헌금 · 바로가기 · 꼭 보세요 · 소그룹 동그라미 · 사진 피드 ═════════ */
+  /* ═════════ v2.4(D-28, A-211~A-216): 섞은 형태 홈: 이번 주일+말씀 카드 · 헌금 · 바로가기 · 꼭 보세요 · 소그룹 동그라미 · 사진 피드 ═════════ */
   // '40분 전'·'2시간 전'·'어제'·'3일 전' → 시간(최신순 정렬과 지난 7일 계산용)
   const agoH = (t) => { if (!t || t === '방금') return 0; let m = /(\d+)분/.exec(t); if (m) return 0; m = /(\d+)시간/.exec(t); if (m) return +m[1]; if (t === '어제') return 24; m = /(\d+)일/.exec(t); if (m) return 24 * m[1]; return 999; };
   const PH_BG = ['linear-gradient(135deg,#f6a75b,#e4572e)', 'linear-gradient(135deg,#7bc8a4,#12b5a6)', 'linear-gradient(135deg,#8fb3ff,#2256f2)', 'linear-gradient(135deg,#f3c26b,#b7791f)', 'linear-gradient(135deg,#c3a6ff,#6d4bd8)', 'linear-gradient(135deg,#9bd1e5,#2b7a9b)'];
@@ -848,7 +849,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     if (it.k === 'g') {
       const { g, f } = it; const ga = esc(JSON.stringify({ g: g.id, id: f.id }));
       return `<article class="fcard">
-        <div class="fh"><span class="avatar" style="width:36px;height:36px;font-size:13px">${esc(f.who.slice(0, 1))}</span><span class="grow"><b>${esc(f.who)}</b><span class="micro">${inGroup ? '' : `🔒 ${esc(g.name)} · `}${f.time}</span></span>${f.word ? '<span class="wordtag">📖 말씀 나눔</span>' : ''}</div>
+        <div class="fh"><span class="avatar" style="width:36px;height:36px;font-size:13px">${esc(f.who.slice(0, 1))}</span><span class="grow"><b>${esc(f.who)}</b><span class="micro">${inGroup ? '' : `${ic('lock', 'xs')}${esc(g.name)} · `}${f.time}</span></span>${f.word ? '<span class="wordtag">말씀 나눔</span>' : ''}</div>
         ${feedPhotos(key, f.photos)}
         <div class="fx"><p>${esc(cut(f.text, FEED_MAX))}${f.text.length > FEED_MAX ? `<button type="button" class="more" data-go="U-75" data-p='${ga}'>더보기</button>` : ''}</p></div>
         <div class="ft"><button type="button" class="${f.liked ? 'on' : ''}" data-v2="amen" data-k="${key}">💛 마음 ${f.likes}</button><button type="button" data-go="U-75" data-p='${ga}'>💬 댓글 ${f.comments.length}</button></div>
@@ -856,7 +857,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     }
     const { x } = it; const pa = esc(JSON.stringify({ id: x.id })); const staff = x.board === 'pastor';
     return `<article class="fcard">
-      <div class="fh"><span class="avatar" style="width:36px;height:36px;font-size:13px${staff ? ';background:#efe9ff;color:#6d4bd8' : ''}">${esc((x.author || DB.me.name).slice(0, 1))}</span><span class="grow"><b>${esc(x.author || DB.me.name)}</b><span class="micro">${esc(boardName(x))} · ${x.time}</span></span>${staff ? '<span class="wordtag">✉️ 목회 서신</span>' : ''}</div>
+      <div class="fh"><span class="avatar" style="width:36px;height:36px;font-size:13px${staff ? ';background:#efe9ff;color:#6d4bd8' : ''}">${esc((x.author || DB.me.name).slice(0, 1))}</span><span class="grow"><b>${esc(x.author || DB.me.name)}</b><span class="micro">${esc(boardName(x))} · ${x.time}</span></span>${staff ? '<span class="wordtag">목회 서신</span>' : ''}</div>
       ${feedPhotos(key, x.photos)}
       <div class="fx"><b>${esc(cut(x.title, 40))}</b><p>${esc(cut(x.body, FEED_MAX))}${x.body.length > FEED_MAX ? `<button type="button" class="more" data-go="U-62" data-p='${pa}'>더보기</button>` : ''}</p></div>
       <div class="ft"><button type="button" class="${x.liked ? 'on' : ''}" data-v2="amen" data-k="${key}">💛 마음 ${x.likes}</button><button type="button" data-go="U-62" data-p='${pa}'>💬 댓글 ${x.comments.length}</button></div>
@@ -872,16 +873,16 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     return `<section class="word" aria-label="이번 주 말씀">
       <div class="k"><span>이번 주일 · ${esc(b.date)} · ${esc(b.week)}</span><button type="button" ${goAttr('U-78')}>주보 ›</button></div>
       <button type="button" class="wbody" ${goAttr('U-81')}><span class="wt clamp1">「${esc(W.title)}」</span><span class="ws clamp1">${esc(W.who)} · ${esc(W.text)}</span><span class="wsum">${esc(cut(W.summary, 60))}</span></button>
-      <div class="wq">💬 나눔 질문 · ${esc(W.questions[0])}</div>
-      <div class="wa"><button type="button" data-toast="설교 영상은 교회 유튜브로 연결돼요 (예시 · ${esc(W.len)})">▶ 설교 영상</button><button type="button" class="pri" data-go="U-63" data-p='${esc(JSON.stringify({ b: 'g:g1', word: true }))}'>말씀 나누기</button></div>
+      <div class="wq">나눔 질문 · ${esc(W.questions[0])}</div>
+      <div class="wa"><button type="button" data-toast="설교 영상은 교회 유튜브로 연결돼요 (예시 · ${esc(W.len)})">설교 영상 보기</button><button type="button" class="pri" data-go="U-63" data-p='${esc(JSON.stringify({ b: 'g:g1', word: true }))}'>말씀 나누기</button></div>
     </section>`;
   }
   const homeChips = (unreadN) => `<div class="chiprow" role="group" aria-label="바로가기">
-      <button type="button" data-go="U-77" data-p='${esc(JSON.stringify({ seg: 'event' }))}'>📅 행사 신청</button>
-      <button type="button" data-go="U-60" data-p='${esc(JSON.stringify({ seg: 'pray' }))}'>🙏 기도 제목</button>
-      <button type="button" data-go="U-60" data-p='${esc(JSON.stringify({ seg: 'meet' }))}'>👥 모임 참석</button>
-      <button type="button" data-go="U-77" data-p='${esc(JSON.stringify({ seg: 'notice' }))}'>📢 공지${unreadN ? `<span class="n" aria-label="안 읽은 공지 ${unreadN}개">${unreadN}</span>` : ''}</button>
-      <button type="button" data-go="U-77" data-p='${esc(JSON.stringify({ seg: 'sermon' }))}'>⏰ 예배 시간</button>
+      <button type="button" data-go="U-77" data-p='${esc(JSON.stringify({ seg: 'event' }))}'>행사 신청</button>
+      <button type="button" data-go="U-60" data-p='${esc(JSON.stringify({ seg: 'pray' }))}'>기도 제목</button>
+      <button type="button" data-go="U-60" data-p='${esc(JSON.stringify({ seg: 'meet' }))}'>모임 참석</button>
+      <button type="button" data-go="U-77" data-p='${esc(JSON.stringify({ seg: 'notice' }))}'>공지${unreadN ? `<span class="n" aria-label="안 읽은 공지 ${unreadN}개">${unreadN}</span>` : ''}</button>
+      <button type="button" data-go="U-77" data-p='${esc(JSON.stringify({ seg: 'sermon' }))}'>예배 시간</button>
     </div>`;
   // 내 소그룹 동그라미 (인스타그램 스토리처럼): 테두리 색 = 새 글 있음
   function storiesRow() {
@@ -895,7 +896,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
   function newsSections() {
     const V = DB.v2; const topP = allPrayers().filter((x) => !x.p.prayed).slice(0, 2);
     return `<div class="note">${ic('chat', 's')}<span>아직 새 글이 적어서 교회 소식 위주로 보여 드려요. 글이 쌓이면 피드로 바뀌어요.</span></div>
-      ${topP.length ? `<div class="sec-title">함께 기도해요 <button class="link" type="button" data-go="U-60" data-p='${esc(JSON.stringify({ seg: 'pray' }))}'>전체 ${ic('chev', 'xs')}</button></div><div class="card tight">${topP.map(({ gid, name, p }) => `<div class="row"><span class="grow"><span class="t" style="font-weight:500">${esc(cut(p.text, 40))}</span><span class="s">🙏 ${p.count}명 · ${esc(name)} · ${p.anon ? '익명' : esc(p.who)}</span></span><button type="button" class="btn sm sub" style="flex:none" data-v2="pray" data-g="${gid}" data-id="${p.id}" aria-label="기도했어요">🙏 기도</button></div>`).join('')}</div>` : ''}
+      ${topP.length ? `<div class="sec-title">함께 기도해요 <button class="link" type="button" data-go="U-60" data-p='${esc(JSON.stringify({ seg: 'pray' }))}'>전체 ${ic('chev', 'xs')}</button></div><div class="card tight">${topP.map(({ gid, name, p }) => `<div class="row"><span class="grow"><span class="t" style="font-weight:500">${esc(cut(p.text, 40))}</span><span class="s">함께 기도 ${p.count}명 · ${esc(name)} · ${p.anon ? '익명' : esc(p.who)}</span></span><button type="button" class="btn sm sub" style="flex:none" data-v2="pray" data-g="${gid}" data-id="${p.id}" aria-label="기도했어요">기도</button></div>`).join('')}</div>` : ''}
       <div class="sec-title">다가오는 행사 <button class="link" type="button" data-go="U-77" data-p='${esc(JSON.stringify({ seg: 'event' }))}'>전체 ${ic('chev', 'xs')}</button></div>
       <div class="card tight">${V.events.slice(0, 2).map((e) => row({ icon: 'clock', t: esc(e.title), s: `${e.applied}/${e.cap}명 신청 · ${e.when}`, right: e.mine ? '<span class="pill green">신청함</span>' : '', attr: goAttr('U-79', { id: e.id }) })).join('')}</div>
       <div class="sec-title">교회 공지 <button class="link" type="button" data-go="U-77" data-p='${esc(JSON.stringify({ seg: 'notice' }))}'>전체 ${ic('chev', 'xs')}</button></div>
@@ -928,15 +929,15 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     <div class="body">
       <div class="card" style="display:flex;flex-direction:column;gap:6px"><span class="small">${esc(b.date)} · ${esc(b.week)}</span><b style="font-size:20px;line-height:28px">「${esc(W.title)}」</b><span class="small">${esc(W.who)} · ${esc(W.text)} · 설교 ${esc(W.len)}</span></div>
       <div class="sec-title">말씀 요약</div>
-      <div class="card" style="display:flex;flex-direction:column;gap:10px"><p style="margin:0">${esc(W.summary)}</p><button type="button" class="link" style="align-self:flex-start;color:var(--primary)" data-toast="성경 본문은 성경 앱으로 연결돼요 (예시)">📖 ${esc(W.text)} 본문 읽기 ›</button></div>
+      <div class="card" style="display:flex;flex-direction:column;gap:10px"><p style="margin:0">${esc(W.summary)}</p><button type="button" class="link" style="align-self:flex-start;color:var(--primary)" data-toast="성경 본문은 성경 앱으로 연결돼요 (예시)">본문 ${esc(W.text)} 본문 읽기 ›</button></div>
       <div class="sec-title">소그룹 나눔 질문</div>
       <div class="card tight">${W.questions.map((q, i) => row({ icon: 'chat', tone: 'teal', t: `질문 ${i + 1}`, s: esc(q), noChev: true, wrap: true })).join('')}</div>
       <div class="sec-title">우리 소그룹의 말씀 나눔 <span class="small">${shares.length}개</span></div>
-      <div class="card tight">${shares.map(({ g, f }) => row({ icon: 'users', tone: 'teal', t: esc(f.who), s: `🔒 ${esc(g.name)} · ${esc(cut(f.text, 30))}`, attr: goAttr('U-75', { g: g.id, id: f.id }) })).join('') || '<div class="empty">아직 나눔이 없어요. 첫 나눔을 남겨 보세요</div>'}</div>
+      <div class="card tight">${shares.map(({ g, f }) => row({ icon: 'users', tone: 'teal', t: esc(f.who), s: `${esc(g.name)} · ${esc(cut(f.text, 30))}`, attr: goAttr('U-75', { g: g.id, id: f.id }) })).join('') || '<div class="empty">아직 나눔이 없어요. 첫 나눔을 남겨 보세요</div>'}</div>
       <div class="sec-title">지난 말씀</div>
       <div class="card tight">${DB.v2.sermons.slice(1).map((s) => row({ icon: 'bookmark', tone: 'gray', t: esc(s.title), s: `${s.who} · ${s.date} · ${s.text}`, attr: 'data-toast="지난 말씀 (프로토타입에서는 이번 주만 보여요)"' })).join('')}</div>
     </div>
-    <div class="btn-bar"><button class="btn line" type="button" data-toast="설교 영상은 교회 유튜브로 연결돼요 (예시)">▶ 설교 영상</button><button class="btn" type="button" data-go="U-63" data-p='${esc(JSON.stringify({ b: 'g:g1', word: true }))}'>말씀 나누기</button></div>`;
+    <div class="btn-bar"><button class="btn line" type="button" data-toast="설교 영상은 교회 유튜브로 연결돼요 (예시)">설교 영상 보기</button><button class="btn" type="button" data-go="U-63" data-p='${esc(JSON.stringify({ b: 'g:g1', word: true }))}'>말씀 나누기</button></div>`;
   };
 
   /* U-72 내 소그룹 전체 (v2.1: 커뮤니티 탭 안 화면) */
@@ -947,7 +948,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
         <span style="display:flex;align-items:center;gap:8px;width:100%;min-width:0"><b class="clamp1" style="font-size:17px">${esc(g.name)}</b>${g.primary ? '<span class="pill blue" style="flex:none">대표 소속</span>' : ''}<span style="flex:1"></span>${g.unread ? `<span class="pill red" style="flex:none">새 글 ${g.unread}</span>` : ''}</span>
         <span class="small clamp1" style="width:100%">${esc(g.path)} · ${g.members}명 · ${esc(g.leader)}</span>
         ${g.note ? `<span class="micro clamp1" style="width:100%">${esc(g.note)}</span>` : ''}
-        ${g.meets[0] ? `<span class="small clamp1" style="color:var(--text);width:100%">📅 ${esc(g.meets[0].title)} · ${esc(g.meets[0].when)}</span>` : ''}
+        ${g.meets[0] ? `<span class="small clamp1" style="color:var(--text);width:100%">다음 모임 ${esc(g.meets[0].title)} · ${esc(g.meets[0].when)}</span>` : ''}
       </button>`).join('')}
       <div class="note">${ic('users', 's')}<span>그룹은 교회가 조직 관리에서 정해요. 소속이 틀리면 MY › 고객센터나 담당 교역자에게 알려 주세요.</span></div>
     </div>`;
@@ -979,7 +980,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     const pray = p.kind === 'prayer';
     const sc = pray ? (p.scope || p.id || 'church') : G(p.id).id;
     const scName = sc === 'church' ? '우리 교회 교인 모두가' : esc(G(sc).name) + ' 식구만';
-    const scopes = [['church', '교회 전체']].concat(DB.v2.groups.map((g) => [g.id, '🔒 ' + g.name]));
+    const scopes = [['church', '교회 전체']].concat(DB.v2.groups.map((g) => [g.id, g.name + ' (멤버만)']));
     return `${hdr(pray ? '기도 제목 올리기' : '그룹에 글 남기기', 'U-74')}
     <div class="body">
       ${pray ? `<div class="field"><span class="lbl">누구와 나눌까요?</span><div class="chips">${scopes.map(([k, l]) => `<button type="button" class="chip" aria-pressed="${sc === k}" data-v2="pscope" data-v="${k}">${esc(l)}</button>`).join('')}</div></div>` : ''}
@@ -995,7 +996,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     const g = G(p.g); const f = g.feed.find((x) => x.id === p.id) || g.feed[0];
     return `${hdr(esc(g.name), 'U-75')}
     <div class="body">
-      <article class="card" style="display:flex;flex-direction:column;gap:10px"><div style="display:flex;align-items:center;gap:10px"><span class="avatar" style="width:36px;height:36px;font-size:13px">${esc(f.who.slice(0, 1))}</span><span style="flex:1;min-width:0"><b style="display:block;font-size:14px">${esc(f.who)}</b><span class="micro">🔒 ${esc(g.name)} · ${f.time}</span></span>${f.word ? '<span class="wordtag">📖 말씀 나눔</span>' : ''}</div>${f.photos && f.photos.length ? `<div class="phrow">${f.photos.map((ph) => photoBox(ph)).join('')}</div>` : ''}<p style="margin:0;white-space:pre-wrap">${esc(f.text)}</p><div style="display:flex;gap:8px;align-items:center"><button class="btn sm line" type="button" data-v2="amen" data-k="g:${g.id}:${f.id}" style="${f.liked ? 'color:var(--primary);border-color:var(--primary)' : ''}">💛 마음 ${f.likes}</button><span class="small">댓글 ${f.comments.length}</span></div></article>
+      <article class="card" style="display:flex;flex-direction:column;gap:10px"><div style="display:flex;align-items:center;gap:10px"><span class="avatar" style="width:36px;height:36px;font-size:13px">${esc(f.who.slice(0, 1))}</span><span style="flex:1;min-width:0"><b style="display:block;font-size:14px">${esc(f.who)}</b><span class="micro">${ic('lock', 'xs')}${esc(g.name)} · ${f.time}</span></span>${f.word ? '<span class="wordtag">말씀 나눔</span>' : ''}</div>${f.photos && f.photos.length ? `<div class="phrow">${f.photos.map((ph) => photoBox(ph)).join('')}</div>` : ''}<p style="margin:0;white-space:pre-wrap">${esc(f.text)}</p><div style="display:flex;gap:8px;align-items:center"><button class="btn sm line" type="button" data-v2="amen" data-k="g:${g.id}:${f.id}" style="${f.liked ? 'color:var(--primary);border-color:var(--primary)' : ''}">💛 마음 ${f.likes}</button><span class="small">댓글 ${f.comments.length}</span></div></article>
       <div class="card tight">${f.comments.map((c) => row({ icon: 'user', tone: 'gray', t: esc(c.who), s: esc(c.text), noChev: true, wrap: true })).join('') || '<div class="empty">첫 댓글을 남겨 보세요</div>'}</div>
     </div>
     <div class="btn-bar"><input class="input" id="v2-cmt" placeholder="댓글 달기" style="flex:1" aria-label="댓글"><button class="btn sm" type="button" data-v2="cmt" data-g="${g.id}" data-id="${f.id}">등록</button></div>`;
@@ -1008,7 +1009,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     let body = '';
     if (seg === 'notice') body = `<div class="card tight">${V.notices.map((n) => row({ icon: 'mega', tone: n.read ? 'gray' : '', t: (n.pin ? '<span class="pill red">고정</span> ' : '') + esc(n.t), s: n.d + (n.read ? '' : ' · 안 읽음'), attr: goAttr('U-76', { id: n.id }) })).join('')}</div>`;
     else if (seg === 'bulletin') body = `<button class="card" type="button" ${goAttr('U-78')} style="border:0;text-align:left;display:flex;flex-direction:column;gap:6px"><span class="pill blue" style="align-self:flex-start">이번 주</span><b style="font-size:17px">${V.bulletin.date} · ${V.bulletin.week}</b><span class="small">예배 순서 · 교회 소식 ${V.bulletin.ads.length}개</span></button><div class="card tight">${['11월 1일 주일', '10월 25일 주일', '10월 18일 주일'].map((d) => row({ icon: 'doc', tone: 'gray', t: d + ' 주보', attr: 'data-toast="지난 주보 (프로토타입에서는 이번 주 주보만 보여요)"' })).join('')}</div>`;
-    else if (seg === 'event') body = V.events.map((e) => `<button class="card" type="button" ${goAttr('U-79', { id: e.id })} style="border:0;text-align:left;display:flex;flex-direction:column;gap:8px"><span style="display:flex;width:100%;gap:8px;align-items:center;min-width:0"><b class="clamp1" style="font-size:16px;flex:1">${esc(e.title)}</b>${e.mine ? '<span class="pill green" style="flex:none">신청함</span>' : e.applied >= e.cap ? '<span class="pill red" style="flex:none">마감</span>' : `<span class="pill" style="flex:none">${e.deadline} 마감</span>`}</span><span class="small clamp1" style="width:100%">📅 ${esc(e.when)} · 📍 ${esc(e.place)}</span><span class="bar" style="width:100%;height:8px"><i style="width:${(e.applied / e.cap) * 100}%;background:var(--primary)"></i></span><span class="micro">${e.applied}/${e.cap}명 신청 · ${esc(e.fee)}</span></button>`).join('');
+    else if (seg === 'event') body = V.events.map((e) => `<button class="card" type="button" ${goAttr('U-79', { id: e.id })} style="border:0;text-align:left;display:flex;flex-direction:column;gap:8px"><span style="display:flex;width:100%;gap:8px;align-items:center;min-width:0"><b class="clamp1" style="font-size:16px;flex:1">${esc(e.title)}</b>${e.mine ? '<span class="pill green" style="flex:none">신청함</span>' : e.applied >= e.cap ? '<span class="pill red" style="flex:none">마감</span>' : `<span class="pill" style="flex:none">${e.deadline} 마감</span>`}</span><span class="small clamp1" style="width:100%">${esc(e.when)} · ${esc(e.place)}</span><span class="bar" style="width:100%;height:8px"><i style="width:${(e.applied / e.cap) * 100}%;background:var(--primary)"></i></span><span class="micro">${e.applied}/${e.cap}명 신청 · ${esc(e.fee)}</span></button>`).join('');
     else body = `<div class="card tight">${V.sermons.map((s) => row({ icon: 'bookmark', t: esc(s.title), s: `${s.who} · ${s.date} · ${s.text} · ${s.len}`, attr: 'data-toast="설교 영상은 교회 유튜브로 연결돼요 (예시)"' })).join('')}</div><div class="sec-title">예배 시간</div><div class="card tight">${V.worship.map(([n, t]) => row({ icon: 'clock', tone: 'gray', t: n, s: t, noChev: true })).join('')}</div>`;
     return `${bigHdr('교회 소식', 'U-77')}
     <div class="body">
@@ -1076,7 +1077,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
       case 'phdel': { S.draft.photos.splice(Number(d.i), 1); if (!S.draft.photos.length) S.draft.consent = false; return rerenderKeep(); }
       case 'wordoff': { S.draft.word = false; return rerenderKeep(); }
       case 'pmore': { const x = PL(d.g).find((y) => y.id === d.id); x.open = !x.open; saveScroll(); return render(); }
-      case 'pray': { const x = PL(d.g).find((y) => y.id === d.id); x.prayed = !x.prayed; x.count += x.prayed ? 1 : -1; if (x.prayed) toast('함께 기도했어요 🙏 올린 분에게 숫자만 전해져요'); return render(); }
+      case 'pray': { const x = PL(d.g).find((y) => y.id === d.id); x.prayed = !x.prayed; x.count += x.prayed ? 1 : -1; if (x.prayed) toast('함께 기도했어요. 올린 분에게 숫자만 전해져요'); return render(); }
       case 'like': { const f = G(d.g).feed.find((y) => y.id === d.id); f.liked = !f.liked; f.likes += f.liked ? 1 : -1; return render(); }
       case 'rsvp': { const m = G(d.g).meets.find((y) => y.id === d.id); if (m.rsvp === 'yes') m.yes--; if (m.rsvp === 'no') m.no--; m.rsvp = m.rsvp === d.v ? null : d.v; if (m.rsvp === 'yes') m.yes++; if (m.rsvp === 'no') m.no++; toast(m.rsvp === 'yes' ? '참석으로 응답했어요. 리더에게 전해져요' : m.rsvp === 'no' ? '불참으로 응답했어요' : '응답을 취소했어요'); return render(); }
       case 'write': {
@@ -1202,7 +1203,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
       </div>
       <div class="card tight">${row({ icon: 'question', tone: 'teal', t: '재정 Q&A', s: `질문 ${DB.questions.length}개 · 답변 ${DB.questions.filter((q) => q.answer).length}개`, attr: 'data-pub="qa"' })}</div>`;
   }
-  /* U-71 교회 카드 사용 내역 (D-23, F-081) — 월 마감 뒤 리포트와 함께 공개, 카드 쓴 사람 이름은 보이지 않음 */
+  /* U-71 교회 카드 사용 내역 (D-23, F-081): 월 마감 뒤 리포트와 함께 공개, 카드 쓴 사람 이름은 보이지 않음 */
   const CARD_USE = {
     9: { pub: '10월 8일', rows: [
       ['9.27', '한빛 식자재마트', '친교위원회', '친교·행사', 512000], ['9.26', '새길 주유소', '시설위원회', '차량 유지', 138000], ['9.24', null, '친교위원회', '구제', 186000, '구제비 과목'],
@@ -1304,7 +1305,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
       <div class="small">나에게만 주어진 헌금 전용 계좌예요. 이 계좌로 보내면 이름을 따로 적지 않아도 내 헌금으로 기록돼요.</div>
       ${vaCard()}
       <div class="card tight">
-        ${row({ icon: 'heart', t: '기본 헌금 종류', s: '이 계좌로 들어온 돈은 십일조로 기록', right: '<span class="small">십일조</span>', attr: 'data-toast="기본 종류 바꾸기 — 시트에서 고릅니다 (프로토타입 생략)"' })}
+        ${row({ icon: 'heart', t: '기본 헌금 종류', s: '이 계좌로 들어온 돈은 십일조로 기록', right: '<span class="small">십일조</span>', attr: 'data-toast="기본 종류 바꾸기: 시트에서 고릅니다 (프로토타입 생략)"' })}
         ${row({ icon: 'receipt', tone: 'gray', t: '들어온 헌금 보기', s: '종류를 잘못 골랐다면 내역에서 바꿀 수 있어요', attr: goAttr('U-20') })}
       </div>
       <div class="note">${ic('shield', 's')}<span>교회 공용 계좌로 보내도 되지만, 그때는 재정부가 이름을 확인한 뒤 기록해요. 내 헌금 계좌로 보내면 바로 기록돼요.</span></div>
@@ -1463,7 +1464,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
   const visiblePosts = (f) => DB.posts.filter((x) => !DB.blocked.includes(x.id) && f(x));
   const postItem = (x) => {
     const b = DB.boards.find((bb) => bb.id === x.board);
-    return `<button class="post" type="button" ${goAttr('U-62', { id: x.id })}><span class="pt">${x.pin ? '<span class="pill red" style="margin-right:6px">📌 고정</span>' : ''}${esc(cut(x.title, 40))}${x.photos && x.photos.length ? ` <span class="small">📷 ${x.photos.length}</span>` : ''}</span><span class="pb">${esc(cut(x.body, 80))}</span><span class="meta"><span>${b.name}</span><span>${x.anon ? '익명' : esc(x.author || DB.me.name)}${x.church ? ' · ' + x.church : ''}</span><span>${x.time}</span><span style="margin-left:auto;color:var(--danger)">${ic('heart', 'xs')}${x.likes}</span><span style="color:var(--primary)">${ic('chat', 'xs')}${x.comments.length}</span></span></button>`;
+    return `<button class="post" type="button" ${goAttr('U-62', { id: x.id })}><span class="pt">${x.pin ? '<span class="pill red" style="margin-right:6px">고정</span>' : ''}${esc(cut(x.title, 40))}${x.photos && x.photos.length ? ` <span class="small">사진 ${x.photos.length}</span>` : ''}</span><span class="pb">${esc(cut(x.body, 80))}</span><span class="meta"><span>${b.name}</span><span>${x.anon ? '익명' : esc(x.author || DB.me.name)}${x.church ? ' · ' + x.church : ''}</span><span>${x.time}</span><span style="margin-left:auto;color:var(--danger)">${ic('heart', 'xs')}${x.likes}</span><span style="color:var(--primary)">${ic('chat', 'xs')}${x.comments.length}</span></span></button>`;
   };
   /* U-60 커뮤니티 (v2.4 D-28): 피드는 홈으로 옮기고, 여기는 내 소그룹 공간 · 게시판 · 기도 · 모임 */
   function prayList() {
@@ -1482,14 +1483,14 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
       <div class="sec-title">최근 글 <span class="small">익명 글 포함</span></div>
       <div class="card tight">${recent.map(postItem).join('') || '<div class="empty">아직 글이 없어요</div>'}</div>`;
   }
-  /* v2.2(A-208): 커뮤니티 맨 위 '꼭 보세요' — 교회가 고정한 글 먼저, 남는 자리(최대 3줄)에 공감 많은 글을 자동으로 */
+  /* v2.2(A-208): 커뮤니티 맨 위 '꼭 보세요': 교회가 고정한 글 먼저, 남는 자리(최대 3줄)에 공감 많은 글을 자동으로 */
   const boardName = (x) => (DB.boards.find((b) => b.id === x.board) || {}).name || '';
-  const pinRow = (kind, title, sub, attr) => `<button class="pinrow" type="button" ${attr}><span class="pill ${kind === 'pin' ? 'red' : 'blue'}">${kind === 'pin' ? '📌 고정' : '🔥 인기'}</span><span class="grow"><span class="t">${title}</span><span class="s">${sub}</span></span><span class="chev">${ic('chev', 's')}</span></button>`;
+  const pinRow = (kind, title, sub, attr) => `<button class="pinrow" type="button" ${attr}><span class="pill ${kind === 'pin' ? 'red' : 'blue'}">${kind === 'pin' ? '고정' : '인기'}</span><span class="grow"><span class="t">${title}</span><span class="s">${sub}</span></span><span class="chev">${ic('chev', 's')}</span></button>`;
   function pinBlock(max) {
     max = max || 3;
     const pins = visiblePosts((x) => x.pin);
-    const hot = visiblePosts((x) => !x.pin && x.board !== 'union' && x.likes >= 10).map((x) => ({ likes: x.likes, html: pinRow('hot', esc(x.title), `${esc(boardName(x))} · ♥ ${x.likes} · 댓글 ${x.comments.length}`, goAttr('U-62', { id: x.id })) }));
-    DB.v2.groups.forEach((g) => g.feed.forEach((f) => { if (f.likes >= 10) hot.push({ likes: f.likes, html: pinRow('hot', esc(cut(f.text, 40)), `🔒 ${esc(g.name)} · ${esc(f.who)} · ♥ ${f.likes}`, `data-go="U-75" data-p='${esc(JSON.stringify({ g: g.id, id: f.id }))}'`) }); }));
+    const hot = visiblePosts((x) => !x.pin && x.board !== 'union' && x.likes >= 10).map((x) => ({ likes: x.likes, html: pinRow('hot', esc(x.title), `${esc(boardName(x))} · 마음 ${x.likes} · 댓글 ${x.comments.length}`, goAttr('U-62', { id: x.id })) }));
+    DB.v2.groups.forEach((g) => g.feed.forEach((f) => { if (f.likes >= 10) hot.push({ likes: f.likes, html: pinRow('hot', esc(cut(f.text, 40)), `${esc(g.name)} · ${esc(f.who)} · 마음 ${f.likes}`, `data-go="U-75" data-p='${esc(JSON.stringify({ g: g.id, id: f.id }))}'`) }); }));
     hot.sort((a, c) => c.likes - a.likes);
     const rows = pins.map((x) => pinRow('pin', esc(x.title), `${esc(boardName(x))} · ${esc(x.author || '')}`, goAttr('U-62', { id: x.id }))).concat(hot.slice(0, Math.max(0, max - pins.length)).map((h) => h.html));
     return rows.length ? `<div class="sec-title">꼭 보세요</div><section class="card tight" style="padding:2px 0">${rows.slice(0, max).join('')}</section>` : '';
@@ -1532,8 +1533,8 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     <div class="body">
       <article class="card" style="display:flex;flex-direction:column;gap:12px">
         <div style="display:flex;align-items:center;gap:10px"><span class="avatar" style="width:36px;height:36px;font-size:14px">${x.anon ? '익' : esc((x.author || DB.me.name).slice(0, 1))}</span><span><b style="display:block;font-size:14px">${x.anon ? '익명' : esc(x.author || DB.me.name)}${x.mine ? ' <span class="pill blue">내 글</span>' : ''}</b><span class="micro">${x.church ? x.church + ' · ' : ''}${x.time}</span></span></div>
-        ${x.pin ? '<span class="pill red" style="align-self:flex-start">📌 교회가 고정한 글 · 커뮤니티 맨 위에 보여요</span>' : ''}
-        ${x.board === 'pastor' ? '<span class="wordtag">✉️ 목회 서신</span>' : ''}
+        ${x.pin ? '<span class="pill red" style="align-self:flex-start">교회가 고정한 글 · 커뮤니티 맨 위에 보여요</span>' : ''}
+        ${x.board === 'pastor' ? '<span class="wordtag">목회 서신</span>' : ''}
         <b style="font-size:18px;line-height:26px">${esc(x.title)}</b>
         ${x.photos && x.photos.length ? `<div class="phrow">${x.photos.map((ph) => photoBox(ph)).join('')}</div>` : ''}
         <p style="margin:0;white-space:pre-wrap">${esc(x.body)}</p>
@@ -1557,10 +1558,10 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     const warn = /01[0-9][- ]?\d{3,4}[- ]?\d{4}|\d{2,6}-\d{2,6}-\d{2,7}|계좌/.test(d.title + ' ' + d.body);
     return `${hdr('글쓰기', 'U-63', `<button class="btn sm" type="button" data-act="post" ${ok ? '' : 'disabled'} style="margin-right:4px">올리기</button>`)}
     <div class="body">
-      ${d.word ? `<div class="card" style="background:#f3efff;display:flex;flex-direction:column;gap:4px;padding:12px 14px"><span class="wordtag">📖 이번 주 말씀 나눔</span><b class="clamp1">「${esc(W.title)}」 · ${esc(W.text)}</b><span class="small clamp2">질문: ${esc(W.questions[0])}</span><button type="button" class="link" style="align-self:flex-start" data-v2="wordoff">말씀 나눔 표시 빼기</button></div>` : ''}
+      ${d.word ? `<div class="card" style="background:#f3efff;display:flex;flex-direction:column;gap:4px;padding:12px 14px"><span class="wordtag">이번 주 말씀 나눔</span><b class="clamp1">「${esc(W.title)}」 · ${esc(W.text)}</b><span class="small clamp2">질문: ${esc(W.questions[0])}</span><button type="button" class="link" style="align-self:flex-start" data-v2="wordoff">말씀 나눔 표시 빼기</button></div>` : ''}
       <div class="field"><span class="lbl">올릴 곳</span>
         <span class="micro">내 소그룹 · 그룹 식구만 봐요 (이름이 보여요)</span>
-        <div class="chips">${DB.v2.groups.map((g) => `<button type="button" class="chip" aria-pressed="${d.b === 'g:' + g.id}" data-wboard="g:${g.id}">🔒 ${esc(g.name)}</button>`).join('')}</div>
+        <div class="chips">${DB.v2.groups.map((g) => `<button type="button" class="chip" aria-pressed="${d.b === 'g:' + g.id}" data-wboard="g:${g.id}">${ic('lock', 'xs')}${esc(g.name)}</button>`).join('')}</div>
         <span class="micro" style="margin-top:6px">교회 게시판 · 우리 교회 교인 모두가 봐요</span>
         <div class="chips">${DB.boards.filter((b) => b.id !== 'teen' && !b.staff).map((b) => `<button type="button" class="chip" aria-pressed="${d.b === b.id}" data-wboard="${b.id}">${b.name}</button>`).join('')}</div></div>
       <input id="w-title" class="input" maxlength="50" placeholder="${isG ? '제목 (적지 않아도 돼요)' : '제목 (50자까지)'}" value="${esc(d.title)}" aria-label="제목">
@@ -1611,9 +1612,9 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     }
     const n = norm(q); const has = (s) => norm(s).includes(n);
     const res = []; const f = S.cf;
-    if (f === 'all' || f === 'board') visiblePosts((x) => has(x.title + ' ' + x.body)).forEach((x) => res.push({ tag: `<span class="scope all">${x.pin ? '📌 ' : ''}${esc(x.board === 'union' ? '연합 게시판' : boardName(x))}</span>`, t: x.title, b: x.body, meta: `${x.anon ? '익명' : esc(x.author || DB.me.name)} · ${x.time} · ♥ ${x.likes}`, attr: goAttr('U-62', { id: x.id }) }));
-    if (f === 'all' || f === 'group') DB.v2.groups.forEach((g) => g.feed.forEach((x) => { if (has(x.text + ' ' + x.who)) res.push({ tag: scopeTag(g.id, g.name), t: null, b: x.text, meta: `${esc(x.who)} · ${x.time} · ♥ ${x.likes}`, attr: `data-go="U-75" data-p='${esc(JSON.stringify({ g: g.id, id: x.id }))}'` }); }));
-    if (f === 'all' || f === 'pray') allPrayers().forEach(({ gid, name, p }) => { if (has(p.text)) res.push({ tag: scopeTag(gid, name) + ' <span class="scope" style="color:var(--text-sub)">· 기도 제목</span>', t: null, b: p.text, meta: `${p.anon ? '익명' : esc(p.who)} · ${p.time} · 🙏 ${p.count}명`, attr: `data-go="U-60" data-p='${esc(JSON.stringify({ seg: 'pray' }))}'` }); });
+    if (f === 'all' || f === 'board') visiblePosts((x) => has(x.title + ' ' + x.body)).forEach((x) => res.push({ tag: `<span class="scope all">${x.pin ? '고정 · ' : ''}${esc(x.board === 'union' ? '연합 게시판' : boardName(x))}</span>`, t: x.title, b: x.body, meta: `${x.anon ? '익명' : esc(x.author || DB.me.name)} · ${x.time} · 마음 ${x.likes}`, attr: goAttr('U-62', { id: x.id }) }));
+    if (f === 'all' || f === 'group') DB.v2.groups.forEach((g) => g.feed.forEach((x) => { if (has(x.text + ' ' + x.who)) res.push({ tag: scopeTag(g.id, g.name), t: null, b: x.text, meta: `${esc(x.who)} · ${x.time} · 마음 ${x.likes}`, attr: `data-go="U-75" data-p='${esc(JSON.stringify({ g: g.id, id: x.id }))}'` }); }));
+    if (f === 'all' || f === 'pray') allPrayers().forEach(({ gid, name, p }) => { if (has(p.text)) res.push({ tag: scopeTag(gid, name) + ' <span class="scope" style="color:var(--text-sub)">· 기도 제목</span>', t: null, b: p.text, meta: `${p.anon ? '익명' : esc(p.who)} · ${p.time} · 함께 기도 ${p.count}명`, attr: `data-go="U-60" data-p='${esc(JSON.stringify({ seg: 'pray' }))}'` }); });
     if (!res.length) return `<div class="empty"><b style="color:var(--text)">'${esc(q)}'(으)로 찾은 글이 없어요</b><div class="small">다른 낱말로 찾거나 범위를 '전체'로 바꿔 보세요</div></div>`;
     return `<div class="small"><b style="color:var(--text)">글 ${res.length}개</b></div><div class="card tight">${res.map((r) => `<button class="sres" type="button" data-csave="1" ${r.attr}>${r.tag}${r.t ? `<span class="pt">${hl(r.t, q)}</span>` : ''}<span class="pb">${hl(snip(r.b, q), q)}</span><span class="micro">${r.meta}</span></button>`).join('')}</div>`;
   }
@@ -1683,7 +1684,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
       ${row({ icon: 'chat', tone: 'gray', t: '내 글에 댓글이 달렸어요', s: '10월 9일', attr: goAttr('U-60') })}
     </div></div>`;
   SCREENS['U-54'] = () => `${hdr('알림 설정', 'U-54')}<div class="body"><div class="card tight">${[['헌금 기록·영수증', true], ['정기 헌금 출금 안내', true], ['재정 리포트·목적헌금 소식', true], ['재정 Q&A 답변', true], ['커뮤니티 댓글·공감', false], ['공지사항', true]].map(([t, on], i) => `<div class="row"><span class="grow t">${t}</span><label class="switch"><input type="checkbox" id="nt${i}" ${on ? 'checked' : ''} aria-label="${t}"><span></span></label></div>`).join('')}</div></div>`;
-  SCREENS['U-55'] = () => `${hdr('공지사항', 'U-55')}<div class="body"><div class="card tight">${DB.notices.map((n) => row({ icon: 'mega', tone: 'gray', t: n.t, s: n.d, attr: `data-toast="${esc(n.t)} — 본문 화면은 생략했어요"` })).join('')}</div></div>`;
+  SCREENS['U-55'] = () => `${hdr('공지사항', 'U-55')}<div class="body"><div class="card tight">${DB.notices.map((n) => row({ icon: 'mega', tone: 'gray', t: n.t, s: n.d, attr: `data-toast="${esc(n.t)}: 본문 화면은 생략했어요"` })).join('')}</div></div>`;
   SCREENS['U-56'] = () => `${hdr('고객센터', 'U-56')}<div class="body">
       <div class="card" style="display:flex;flex-direction:column;gap:6px"><b>무엇을 도와드릴까요?</b><span class="small">평일 10시~18시에 답해 드려요. 헌금 금액이나 교적 문의는 교회 행정실로 연결해 드려요.</span></div>
       <div class="card tight">${row({ icon: 'chat', t: '1:1 문의하기', s: '보통 하루 안에 답변', attr: 'data-toast="1:1 문의 작성 화면 (프로토타입 생략)"' })}${row({ icon: 'question', tone: 'gray', t: '자주 묻는 질문', s: '기부금영수증 · 정기 헌금 · 계좌', attr: 'data-toast="자주 묻는 질문 목록 (프로토타입 생략)"' })}</div></div>`;
@@ -1967,7 +1968,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
   setIds(store.get('ids', true));
   document.getElementById('idToggle').addEventListener('click', () => setIds(!phone.classList.contains('show-ids')));
   document.getElementById('idToggle2').addEventListener('click', () => setIds(!phone.classList.contains('show-ids')));
-  // v2.4(A-216): 홈 화면 방식 — 교회 설정을 흉내 낸다 (자동 · 피드 · 소식 위주)
+  // v2.4(A-216): 홈 화면 방식: 교회 설정을 흉내 낸다 (자동 · 피드 · 소식 위주)
   const markHomeMode = () => document.querySelectorAll('#homeMode [data-hm]').forEach((b) => b.setAttribute('aria-pressed', String((b.dataset.hm || '') === (S.homeForce || ''))));
   markHomeMode();
   document.getElementById('homeMode').addEventListener('click', (e) => {
