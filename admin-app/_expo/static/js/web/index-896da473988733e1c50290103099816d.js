@@ -1,0 +1,1 @@
+__d(function(g,r,i,a,m,e,d){"use strict";Object.defineProperty(e,'__esModule',{value:!0}),Object.defineProperty(e,"default",{enumerable:!0,get:function(){return u}});var t=r(d[0]),n=r(d[1]),s=r(d[2]);function u(){const u=(0,n.useSession)(t=>t.status);return(0,s.jsx)(t.Redirect,{href:'signedIn'===u?'/dashboard':'/login'})}},766,[771,772,6]);

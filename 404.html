@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Knitus 화면 보기</title>
+<script>
+  // 체험판 앱 안의 주소(예: /app/community)를 새로고침하면 GitHub Pages가 이 파일을 준다.
+  // 그 앱의 첫 화면으로 보내면서 원래 주소를 넘기면, 앱이 같은 화면을 다시 연다.
+  (function () {
+    var base = '/gamsa-church-prototype/';
+    var apps = ['app/', 'admin-app/'];
+    var path = location.pathname;
+    for (var i = 0; i < apps.length; i += 1) {
+      var root = base + apps[i];
+      if (path.indexOf(root) === 0 && path !== root) {
+        location.replace(root + '?route=' + encodeURIComponent(path.slice(root.length - 1)) + location.hash);
+        return;
+      }
+    }
+  })();
+</script>
+<style>
+  body { margin: 0; background: #f6f3ee; color: #1e1b18; font-family: "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif; }
+  main { max-width: 560px; margin: 0 auto; padding: 64px 20px; }
+  a { color: #b0472a; }
+</style>
+</head>
+<body>
+<main>
+  <p>찾는 페이지가 없어요. <a href="/gamsa-church-prototype/">처음 화면</a>으로 가 주세요.</p>
+</main>
+</body>
+</html>

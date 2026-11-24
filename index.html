@@ -4,74 +4,106 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta property="og:title" content="Knitus 프로토타입">
-<meta property="og:description" content="Knitus. 우리 교회 사람들이 모이는 교회 커뮤니티 앱. 신도 앱과 관리자 웹 클릭 프로토타입 (예시 데이터)">
+<meta property="og:title" content="Knitus 화면 보기">
+<meta property="og:description" content="교회 커뮤니티 앱 Knitus. 지금까지 개발한 신도 앱, 관리자 웹, 관리자 앱, 운영자 화면을 예시 데이터로 볼 수 있습니다.">
 <meta property="og:type" content="website">
-<title>Knitus 프로토타입</title>
+<title>Knitus 화면 보기</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
-/* 시안 C · 투명한 데이터. 두 프로토타입으로 가는 입구 한 장 */
 :root {
   --bg: #f6f3ee;
   --surface: #ffffff;
   --primary: #b0472a;
-  --primary-soft: #f8e6de;
-  --accent: #b7791f;
-  --accent-soft: #fbf0d9;
   --text: #1e1b18;
   --text-sub: #5b534b;
-  --line: #e6dfd5;
+  --line: #e2d9cc;
   --font: "Gothic A1", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
   color-scheme: light;
 }
 * { box-sizing: border-box; }
 html, body { margin: 0; }
-body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 23px; -webkit-font-smoothing: antialiased; }
-main { max-width: 760px; margin: 0 auto; padding: 48px 20px 56px; display: flex; flex-direction: column; gap: 24px; }
-.brand { display: flex; align-items: center; gap: 12px; }
-.logo { width: 44px; height: 44px; border-radius: 12px; background: var(--primary); color: #fff; display: grid; place-items: center; flex: none; }
-.brand b { display: block; font-size: 20px; line-height: 26px; font-weight: 800; }
-.brand span { font-size: 13px; color: var(--text-sub); }
-h1 { margin: 0; font-size: 28px; line-height: 38px; font-weight: 800; text-wrap: balance; }
-p { margin: 0; color: var(--text-sub); }
-.cards { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
-.card { background: var(--surface); border-radius: 18px; padding: 24px; display: flex; flex-direction: column; gap: 10px; text-decoration: none; color: inherit; border: 2px solid transparent; transition: border-color .15s; }
-.card:hover, .card:focus-visible { border-color: var(--primary); outline: none; }
-.tag { align-self: flex-start; font-size: 12px; line-height: 16px; font-weight: 700; border-radius: 999px; padding: 4px 10px; }
-.tag.m { background: var(--accent-soft); color: #7a4f0a; }
-.tag.a { background: var(--primary-soft); color: var(--primary); }
-.card h2 { margin: 0; font-size: 21px; line-height: 28px; font-weight: 800; }
-.card ul { margin: 0; padding-left: 18px; color: var(--text-sub); font-size: 14px; line-height: 21px; }
-.go { margin-top: auto; padding-top: 8px; font-weight: 700; color: var(--primary); }
-.note { background: var(--surface); border-radius: 14px; padding: 14px 18px; font-size: 13px; line-height: 20px; color: var(--text-sub); }
-@media (max-width: 600px) { .cards { grid-template-columns: minmax(0, 1fr); } main { padding-top: 32px; } h1 { font-size: 24px; line-height: 32px; } }
-@media (prefers-reduced-motion: reduce) { .card { transition: none; } }
+body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 24px; -webkit-font-smoothing: antialiased; }
+main { max-width: 760px; margin: 0 auto; padding: 48px 20px 64px; }
+header { padding-bottom: 20px; border-bottom: 2px solid var(--text); }
+header .name { font-size: 13px; letter-spacing: 0.04em; color: var(--text-sub); margin: 0 0 6px; }
+h1 { margin: 0; font-size: 28px; line-height: 38px; font-weight: 800; }
+header p { margin: 10px 0 0; color: var(--text-sub); }
+h2 { margin: 40px 0 4px; font-size: 18px; line-height: 26px; font-weight: 800; }
+.lead { margin: 0 0 12px; color: var(--text-sub); font-size: 14px; }
+ol.apps { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--line); }
+ol.apps li { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 16px; padding: 18px 0; border-bottom: 1px solid var(--line); }
+ol.apps a.title { font-size: 17px; line-height: 24px; font-weight: 800; color: var(--primary); text-decoration: none; }
+ol.apps a.title:hover, ol.apps a.title:focus-visible { text-decoration: underline; }
+ol.apps .who { display: block; margin-top: 2px; font-size: 13px; color: var(--text-sub); }
+ol.apps p { margin: 0; }
+ol.apps .tip { margin-top: 4px; font-size: 13px; color: var(--text-sub); }
+.note { margin-top: 28px; padding: 16px 18px; background: var(--surface); border-left: 3px solid var(--primary); font-size: 14px; line-height: 22px; color: var(--text-sub); }
+.note p { margin: 0; }
+.note p + p { margin-top: 8px; }
+footer { margin-top: 40px; font-size: 12px; color: var(--text-sub); }
+@media (max-width: 600px) {
+  main { padding-top: 32px; }
+  h1 { font-size: 24px; line-height: 32px; }
+  ol.apps li { grid-template-columns: minmax(0, 1fr); gap: 6px; }
+}
 </style>
 </head>
 <body>
 <main>
-  <div class="brand"><span class="logo"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3.5v2.5M5.9 6.4l1.8 1.8M18.1 6.4l-1.8 1.8M3.5 13h2.5M18 13h2.5"/><path d="M7.5 17a4.5 4.5 0 0 1 9 0"/><path d="M4 20.5h16"/></svg></span><span><b>Knitus <small style="font-size:13px;font-weight:600;color:var(--text-sub)">니터스</small></b><span>우리 교회 커뮤니티 · 클릭 프로토타입 v2.6</span></span></div>
-  <div>
-    <h1>보고 싶은 프로토타입을 고르세요</h1>
-    <p>눌러 보면 실제 서비스처럼 화면이 바뀝니다. 로그인 없이 볼 수 있습니다.</p>
+  <header>
+    <p class="name">KNITUS 니터스</p>
+    <h1>교회 커뮤니티 앱 Knitus, 지금까지 만든 화면</h1>
+    <p>링크만 있으면 로그인 없이 열립니다. 화면 속 '감사교회'와 사람 이름, 금액, 계좌는 모두 예시입니다.</p>
+  </header>
+
+  <h2>개발한 앱 체험판</h2>
+  <p class="lead">실제로 개발한 코드로 만든 화면입니다. 2026년 11월 25일 기준.</p>
+  <ol class="apps">
+    <li>
+      <div><a class="title" href="app/">신도 앱</a><span class="who">교인 김은혜(2청년 셀 그룹장)로 보기</span></div>
+      <div>
+        <p>홈의 이번 주 말씀과 교회 피드, 소그룹 글과 기도 제목, 교회 소식과 행사, 헌금 내역과 기부금영수증, 재정 공개, 내 기도 노트.</p>
+        <p class="tip">휴대폰으로 열거나, PC에서는 창을 좁게 해서 보세요.</p>
+      </div>
+    </li>
+    <li>
+      <div><a class="title" href="admin-web/dashboard/">관리자 웹</a><span class="who">감사교회 관리자로 보기</span></div>
+      <div>
+        <p>참여 대시보드, 교인과 조직, 커뮤니티 신고 처리, 공지와 행사, 헌금과 장부, 예산과 집행, 교회 카드, 요금제, 자료 내보내기.</p>
+        <p class="tip">PC 화면에 맞춰 만들었습니다.</p>
+      </div>
+    </li>
+    <li>
+      <div><a class="title" href="admin-app/">관리자 앱</a><span class="who">같은 관리자가 휴대폰으로 볼 때</span></div>
+      <div><p>오늘 숫자, 가입과 집행 승인함, 교인 찾기, 알림, 공지 바로 올리기.</p></div>
+    </li>
+    <li>
+      <div><a class="title" href="ops/applications/">운영자 백오피스</a><span class="who">Knitus 운영팀으로 보기</span></div>
+      <div><p>교회 등록 심사, 교인이 만든 교회 공간, 신고 처리, 오늘의 말씀 고르기, 교회별 요금과 연락할 교회, 교단, 서비스 공지, 고객 문의.</p></div>
+    </li>
+  </ol>
+
+  <div class="note">
+    <p>체험판은 서버 없이 미리 녹화해 둔 예시 데이터로 움직입니다. 글을 쓰거나 저장하는 버튼을 누르면 '체험판이라 저장하지 않아요'라고 나옵니다.</p>
+    <p>예시에 없는 화면을 열면 내용이 비어 보일 수 있고, 사진은 나오지 않습니다.</p>
   </div>
-  <div class="cards">
-    <a class="card" href="member.html">
-      <span class="tag m">휴대폰 · 교인용</span>
-      <h2>신도 앱</h2>
-      <ul><li>홈: 목사님 말씀 카드 + 교인들이 올린 사진 피드(반응: 마음)</li><li>내 소그룹·게시판·기도·모임, 글에 사진 첨부</li><li>교회 소식·주보·행사, 헌금하기·영수증(부가 기능)</li></ul>
-      <span class="go">신도 앱 열기 →</span>
-    </a>
-    <a class="card" href="admin.html">
-      <span class="tag a">PC · 교역자·교회 관리자용</span>
-      <h2>관리자 웹</h2>
-      <ul><li>참여 대시보드, 홈 화면 방식·말씀 카드·사진 설정</li><li>공지·주보·행사, 교인·조직 관리</li><li>헌금·장부·영수증·재정 공개(부가 기능·ERP 연동)</li></ul>
-      <span class="go">관리자 웹 열기 →</span>
-    </a>
-  </div>
-  <div class="note">서비스 이름은 Knitus(니터스)이고, 화면 속 '감사교회'와 사람 이름·금액·계좌는 모두 예시입니다. 입력한 내용은 보는 사람의 화면에만 남고 실제로 저장·발송·결제되지 않습니다. 관리자 웹은 PC 화면에서 보기 좋습니다.</div>
+
+  <h2>기획 단계 클릭 프로토타입 v2.6</h2>
+  <p class="lead">개발 전에 화면 흐름을 맞춰 보려고 만든 시안입니다. 체험판보다 앞선 버전이라 일부 화면이 다릅니다.</p>
+  <ol class="apps">
+    <li>
+      <div><a class="title" href="member.html">신도 앱 시안</a></div>
+      <div><p>교인 화면의 흐름. 입력한 내용은 보는 사람 화면에만 남습니다.</p></div>
+    </li>
+    <li>
+      <div><a class="title" href="admin.html">관리자 웹 시안</a></div>
+      <div><p>교회 관리자 화면의 흐름.</p></div>
+    </li>
+  </ol>
+
+  <footer>마지막 갱신 2026년 11월 25일</footer>
 </main>
 </body>
 </html>
