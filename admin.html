@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta property="og:title" content="감사교회 프로토타입">
+<meta property="og:title" content="Knitus 프로토타입">
 <meta property="og:description" content="관리자 웹 클릭 프로토타입 (예시 데이터)">
-<title>Faithtown 관리자 웹 프로토타입</title>
+<title>Knitus 관리자 웹 프로토타입</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,32 +14,34 @@
 /* 시안 C · 투명한 데이터 (D-21). 관리자 웹은 밝은 화면 하나로 설계되어 어두운 테마를 따로 두지 않는다.
    배치: 왼쪽 메뉴 + 위쪽 검색 줄 + 본문. 좁은 화면에서는 메뉴가 아이콘만 남고, 휴대폰 폭에서는 메뉴 버튼으로 연다. */
 :root {
-  --bg: #f4f6fa;
+  --bg: #f6f3ee;
   --surface: #ffffff;
-  --surface-alt: #eef1f6;
-  --primary: #2256f2;
-  --primary-press: #1a46cc;
-  --primary-soft: #e8effe;
-  --accent: #12b5a6;
-  --accent-soft: #ddf5f2;
-  --text: #111827;
-  --text-sub: #4b5563;
-  --text-faint: #9ca3af;
-  --line: #e5e7eb;
+  --surface-alt: #eee8df;
+  --primary: #b0472a;
+  --primary-press: #933a21;
+  --primary-soft: #f8e6de;
+  --accent: #b7791f;
+  --accent-soft: #fbf0d9;
+  --text: #1e1b18;
+  --text-sub: #5b534b;
+  --text-faint: #a0978d;
+  --line: #e6dfd5;
   --success: #0f9f6e;
   --success-soft: #e2f6ee;
   --warning: #b45309;
   --warning-soft: #fdf1df;
   --danger: #e5484d;
   --danger-soft: #fdecec;
-  --chart-1: #2256f2;
-  --chart-2: #12b5a6;
-  --chart-3: #7c9cff;
-  --chart-4: #8be0d7;
-  --chart-5: #c5ccd8;
-  --ink: #0f172a;
+  --chart-1: #b0472a;
+  --chart-2: #b7791f;
+  --chart-3: #e3a08b;
+  --chart-4: #f2cf86;
+  --chart-5: #cfc6ba;
+  --ink: #1e1b18;
   --font: "Gothic A1", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
   --side-w: 232px;
+  --heart: #f2b33d;
+  --accent-text: #7a4f0a;
   color-scheme: light;
 }
 * { box-sizing: border-box; }
@@ -53,14 +55,14 @@ a { color: var(--primary); }
 h1, h2, h3 { text-wrap: balance; }
 
 /* 프로토타입 안내 줄 */
-.proto { flex: none; display: flex; align-items: center; gap: 8px 12px; flex-wrap: wrap; padding: 7px 16px; background: var(--ink); color: #cbd5e1; font-size: 12px; line-height: 16px; }
+.proto { flex: none; display: flex; align-items: center; gap: 8px 12px; flex-wrap: wrap; padding: 7px 16px; background: var(--ink); color: #d9d0c4; font-size: 12px; line-height: 16px; }
 .proto b { color: #fff; font-weight: 700; }
 .proto .sp { flex: 1; }
-.proto button { background: transparent; border: 1px solid #475569; color: #e2e8f0; border-radius: 6px; padding: 4px 9px; font-size: 12px; line-height: 16px; }
-.proto button:hover { border-color: #94a3b8; }
-.proto .proto-link { color: #c9d7ff; font-weight: 700; text-decoration: none; padding: 4px 6px; }
+.proto button { background: transparent; border: 1px solid #5b534b; color: #ebe5dc; border-radius: 6px; padding: 4px 9px; font-size: 12px; line-height: 16px; }
+.proto button:hover { border-color: #a0978d; }
+.proto .proto-link { color: #fbe2d8; font-weight: 700; text-decoration: none; padding: 4px 6px; }
 .proto .proto-link:hover { color: #fff; text-decoration: underline; }
-.proto button[aria-pressed="true"] { background: #1e293b; border-color: #94a3b8; color: #fff; }
+.proto button[aria-pressed="true"] { background: #2a2520; border-color: #a0978d; color: #fff; }
 
 /* 앱 뼈대 */
 .app { flex: 1; display: flex; min-height: 0; }
@@ -89,7 +91,7 @@ body.bare #bare { display: block; }
 .gsearch { position: relative; width: 320px; }
 .gsearch input { width: 100%; height: 40px; border: 1px solid var(--line); border-radius: 10px; background: var(--surface); padding: 0 12px 0 38px; }
 .gsearch > svg { position: absolute; left: 12px; top: 10px; color: var(--text-faint); }
-.dd { position: absolute; top: 44px; left: 0; right: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 12px 32px -12px rgba(15, 23, 42, .25); z-index: 30; padding: 6px; max-height: 340px; overflow-y: auto; }
+.dd { position: absolute; top: 44px; left: 0; right: 0; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; box-shadow: 0 12px 32px -12px rgba(30, 27, 24, .25); z-index: 30; padding: 6px; max-height: 340px; overflow-y: auto; }
 .dd button { display: flex; width: 100%; align-items: center; gap: 8px; border: 0; background: transparent; text-align: left; padding: 8px 10px; border-radius: 8px; }
 .dd button:hover, .dd button:focus-visible { background: var(--surface-alt); }
 .dd small { color: var(--text-faint); font-size: 12px; }
@@ -165,7 +167,7 @@ hr.div { border: 0; border-top: 1px solid var(--line); margin: 4px 0; }
 .c-warn { background: var(--warning-soft); color: var(--warning); }
 .c-bad { background: var(--danger-soft); color: var(--danger); }
 .c-info { background: var(--primary-soft); color: var(--primary); }
-.c-teal { background: var(--accent-soft); color: #0b7f74; }
+.c-teal { background: var(--accent-soft); color: #7a4f0a; }
 .c-mute { background: var(--surface-alt); color: var(--text-sub); }
 
 /* 표 */
@@ -178,7 +180,7 @@ table.t { width: 100%; border-collapse: collapse; font-size: 14px; line-height: 
 .t td.wrap { white-space: normal; min-width: 180px; }
 .t .r { text-align: right; }
 .t tr.click { cursor: pointer; }
-.t tr.click:hover td { background: #f8fafc; }
+.t tr.click:hover td { background: #faf8f4; }
 .t tr.hl td { background: #fffaf0; }
 .t tfoot td { font-weight: 800; border-bottom: 0; }
 .t .sum td { background: var(--surface-alt); font-weight: 700; }
@@ -208,14 +210,14 @@ textarea.in { height: auto; min-height: 84px; padding: 10px 12px; resize: vertic
 .chk input { width: 18px; height: 18px; accent-color: var(--primary); }
 .seg { display: inline-flex; background: var(--surface-alt); border-radius: 10px; padding: 3px; gap: 2px; flex-wrap: wrap; }
 .seg button { border: 0; background: transparent; padding: 6px 12px; border-radius: 8px; font-size: 13px; line-height: 18px; font-weight: 600; color: var(--text-sub); }
-.seg button.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 2px rgba(15, 23, 42, .1); }
+.seg button.on { background: var(--surface); color: var(--text); box-shadow: 0 1px 2px rgba(30, 27, 24, .1); }
 .tog { width: 40px; height: 24px; border-radius: 12px; border: 0; background: var(--line); position: relative; flex: none; }
 .tog::after { content: ""; position: absolute; top: 3px; left: 3px; width: 18px; height: 18px; border-radius: 50%; background: #fff; transition: left .15s; box-shadow: 0 1px 2px rgba(0, 0, 0, .2); }
 .tog[aria-checked="true"] { background: var(--primary); }
 .tog[aria-checked="true"]::after { left: 19px; }
 
 /* 안내 상자 */
-.note { border-radius: 12px; padding: 12px 16px; background: var(--primary-soft); color: #1e3a8a; font-size: 13px; line-height: 20px; display: flex; gap: 10px; align-items: flex-start; }
+.note { border-radius: 12px; padding: 12px 16px; background: var(--primary-soft); color: #7c2f19; font-size: 13px; line-height: 20px; display: flex; gap: 10px; align-items: flex-start; }
 .note svg { flex: none; margin-top: 1px; }
 .note.warn { background: var(--warning-soft); color: #7c4a03; }
 .note.bad { background: var(--danger-soft); color: #9b1c1f; }
@@ -261,21 +263,21 @@ textarea.in { height: auto; min-height: 84px; padding: 10px 12px; resize: vertic
 .chart text { font-family: var(--font); fill: var(--text-sub); font-size: 11px; }
 
 /* 겹창 */
-.scrim { position: fixed; inset: 0; background: rgba(15, 23, 42, .45); display: grid; place-items: center; z-index: 50; padding: 16px; }
-.modal { background: var(--surface); border-radius: 18px; width: min(520px, 100%); max-height: calc(100% - 32px); overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 30px 60px -20px rgba(15, 23, 42, .4); }
+.scrim { position: fixed; inset: 0; background: rgba(30, 27, 24, .45); display: grid; place-items: center; z-index: 50; padding: 16px; }
+.modal { background: var(--surface); border-radius: 18px; width: min(520px, 100%); max-height: calc(100% - 32px); overflow-y: auto; padding: 24px; display: flex; flex-direction: column; gap: 16px; box-shadow: 0 30px 60px -20px rgba(30, 27, 24, .4); }
 .modal.wide { width: min(780px, 100%); }
 .modal h3 { margin: 0; font-size: 19px; line-height: 26px; font-weight: 800; }
 .modal .mf { display: flex; gap: 8px; justify-content: flex-end; flex-wrap: wrap; }
 .modal .x { margin-left: auto; }
 .mh { display: flex; align-items: center; gap: 8px; }
-.drawer-scrim { position: fixed; inset: 0; background: rgba(15, 23, 42, .3); z-index: 50; }
-.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(460px, 100%); background: var(--surface); z-index: 51; box-shadow: -20px 0 40px -20px rgba(15, 23, 42, .3); padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
+.drawer-scrim { position: fixed; inset: 0; background: rgba(30, 27, 24, .3); z-index: 50; }
+.drawer { position: fixed; top: 0; right: 0; bottom: 0; width: min(460px, 100%); background: var(--surface); z-index: 51; box-shadow: -20px 0 40px -20px rgba(30, 27, 24, .3); padding: 24px; overflow-y: auto; display: flex; flex-direction: column; gap: 16px; }
 .drawer h3 { margin: 0; font-size: 19px; font-weight: 800; }
 .kv { display: grid; grid-template-columns: 112px 1fr; gap: 10px 12px; font-size: 14px; }
 .kv dt { color: var(--text-sub); }
 .kv dd { margin: 0; font-weight: 600; min-width: 0; overflow-wrap: anywhere; }
 .toasts { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 70; width: max-content; max-width: calc(100% - 32px); }
-.toast { background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 12px; font-size: 14px; line-height: 20px; box-shadow: 0 12px 30px -10px rgba(15, 23, 42, .5); animation: up .2s ease-out; }
+.toast { background: var(--ink); color: #fff; padding: 12px 18px; border-radius: 12px; font-size: 14px; line-height: 20px; box-shadow: 0 12px 30px -10px rgba(30, 27, 24, .5); animation: up .2s ease-out; }
 @keyframes up { from { transform: translateY(8px); opacity: 0; } to { transform: none; opacity: 1; } }
 @media (prefers-reduced-motion: reduce) { .toast { animation: none; } .tog::after { transition: none; } }
 
@@ -287,14 +289,14 @@ textarea.in { height: auto; min-height: 84px; padding: 10px 12px; resize: vertic
 .solo h1 { font-size: 22px; line-height: 30px; margin: 0; font-weight: 800; }
 
 /* 영수증 문서 */
-.rdoc { border: 1px solid #9aa3b2; padding: 22px; font-size: 13px; line-height: 19px; background: #fff; }
+.rdoc { border: 1px solid #a0978d; padding: 22px; font-size: 13px; line-height: 19px; background: #fff; }
 .rdoc .tag { font-size: 11px; color: var(--text-faint); }
 .rdoc h4 { text-align: center; font-size: 22px; letter-spacing: .5em; margin: 10px 0 4px; font-weight: 800; }
 .rdoc .no { text-align: right; font-size: 12px; color: var(--text-sub); }
 .rt { width: 100%; border-collapse: collapse; margin-top: 10px; }
-.rt th, .rt td { border: 1px solid #c3c9d4; padding: 6px 8px; text-align: left; }
+.rt th, .rt td { border: 1px solid #cdc4b8; padding: 6px 8px; text-align: left; }
 .rt th { background: var(--surface-alt); font-weight: 700; }
-.rt .k { color: var(--text-sub); background: #fafbfc; width: 92px; }
+.rt .k { color: var(--text-sub); background: #faf8f4; width: 92px; }
 .rdoc .sign { text-align: right; margin-top: 16px; }
 
 /* 대시보드 할 일 */
@@ -322,7 +324,7 @@ textarea.in { height: auto; min-height: 84px; padding: 10px 12px; resize: vertic
 }
 @media (max-width: 680px) {
   .side { display: none; }
-  .side.open { display: flex; position: fixed; z-index: 45; top: 0; bottom: 0; left: 0; width: 240px; box-shadow: 20px 0 40px -20px rgba(15, 23, 42, .4); }
+  .side.open { display: flex; position: fixed; z-index: 45; top: 0; bottom: 0; left: 0; width: 240px; box-shadow: 20px 0 40px -20px rgba(30, 27, 24, .4); }
   .side.open .brand { justify-content: flex-start; padding: 4px 8px 18px; }
   .side.open .brand .bt, .side.open .nav .lbl, .side.open .nav .sub, .side.open .nav .ph2 { display: initial; }
   .side.open .nav .sub { display: flex; }
@@ -360,9 +362,9 @@ textarea.in { height: auto; min-height: 84px; padding: 10px 12px; resize: vertic
 .ob b { font-weight: 700; }
 .ob span { font-size: 12px; line-height: 17px; color: var(--text-sub); }
 .ob.root { background: var(--primary); color: #fff; border-color: var(--primary); }
-.ob.root span { color: #c9d7ff; }
+.ob.root span { color: #fbe2d8; }
 button.ob { cursor: pointer; }
-.ob.g1 { background: var(--primary-soft); border-color: #c9d7ff; text-align: left; }
+.ob.g1 { background: var(--primary-soft); border-color: #fbe2d8; text-align: left; }
 .vline { width: 2px; height: 22px; background: var(--line); }
 .orow { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
 .ocols { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 14px; width: 100%; border-top: 2px solid var(--line); padding-top: 18px; }
@@ -393,7 +395,7 @@ svg.i.xs { width: 15px; height: 15px; }
 </head>
 <body class="show-ids">
 <div class="proto" role="region" aria-label="프로토타입 안내">
-  <b>Faithtown(가제) 관리자 웹 프로토타입 v2.5 · 커뮤니티 중심 · 예시 교회: 감사교회</b>
+  <b>Knitus 관리자 웹 프로토타입 v2.6 · 커뮤니티 중심 · 예시 교회: 감사교회</b>
   <span>디자인 시안 C · 예시 데이터 · 입력한 내용은 이 창에만 남고 실제로 저장·발송·결제되지 않습니다</span>
   <span class="sp"></span>
   <a class="proto-link" href="member.html">신도 앱 프로토타입 ↗</a>
@@ -1412,7 +1414,7 @@ svg.i.xs { width: 15px; height: 15px; }
   }
 
   /* ───────── AW-01~03 시작 화면 ───────── */
-  function brandBlock() { return '<div class="brand"><span class="logo">' + ic('brand') + '</span><span class="bt"><b>Faithtown</b><small>교회 관리자</small></span></div>'; }
+  function brandBlock() { return '<div class="brand"><span class="logo">' + ic('brand') + '</span><span class="bt"><b>Knitus</b><small>교회 관리자</small></span></div>'; }
   function vLogin(sc) {
     const L = S.login;
     const step1 = '<h1>관리자 로그인 <span class="sid">' + sc.id + '</span></h1><div class="fld"><label for="lg-id">이메일</label><input class="in" id="lg-id" type="email" value="finance@gamsa.example" autocomplete="username"></div><div class="fld"><label for="lg-pw">비밀번호</label><input class="in" id="lg-pw" type="password" value="example-password" autocomplete="current-password"></div><button type="button" class="btn btn-p" data-act="login1">로그인</button><span class="hint">예시 계정이 채워져 있습니다. 5번 틀리면 30분 잠깁니다.</span>';
@@ -1455,7 +1457,7 @@ svg.i.xs { width: 15px; height: 15px; }
       const subs = SCREENS.filter((x) => x.g === g[0] && !x.hide && !x.later);
       if (on && subs.length > 1) s += '<div class="sub">' + subs.map((x) => '<a href="#' + x.h + '" class="' + (x.h === sc.h || (sc.h === 'aw-71' && x.h === 'aw-70') ? 'on' : '') + '">' + x.t + '</a>').join('') + '</div>';
     });
-    s += '</nav><div class="foot">커뮤니티 중심 v2.5(D-24~D-29) · 재정은 부가 기능 · 예산·집행·교단은 계획만 보여 줍니다</div>';
+    s += '</nav><div class="foot">커뮤니티 중심 v2.6(D-24~D-39) · 재정은 부가 기능 · 예산·집행·교단은 계획만 보여 줍니다</div>';
     $('#side').innerHTML = s;
     const P0 = actor(); $('#who').innerHTML = '<span class="cname">' + esc(DB.church.name) + '</span><span class="sep"></span><span class="avatar">' + P0.name[0] + '</span><b>' + P0.name + '</b><span class="role">' + P0.role + '</span><button type="button" class="btn btn-g sm" data-act="logout" title="로그아웃" aria-label="로그아웃">' + ic('logout', 's') + '</button>';
   }
@@ -2203,7 +2205,7 @@ svg.i.xs { width: 15px; height: 15px; }
 
   /* AW-94 ERP 연동 (부가 기능) */
   function vErp(sc) {
-    const M = [['erp', 'ERP 연동', '교회가 쓰는 ERP의 헌금 내역·기부금영수증을 받아 신도 앱에 보여 줍니다. 장부는 ERP에 그대로 둡니다.'], ['builtin', '내장 재정 모듈', 'ERP가 없는 교회용. 헌금·장부·월 마감·영수증 발급을 Faithtown에서 합니다(기존 기능).'], ['off', '사용 안 함', '신도 앱에서 헌금·영수증 메뉴를 숨깁니다.']];
+    const M = [['erp', 'ERP 연동', '교회가 쓰는 ERP의 헌금 내역·기부금영수증을 받아 신도 앱에 보여 줍니다. 장부는 ERP에 그대로 둡니다.'], ['builtin', '내장 재정 모듈', 'ERP가 없는 교회용. 헌금·장부·월 마감·영수증 발급을 Knitus에서 합니다(기존 기능).'], ['off', '사용 안 함', '신도 앱에서 헌금·영수증 메뉴를 숨깁니다.']];
     return '<div class="page" style="max-width:960px">' + head(sc, 'ERP 연동', '고객 인터뷰에서 대부분의 교회가 이미 ERP로 헌금·자산을 관리한다고 확인했습니다(D-24). 재정은 부가 기능이며, 교회가 방식을 고릅니다(A-193).') +
       '<div class="stack">' + M.map((x) => '<label class="card row" style="cursor:pointer;align-items:flex-start;flex-wrap:nowrap;gap:14px;border:2px solid ' + (DB.finMode === x[0] ? 'var(--primary)' : 'transparent') + '"><input type="radio" name="finMode" value="' + x[0] + '" data-chg="finMode" ' + (DB.finMode === x[0] ? 'checked' : '') + ' style="margin-top:4px;accent-color:var(--primary)"><span style="flex:1"><b>' + x[1] + '</b><div class="muted small">' + x[2] + '</div></span>' + (DB.finMode === x[0] ? chip('사용 중', 'c-ok') : '') + '</label>').join('') + '</div>' +
       (DB.finMode === 'erp' ? '<div class="card stack"><h2 style="margin:0">ERP 연결</h2><div class="grid g2"><div class="fld"><label for="erpSel">사용 중인 ERP</label><select class="in" id="erpSel"><option>A사 교회 ERP (예시)</option><option>B사 교회 재정 (예시)</option><option>목록에 없음: 엑셀로 올리기</option></select></div><div class="fld"><span class="lab-t">받을 정보</span><label class="chk"><input type="checkbox" checked disabled>교인별 헌금 내역</label><label class="chk"><input type="checkbox" checked disabled>기부금영수증 (PDF)</label><label class="chk"><input type="checkbox">재정 리포트 (재정 공개용)</label></div></div><div class="note warn">' + ic('alert', 's') + '<span>ERP 업체별 연동(API·내보내기 파일) 가능 여부는 확인 전입니다. 업체 문의는 무료, 연동 개발·제휴는 비용이 생길 수 있어 대표 승인이 필요합니다(H2-4).</span></div></div>' : '') +

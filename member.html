@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="noindex, nofollow">
-<meta property="og:title" content="감사교회 프로토타입">
+<meta property="og:title" content="Knitus 프로토타입">
 <meta property="og:description" content="신도 앱 클릭 프로토타입 (예시 데이터)">
-<title>Faithtown 신도 앱 프로토타입</title>
+<title>Knitus 신도 앱 프로토타입</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,28 +14,30 @@
 /* 시안 C · 투명한 데이터 (D-21). 이 앱은 밝은 화면 하나로만 설계되어 있어 어두운 테마를 따로 두지 않는다.
    배치: 데스크톱은 왼쪽 안내 + 오른쪽 휴대폰, 휴대폰에서는 앱이 화면 전체를 쓴다. */
 :root {
-  --bg: #f4f6fa;
+  --bg: #f6f3ee;
   --surface: #ffffff;
-  --surface-alt: #eef1f6;
-  --primary: #2256f2;
-  --primary-soft: #e8effe;
-  --accent: #12b5a6;
-  --accent-soft: #ddf5f2;
-  --text: #111827;
-  --text-sub: #4b5563;
-  --text-faint: #9ca3af;
-  --line: #e5e7eb;
+  --surface-alt: #eee8df;
+  --primary: #b0472a;
+  --primary-soft: #f8e6de;
+  --accent: #b7791f;
+  --accent-soft: #fbf0d9;
+  --text: #1e1b18;
+  --text-sub: #5b534b;
+  --text-faint: #a0978d;
+  --line: #e6dfd5;
   --success: #0f9f6e;
   --danger: #e5484d;
-  --on-hero-sub: #c9d7ff;
-  --chart-1: #2256f2;
-  --chart-2: #12b5a6;
-  --chart-3: #7c9cff;
-  --chart-4: #8be0d7;
-  --chart-5: #c5ccd8;
-  --stage: #dfe4ee;
-  --ink: #0f172a;
+  --on-hero-sub: #fbe2d8;
+  --chart-1: #b0472a;
+  --chart-2: #b7791f;
+  --chart-3: #e3a08b;
+  --chart-4: #f2cf86;
+  --chart-5: #cfc6ba;
+  --stage: #e6dfd4;
+  --ink: #1e1b18;
   --font: "Gothic A1", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  --heart: #f2b33d;
+  --accent-text: #7a4f0a;
   color-scheme: light;
 }
 * { box-sizing: border-box; }
@@ -78,15 +80,15 @@ button { cursor: pointer; }
 .phone {
   width: 375px; height: min(812px, 100%); flex: none;
   background: var(--bg); border: 8px solid var(--ink); border-radius: 44px;
-  box-shadow: 0 30px 60px -20px rgba(15, 23, 42, .35);
+  box-shadow: 0 30px 60px -20px rgba(30, 27, 24, .35);
   overflow: hidden; display: flex; flex-direction: column; position: relative;
 }
 .notice {
   flex: none; display: flex; align-items: center; justify-content: space-between; gap: 8px;
-  background: var(--ink); color: #e2e8f0; font-size: 11px; line-height: 14px; padding: 8px 16px 6px;
+  background: var(--ink); color: #ebe5dc; font-size: 11px; line-height: 14px; padding: 8px 16px 6px;
 }
 .notice b { color: #fff; font-weight: 700; }
-.notice button { background: transparent; border: 1px solid #475569; color: #e2e8f0; border-radius: 6px; padding: 2px 6px; font-size: 10px; line-height: 14px; }
+.notice button { background: transparent; border: 1px solid #5b534b; color: #ebe5dc; border-radius: 6px; padding: 2px 6px; font-size: 10px; line-height: 14px; }
 .area { flex: 1; position: relative; overflow: hidden; }
 .scr { position: absolute; inset: 0; display: flex; flex-direction: column; background: var(--bg); }
 .scr.enter { animation: slide .22s ease-out; }
@@ -126,7 +128,7 @@ svg.i.xs { width: 16px; height: 16px; }
 .amount { font-size: 32px; line-height: 40px; font-weight: 800; letter-spacing: -.01em; }
 .amount-m { font-size: 20px; line-height: 28px; font-weight: 800; }
 .row { display: flex; align-items: center; gap: 12px; padding: 14px 18px; width: 100%; border: 0; background: transparent; text-align: left; }
-button.row:hover { background: #f8fafc; }
+button.row:hover { background: #faf8f4; }
 .row + .row { border-top: 1px solid var(--line); }
 .row .grow { flex: 1; min-width: 0; }
 .row .t { font-size: 15px; line-height: 22px; font-weight: 600; }
@@ -143,7 +145,7 @@ button.row:hover { background: #f8fafc; }
 .btn-bar { flex: none; padding: 12px 20px 16px; background: var(--bg); display: flex; gap: 8px; }
 .pill { display: inline-flex; align-items: center; gap: 4px; border-radius: 999px; padding: 2px 8px; font-size: 11px; line-height: 16px; font-weight: 700; background: var(--surface-alt); color: var(--text-sub); flex: none; }
 .pill.blue { background: var(--primary-soft); color: var(--primary); }
-.pill.teal { background: var(--accent-soft); color: #0b7f74; }
+.pill.teal { background: var(--accent-soft); color: #7a4f0a; }
 .pill.green { background: #dcf3ea; color: var(--success); }
 .pill.red { background: #fde4e4; color: var(--danger); }
 .chips { display: flex; gap: 8px; flex-wrap: wrap; }
@@ -151,7 +153,7 @@ button.row:hover { background: #f8fafc; }
 .chip[aria-pressed="true"] { background: var(--primary); border-color: var(--primary); color: #fff; }
 .seg { display: grid; grid-auto-flow: column; grid-auto-columns: 1fr; background: var(--surface-alt); border-radius: 14px; padding: 4px; gap: 4px; }
 .seg button { border: 0; background: transparent; border-radius: 10px; padding: 8px 4px; font-size: 14px; line-height: 20px; font-weight: 600; color: var(--text-sub); }
-.seg button[aria-selected="true"] { background: var(--surface); color: var(--text); box-shadow: 0 1px 2px rgba(15, 23, 42, .08); }
+.seg button[aria-selected="true"] { background: var(--surface); color: var(--text); box-shadow: 0 1px 2px rgba(30, 27, 24, .08); }
 .sticky { position: sticky; top: 0; z-index: 2; background: var(--bg); padding: 4px 0 8px; margin: -4px 0 -8px; }
 .bar { height: 10px; border-radius: 999px; background: var(--surface-alt); overflow: hidden; display: flex; }
 .bar > i { display: block; height: 100%; }
@@ -159,7 +161,7 @@ button.row:hover { background: #f8fafc; }
 .legend span { display: inline-flex; align-items: center; gap: 6px; }
 .legend i { width: 8px; height: 8px; border-radius: 3px; display: inline-block; }
 .note { background: var(--surface-alt); border-radius: 12px; padding: 12px 14px; font-size: 13px; line-height: 19px; color: var(--text-sub); display: flex; gap: 8px; }
-.note.blue { background: var(--primary-soft); color: #1d3fa8; }
+.note.blue { background: var(--primary-soft); color: #7c2f19; }
 .note.warn { background: #fff4e5; color: #8a4b00; }
 .field { display: flex; flex-direction: column; gap: 6px; }
 .field label, .field .lbl { font-size: 13px; line-height: 19px; font-weight: 700; color: var(--text-sub); }
@@ -169,14 +171,14 @@ button.row:hover { background: #f8fafc; }
 textarea.input { resize: none; min-height: 140px; }
 .switch { position: relative; width: 46px; height: 28px; flex: none; }
 .switch input { position: absolute; opacity: 0; inset: 0; margin: 0; cursor: pointer; }
-.switch span { position: absolute; inset: 0; border-radius: 999px; background: #cfd5df; transition: background .15s; pointer-events: none; }
+.switch span { position: absolute; inset: 0; border-radius: 999px; background: #d6cec3; transition: background .15s; pointer-events: none; }
 .switch span::after { content: ""; position: absolute; top: 3px; left: 3px; width: 22px; height: 22px; border-radius: 50%; background: #fff; transition: transform .15s; box-shadow: 0 1px 2px rgba(0,0,0,.2); }
 .switch input:checked + span { background: var(--primary); }
 .switch input:checked + span::after { transform: translateX(18px); }
 .switch input:focus-visible + span { outline: 2px solid var(--primary); outline-offset: 2px; }
 .radio-row { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border: 1px solid var(--line); border-radius: 14px; background: var(--surface); width: 100%; text-align: left; }
-.radio-row[aria-checked="true"] { border-color: var(--primary); background: #f5f8ff; }
-.radio-row .dotc { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #cfd5df; flex: none; display: grid; place-items: center; }
+.radio-row[aria-checked="true"] { border-color: var(--primary); background: #fdf6f2; }
+.radio-row .dotc { width: 20px; height: 20px; border-radius: 50%; border: 2px solid #d6cec3; flex: none; display: grid; place-items: center; }
 .radio-row[aria-checked="true"] .dotc { border-color: var(--primary); }
 .radio-row[aria-checked="true"] .dotc::after { content: ""; width: 10px; height: 10px; border-radius: 50%; background: var(--primary); }
 .empty { text-align: center; padding: 28px 12px; color: var(--text-sub); font-size: 14px; }
@@ -211,7 +213,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
 .hero .k { color: var(--on-hero-sub); font-size: 13px; line-height: 19px; font-weight: 600; display: flex; justify-content: space-between; align-items: center; }
 .hero .k button { background: rgba(255,255,255,.14); border: 0; color: #fff; border-radius: 8px; padding: 3px 8px; font-size: 12px; font-weight: 600; }
 .hero .bar { background: rgba(255,255,255,.18); }
-.hero .legend { color: #e6ecff; }
+.hero .legend { color: #fbe2d8; }
 .quick { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; }
 .quick button { border: 0; background: var(--surface); border-radius: 16px; padding: 14px 6px 12px; display: flex; flex-direction: column; align-items: center; gap: 8px; font-size: 13px; line-height: 18px; font-weight: 700; }
 .church-btn { border: 0; background: transparent; display: inline-flex; align-items: center; gap: 4px; font-size: 20px; line-height: 28px; font-weight: 800; padding: 0; }
@@ -226,7 +228,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
 .addon button { border: 0; background: transparent; display: flex; flex-direction: column; align-items: center; gap: 6px; font-size: 12px; line-height: 16px; font-weight: 600; color: var(--text); padding: 4px 2px; white-space: nowrap; }
 .gfeed { border: 0; text-align: left; display: flex; flex-direction: column; gap: 6px; padding: 14px 18px; width: 100%; }
 .gfeed .tx { font-size: 14px; line-height: 21px; color: var(--text); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; white-space: pre-wrap; }
-.scope { font-size: 12px; line-height: 16px; font-weight: 700; color: #0b7f74; }
+.scope { font-size: 12px; line-height: 16px; font-weight: 700; color: #7a4f0a; }
 .scope.all { color: var(--primary); }
 .boards { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
 .boards button { border: 0; background: var(--surface); border-radius: 14px; padding: 12px 14px; text-align: left; display: flex; flex-direction: column; gap: 2px; }
@@ -237,7 +239,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
 .post .pb { font-size: 13px; line-height: 19px; color: var(--text-sub); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .meta { display: flex; align-items: center; gap: 10px; font-size: 12px; line-height: 16px; color: var(--text-faint); flex-wrap: wrap; }
 .meta span { display: inline-flex; align-items: center; gap: 3px; }
-.fab { position: absolute; right: 18px; bottom: 18px; border: 0; border-radius: 999px; background: var(--primary); color: #fff; padding: 12px 18px 12px 14px; display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 700; box-shadow: 0 8px 20px -6px rgba(34, 86, 242, .55); }
+.fab { position: absolute; right: 18px; bottom: 18px; border: 0; border-radius: 999px; background: var(--primary); color: #fff; padding: 12px 18px 12px 14px; display: flex; align-items: center; gap: 6px; font-size: 15px; font-weight: 700; box-shadow: 0 8px 20px -6px rgba(176, 71, 42, .45); }
 .cmt { display: flex; flex-direction: column; gap: 4px; padding: 12px 0; }
 .cmt + .cmt { border-top: 1px solid var(--line); }
 .cmt .who { font-size: 13px; font-weight: 700; display: flex; align-items: center; gap: 6px; }
@@ -267,13 +269,13 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
 .avatar { width: 48px; height: 48px; border-radius: 50%; background: var(--primary-soft); color: var(--primary); display: grid; place-items: center; font-weight: 800; font-size: 18px; flex: none; }
 
 /* 시트·토스트 */
-.dim { position: absolute; inset: 0; background: rgba(15, 23, 42, .4); z-index: 20; display: flex; align-items: flex-end; }
+.dim { position: absolute; inset: 0; background: rgba(30, 27, 24, .4); z-index: 20; display: flex; align-items: flex-end; }
 .sheet { background: var(--surface); width: 100%; border-radius: 22px 22px 0 0; padding: 10px 20px 20px; display: flex; flex-direction: column; gap: 12px; max-height: 85%; overflow-y: auto; }
 .sheet .grab { width: 36px; height: 4px; border-radius: 2px; background: var(--line); margin: 0 auto 4px; }
 .sheet h2 { margin: 0; font-size: 17px; line-height: 24px; }
 .sheet-item { border: 0; background: transparent; display: flex; align-items: center; gap: 12px; padding: 12px 4px; font-size: 15px; text-align: left; width: 100%; border-radius: 10px; }
 .sheet-item:hover { background: var(--surface-alt); }
-.toast { position: absolute; left: 50%; bottom: 84px; transform: translateX(-50%); background: rgba(17, 24, 39, .92); color: #fff; font-size: 13px; line-height: 19px; padding: 10px 16px; border-radius: 12px; z-index: 30; width: max-content; max-width: calc(100% - 40px); text-align: center; animation: pop .18s ease-out; }
+.toast { position: absolute; left: 50%; bottom: 84px; transform: translateX(-50%); background: rgba(30, 27, 24, .92); color: #fff; font-size: 13px; line-height: 19px; padding: 10px 16px; border-radius: 12px; z-index: 30; width: max-content; max-width: calc(100% - 40px); text-align: center; animation: pop .18s ease-out; }
 @keyframes pop { from { opacity: 0; transform: translate(-50%, 6px); } to { opacity: 1; transform: translate(-50%, 0); } }
 
 .donut-wrap { display: flex; align-items: center; gap: 18px; }
@@ -319,7 +321,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
 .word .wbody { border: 0; background: transparent; color: inherit; text-align: left; padding: 0; display: flex; flex-direction: column; gap: 3px; min-width: 0; }
 .word .wt { font-size: 19px; line-height: 26px; font-weight: 800; }
 .word .ws { font-size: 13px; line-height: 18px; color: var(--on-hero-sub); }
-.word .wsum { margin-top: 3px; font-size: 14px; line-height: 21px; color: #eef2ff; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.word .wsum { margin-top: 3px; font-size: 14px; line-height: 21px; color: #fdf1ec; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
 .word .wq { background: rgba(255,255,255,.12); border-radius: 12px; padding: 9px 12px; font-size: 13px; line-height: 19px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .word .wa { display: flex; gap: 8px; }
 .word .wa button { flex: 1; border: 0; border-radius: 12px; padding: 9px 8px; font-size: 14px; line-height: 20px; font-weight: 700; background: rgba(255,255,255,.16); color: #fff; }
@@ -332,7 +334,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
 .stories { gap: 12px; }
 .story { flex: none; width: 66px; border: 0; background: transparent; display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 0; color: var(--text); }
 .story .ring { width: 62px; height: 62px; border-radius: 50%; padding: 3px; background: var(--line); }
-.story.new .ring { background: linear-gradient(135deg, var(--accent), var(--primary)); }
+.story.new .ring { background: var(--primary); }
 .story .av { width: 100%; height: 100%; border-radius: 50%; background: var(--surface); border: 2px solid var(--bg); display: grid; place-items: center; font-weight: 800; font-size: 15px; color: var(--primary); }
 .story.add .av { color: var(--text-sub); }
 .story .nm { font-size: 12px; line-height: 16px; width: 66px; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
@@ -346,8 +348,10 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
 .fcard .fx p { margin: 0; font-size: 14px; line-height: 21px; }
 .fcard .ft { display: flex; align-items: center; gap: 16px; padding: 8px 14px 12px; }
 .fcard .ft button { border: 0; background: none; padding: 0; font-size: 13px; line-height: 18px; font-weight: 600; color: var(--text-sub); }
-.fcard .ft button.on { color: var(--primary); }
-.wordtag { flex: none; font-size: 12px; line-height: 16px; font-weight: 700; color: #6d4bd8; }
+.fcard .ft button { display: inline-flex; align-items: center; gap: 4px; }
+.fcard .ft button.on { color: var(--text); }
+svg.i.heart-on { fill: var(--heart); stroke: var(--heart); }
+.wordtag { flex: none; font-size: 12px; line-height: 16px; font-weight: 700; color: var(--accent-text); }
 .ph-btn { border: 0; padding: 0; background: none; display: block; width: 100%; }
 .ph { position: relative; width: 100%; aspect-ratio: 4 / 3; display: grid; place-items: center; color: #fff; overflow: hidden; }
 .ph img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
@@ -374,10 +378,10 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
 
 <aside class="panel" aria-label="프로토타입 안내">
   <div>
-    <div class="eyebrow">Faithtown(가제) · 신도 앱 · 시안 C · 커뮤니티 중심</div>
-    <h1>신도 앱 프로토타입 v2.5</h1>
+    <div class="eyebrow">Knitus · 신도 앱 · 시안 C · 커뮤니티 중심</div>
+    <h1>신도 앱 프로토타입 v2.6</h1>
   </div>
-  <p><b>v2.5(D-29) 서비스 이름 가제 'Faithtown'</b>: 교회·성당·절 누구나 쓰는 신앙인들의 동네라는 뜻입니다. 화면 안의 '감사교회'는 예시 교회 이름입니다. 글 반응은 종교 단어 대신 <b>'💛 마음'</b>(마음 보내기)으로 바꿨습니다.</p>
+  <p><b>v2.6(D-39) 서비스 이름 'Knitus'(니터스)</b>: knit us, 우리 교회 사람들을 서로 엮는다는 뜻입니다. 메인 컬러는 감빛으로 바꿨고, 글 반응 '마음'은 이모지 대신 하트 아이콘으로 보여 줍니다. 화면 안의 '감사교회'는 예시 교회 이름입니다.</p>
   <p><b>v2.4(D-28) 섞은 형태 홈</b>: 앱을 열면 맨 위에 <b>이번 주일 + 목사님 말씀 카드</b>(설교 제목·본문·요약·나눔 질문), 그 아래 작은 헌금 영역 · 바로가기 · '꼭 보세요' · 내 소그룹 동그라미, 그리고 교인들이 올린 <b>사진 피드</b>가 이어집니다. 글에 <b>사진을 첨부</b>할 수 있습니다(소그룹·실명 글만, 익명 글은 사진 없음). 커뮤니티 탭은 게시판 · 기도 · 모임만 남겼습니다.</p>
   <p class="micro">이전: 커뮤니티 중심(D-24), 소그룹·커뮤니티 통합과 헌금 부가 기능(D-25), 홈 헌금 영역·고정 글·글 검색(D-26), 긴 글 줄이기(D-27), 섞은 형태 홈·사진 첨부(D-28).</p>
   <div class="card">
@@ -385,7 +389,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     <ul>
       <li>홈 맨 위 말씀 카드 → '이번 주 말씀'(요약·나눔 질문·소그룹 나눔)</li>
       <li>말씀 카드 '말씀 나누기' → 내 소그룹에 말씀 나눔 글 쓰기</li>
-      <li>홈 피드: 사진을 누르면 다음 사진, '💛 마음', 댓글</li>
+      <li>홈 피드: 사진을 누르면 다음 사진, '마음'(하트), 댓글</li>
       <li>홈 '내 소그룹' 동그라미: 테두리 색 = 새 글 있음</li>
       <li>글쓰기 → 사진 추가(휴대폰 사진 고르기 또는 '예시 사진 넣기')</li>
       <li>게시판에서 익명을 켜면 사진을 올릴 수 없는 것 확인</li>
@@ -693,7 +697,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     return Object.entries(m).sort((a, b) => b[1] - a[1]);
   }
   // 파란 카드 위에서는 십일조가 배경과 같은 색이 되므로 밝은 색 묶음을 따로 쓴다
-  const HERO_COLOR = { 십일조: '#ffffff', 감사헌금: '#5fe0d3', 선교헌금: '#a9bcff', 주일헌금: '#c9d7ff', 건축헌금: '#7dd3fc', 구제헌금: '#fcd34d' };
+  const HERO_COLOR = { 십일조: '#ffffff', 감사헌금: '#f2b33d', 선교헌금: '#bfe3c8', 주일헌금: '#f7c7b5', 건축헌금: '#fff1c7', 구제헌금: '#d9c2f0' };
   const stack = (list, total, colors) => `<div class="bar">${byType(list).map(([t, v]) => `<i style="width:${(v / total) * 100}%;background:${(colors || TYPE_COLOR)[t]}"></i>`).join('')}</div>`;
   const short = (t) => t.replace('헌금', '') || t;
 
@@ -827,7 +831,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
   /* ═════════ v2.4(D-28, A-211~A-216): 섞은 형태 홈: 이번 주일+말씀 카드 · 헌금 · 바로가기 · 꼭 보세요 · 소그룹 동그라미 · 사진 피드 ═════════ */
   // '40분 전'·'2시간 전'·'어제'·'3일 전' → 시간(최신순 정렬과 지난 7일 계산용)
   const agoH = (t) => { if (!t || t === '방금') return 0; let m = /(\d+)분/.exec(t); if (m) return 0; m = /(\d+)시간/.exec(t); if (m) return +m[1]; if (t === '어제') return 24; m = /(\d+)일/.exec(t); if (m) return 24 * m[1]; return 999; };
-  const PH_BG = ['linear-gradient(135deg,#f6a75b,#e4572e)', 'linear-gradient(135deg,#7bc8a4,#12b5a6)', 'linear-gradient(135deg,#8fb3ff,#2256f2)', 'linear-gradient(135deg,#f3c26b,#b7791f)', 'linear-gradient(135deg,#c3a6ff,#6d4bd8)', 'linear-gradient(135deg,#9bd1e5,#2b7a9b)'];
+  const PH_BG = ['linear-gradient(135deg,#f6a75b,#e4572e)', 'linear-gradient(135deg,#7bc8a4,#12b5a6)', 'linear-gradient(135deg,#f3b9a3,#b0472a)', 'linear-gradient(135deg,#f3c26b,#b7791f)', 'linear-gradient(135deg,#c3a6ff,#6d4bd8)', 'linear-gradient(135deg,#9bd1e5,#2b7a9b)'];
   // 사진 한 장: src가 있으면 사용자가 고른 실제 사진(이 기기 화면에만 보임), 없으면 예시 그림
   const photoBox = (ph, extra) => `<div class="ph" style="background:${ph.src ? '#111' : PH_BG[(ph.g || 0) % PH_BG.length]}">${ph.src ? `<img src="${ph.src}" alt="첨부한 사진">` : ic(ph.i || 'users') + `<span class="cap">예시 사진 · ${esc(ph.cap || '')}</span>`}${extra || ''}</div>`;
   const phKey = (it) => (it.k === 'g' ? `g:${it.g.id}:${it.f.id}` : `p:${it.x.id}`);
@@ -852,15 +856,15 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
         <div class="fh"><span class="avatar" style="width:36px;height:36px;font-size:13px">${esc(f.who.slice(0, 1))}</span><span class="grow"><b>${esc(f.who)}</b><span class="micro">${inGroup ? '' : `${ic('lock', 'xs')}${esc(g.name)} · `}${f.time}</span></span>${f.word ? '<span class="wordtag">말씀 나눔</span>' : ''}</div>
         ${feedPhotos(key, f.photos)}
         <div class="fx"><p>${esc(cut(f.text, FEED_MAX))}${f.text.length > FEED_MAX ? `<button type="button" class="more" data-go="U-75" data-p='${ga}'>더보기</button>` : ''}</p></div>
-        <div class="ft"><button type="button" class="${f.liked ? 'on' : ''}" data-v2="amen" data-k="${key}">💛 마음 ${f.likes}</button><button type="button" data-go="U-75" data-p='${ga}'>💬 댓글 ${f.comments.length}</button></div>
+        <div class="ft"><button type="button" class="${f.liked ? 'on' : ''}" data-v2="amen" data-k="${key}">${ic('heart', f.liked ? 'xs heart-on' : 'xs')}마음 ${f.likes}</button><button type="button" data-go="U-75" data-p='${ga}'>${ic('chat', 'xs')}댓글 ${f.comments.length}</button></div>
       </article>`;
     }
     const { x } = it; const pa = esc(JSON.stringify({ id: x.id })); const staff = x.board === 'pastor';
     return `<article class="fcard">
-      <div class="fh"><span class="avatar" style="width:36px;height:36px;font-size:13px${staff ? ';background:#efe9ff;color:#6d4bd8' : ''}">${esc((x.author || DB.me.name).slice(0, 1))}</span><span class="grow"><b>${esc(x.author || DB.me.name)}</b><span class="micro">${esc(boardName(x))} · ${x.time}</span></span>${staff ? '<span class="wordtag">목회 서신</span>' : ''}</div>
+      <div class="fh"><span class="avatar" style="width:36px;height:36px;font-size:13px${staff ? ';background:var(--accent-soft);color:var(--accent-text)' : ''}">${esc((x.author || DB.me.name).slice(0, 1))}</span><span class="grow"><b>${esc(x.author || DB.me.name)}</b><span class="micro">${esc(boardName(x))} · ${x.time}</span></span>${staff ? '<span class="wordtag">목회 서신</span>' : ''}</div>
       ${feedPhotos(key, x.photos)}
       <div class="fx"><b>${esc(cut(x.title, 40))}</b><p>${esc(cut(x.body, FEED_MAX))}${x.body.length > FEED_MAX ? `<button type="button" class="more" data-go="U-62" data-p='${pa}'>더보기</button>` : ''}</p></div>
-      <div class="ft"><button type="button" class="${x.liked ? 'on' : ''}" data-v2="amen" data-k="${key}">💛 마음 ${x.likes}</button><button type="button" data-go="U-62" data-p='${pa}'>💬 댓글 ${x.comments.length}</button></div>
+      <div class="ft"><button type="button" class="${x.liked ? 'on' : ''}" data-v2="amen" data-k="${key}">${ic('heart', x.liked ? 'xs heart-on' : 'xs')}마음 ${x.likes}</button><button type="button" data-go="U-62" data-p='${pa}'>${ic('chat', 'xs')}댓글 ${x.comments.length}</button></div>
     </article>`;
   }
   // 홈 화면 방식(A-216): 자동이면 지난 7일 새 글 5개 이상일 때 피드, 적으면 소식 위주
@@ -996,7 +1000,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     const g = G(p.g); const f = g.feed.find((x) => x.id === p.id) || g.feed[0];
     return `${hdr(esc(g.name), 'U-75')}
     <div class="body">
-      <article class="card" style="display:flex;flex-direction:column;gap:10px"><div style="display:flex;align-items:center;gap:10px"><span class="avatar" style="width:36px;height:36px;font-size:13px">${esc(f.who.slice(0, 1))}</span><span style="flex:1;min-width:0"><b style="display:block;font-size:14px">${esc(f.who)}</b><span class="micro">${ic('lock', 'xs')}${esc(g.name)} · ${f.time}</span></span>${f.word ? '<span class="wordtag">말씀 나눔</span>' : ''}</div>${f.photos && f.photos.length ? `<div class="phrow">${f.photos.map((ph) => photoBox(ph)).join('')}</div>` : ''}<p style="margin:0;white-space:pre-wrap">${esc(f.text)}</p><div style="display:flex;gap:8px;align-items:center"><button class="btn sm line" type="button" data-v2="amen" data-k="g:${g.id}:${f.id}" style="${f.liked ? 'color:var(--primary);border-color:var(--primary)' : ''}">💛 마음 ${f.likes}</button><span class="small">댓글 ${f.comments.length}</span></div></article>
+      <article class="card" style="display:flex;flex-direction:column;gap:10px"><div style="display:flex;align-items:center;gap:10px"><span class="avatar" style="width:36px;height:36px;font-size:13px">${esc(f.who.slice(0, 1))}</span><span style="flex:1;min-width:0"><b style="display:block;font-size:14px">${esc(f.who)}</b><span class="micro">${ic('lock', 'xs')}${esc(g.name)} · ${f.time}</span></span>${f.word ? '<span class="wordtag">말씀 나눔</span>' : ''}</div>${f.photos && f.photos.length ? `<div class="phrow">${f.photos.map((ph) => photoBox(ph)).join('')}</div>` : ''}<p style="margin:0;white-space:pre-wrap">${esc(f.text)}</p><div style="display:flex;gap:8px;align-items:center"><button class="btn sm line" type="button" data-v2="amen" data-k="g:${g.id}:${f.id}" style="${f.liked ? 'color:var(--primary);border-color:var(--primary)' : ''}">${ic('heart', f.liked ? 'xs heart-on' : 'xs')}마음 ${f.likes}</button><span class="small">댓글 ${f.comments.length}</span></div></article>
       <div class="card tight">${f.comments.map((c) => row({ icon: 'user', tone: 'gray', t: esc(c.who), s: esc(c.text), noChev: true, wrap: true })).join('') || '<div class="empty">첫 댓글을 남겨 보세요</div>'}</div>
     </div>
     <div class="btn-bar"><input class="input" id="v2-cmt" placeholder="댓글 달기" style="flex:1" aria-label="댓글"><button class="btn sm" type="button" data-v2="cmt" data-g="${g.id}" data-id="${f.id}">등록</button></div>`;
@@ -1188,7 +1192,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
         <div style="display:flex;justify-content:space-between;align-items:baseline"><b style="font-size:17px">9월 재정 요약</b><span class="micro">10월 8일 발행</span></div>
         <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
           <div style="background:var(--primary-soft);border-radius:12px;padding:12px"><div class="small">수입</div><div class="amount-m num" style="color:var(--primary)">8,420만 원</div></div>
-          <div style="background:var(--accent-soft);border-radius:12px;padding:12px"><div class="small">지출</div><div class="amount-m num" style="color:#0b7f74">7,960만 원</div></div>
+          <div style="background:var(--accent-soft);border-radius:12px;padding:12px"><div class="small">지출</div><div class="amount-m num" style="color:#7a4f0a">7,960만 원</div></div>
         </div>
         <div><div class="small" style="font-weight:700;margin-bottom:8px">지출 구성 · 예산 대비 집행률 94%</div>
           <div class="donut-wrap">${donut(EXP, 112)}<div class="legend">${EXP.map(([n, v, c]) => `<span><span style="display:inline-flex;align-items:center;gap:6px"><i style="background:${c}"></i>${n}</span><em class="num">${v}%</em></span>`).join('')}</div></div>
@@ -1420,7 +1424,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     <div class="body">
       ${m !== 9 ? '<div class="note">예시로 9월과 같은 숫자를 보여 줘요.</div>' : ''}
       <div class="card" style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;justify-content:space-between"><b>수입</b><b class="num" style="color:var(--primary)">8,420만 원</b></div>${tbl(inc, 'var(--chart-1)')}</div>
-      <div class="card" style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;justify-content:space-between"><b>지출</b><b class="num" style="color:#0b7f74">7,960만 원</b></div>${tbl(exp, 'var(--chart-2)')}</div>
+      <div class="card" style="display:flex;flex-direction:column;gap:12px"><div style="display:flex;justify-content:space-between"><b>지출</b><b class="num" style="color:#7a4f0a">7,960만 원</b></div>${tbl(exp, 'var(--chart-2)')}</div>
       <div class="card" style="display:flex;flex-direction:column;gap:8px"><b>재정부장 설명</b><p class="small" style="margin:0">9월에는 주차장 바닥 보수(410만 원)로 운영비가 늘었습니다. 선교센터 건축헌금은 별도 계정으로 관리하며 이번 달 220만 원이 모였습니다. 남은 460만 원은 다음 달로 이월합니다.</p></div>
       <button class="btn sub" type="button" ${goAttr('U-35')}>이 리포트에 대해 질문하기</button>
     </div>`;
@@ -1538,7 +1542,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
         <b style="font-size:18px;line-height:26px">${esc(x.title)}</b>
         ${x.photos && x.photos.length ? `<div class="phrow">${x.photos.map((ph) => photoBox(ph)).join('')}</div>` : ''}
         <p style="margin:0;white-space:pre-wrap">${esc(x.body)}</p>
-        <div style="display:flex;gap:8px"><button class="btn sm line" type="button" data-like="${x.id}" style="color:${x.liked ? 'var(--danger)' : 'inherit'}">💛 마음 ${x.likes}</button><button class="btn sm line" type="button" data-scrap="${x.id}">${ic('bookmark', 'xs')} ${x.scrap ? '스크랩함' : '스크랩'}</button></div>
+        <div style="display:flex;gap:8px"><button class="btn sm line" type="button" data-like="${x.id}" style="color:${x.liked ? 'var(--text)' : 'inherit'}">${ic('heart', x.liked ? 'xs heart-on' : 'xs')}마음 ${x.likes}</button><button class="btn sm line" type="button" data-scrap="${x.id}">${ic('bookmark', 'xs')} ${x.scrap ? '스크랩함' : '스크랩'}</button></div>
       </article>
       <div class="card" style="padding:4px 18px"><div style="padding:12px 0 4px" class="small"><b>댓글 ${x.comments.length}</b> · 익명 댓글은 글마다 익명1, 익명2 순서로 번호가 붙어요</div>
         ${x.comments.map((c) => `<div class="cmt"><span class="who">${esc(c.who)}${c.who === '글쓴이' ? ' <span class="pill blue">글쓴이</span>' : ''}${c.me ? ' <span class="pill">나</span>' : ''}</span><span class="small" style="color:var(--text)">${esc(c.text)}</span></div>`).join('') || '<div class="empty" style="padding:16px">첫 댓글을 남겨 보세요</div>'}
@@ -1558,7 +1562,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
     const warn = /01[0-9][- ]?\d{3,4}[- ]?\d{4}|\d{2,6}-\d{2,6}-\d{2,7}|계좌/.test(d.title + ' ' + d.body);
     return `${hdr('글쓰기', 'U-63', `<button class="btn sm" type="button" data-act="post" ${ok ? '' : 'disabled'} style="margin-right:4px">올리기</button>`)}
     <div class="body">
-      ${d.word ? `<div class="card" style="background:#f3efff;display:flex;flex-direction:column;gap:4px;padding:12px 14px"><span class="wordtag">이번 주 말씀 나눔</span><b class="clamp1">「${esc(W.title)}」 · ${esc(W.text)}</b><span class="small clamp2">질문: ${esc(W.questions[0])}</span><button type="button" class="link" style="align-self:flex-start" data-v2="wordoff">말씀 나눔 표시 빼기</button></div>` : ''}
+      ${d.word ? `<div class="card" style="background:#fbf0d9;display:flex;flex-direction:column;gap:4px;padding:12px 14px"><span class="wordtag">이번 주 말씀 나눔</span><b class="clamp1">「${esc(W.title)}」 · ${esc(W.text)}</b><span class="small clamp2">질문: ${esc(W.questions[0])}</span><button type="button" class="link" style="align-self:flex-start" data-v2="wordoff">말씀 나눔 표시 빼기</button></div>` : ''}
       <div class="field"><span class="lbl">올릴 곳</span>
         <span class="micro">내 소그룹 · 그룹 식구만 봐요 (이름이 보여요)</span>
         <div class="chips">${DB.v2.groups.map((g) => `<button type="button" class="chip" aria-pressed="${d.b === 'g:' + g.id}" data-wboard="g:${g.id}">${ic('lock', 'xs')}${esc(g.name)}</button>`).join('')}</div>
@@ -1645,7 +1649,7 @@ mark { background: transparent; color: var(--primary); font-weight: 800; }
         return `<section class="card tight group"><h3>${g}${g === '내 업무' ? ' <span class="pill teal">집행자에게만 보여요</span>' : ''}</h3>${items.map((m) => row({ icon: m.i, tone: 'gray', t: m.n, attr: `data-menu="${m.to}"` })).join('')}</section>`;
       }).join('')}</div>
       <div style="display:flex;justify-content:center;gap:20px" class="small"><button class="link" type="button" data-toast="로그아웃 (프로토타입에서는 그대로 머물러요)">로그아웃</button><button class="link" type="button" ${goAttr('U-58')}>회원 탈퇴</button></div>
-      <div class="micro" style="text-align:center">Faithtown(가제) 앱 버전 2.5 · 프로토타입 · 헌금·재정은 부가 기능이에요</div>`;
+      <div class="micro" style="text-align:center">Knitus 앱 버전 2.6 · 프로토타입 · 헌금·재정은 부가 기능이에요</div>`;
   }
   const norm = (s) => s.toLowerCase().replace(/\s+/g, '');
   function hl(name, q) {

@@ -14,7 +14,7 @@ function latest(prefix) {
 
 const META = (desc) =>
   '<meta name="robots" content="noindex, nofollow">\n' +
-  '<meta property="og:title" content="감사교회 프로토타입">\n' +
+  '<meta property="og:title" content="Knitus 프로토타입">\n' +
   '<meta property="og:description" content="' + desc + '">\n';
 
 function put(src, out, desc, fix) {
