@@ -1,3 +1,3 @@
 :HL["/gamsa-church-prototype/ops/_next/static/chunks/14q046rjk3nif.css","style"]
 1:[["children",{"s":"__PAGE__","h":160}]]
-0:{"b":"kteOB7m1STeyoZF-Wn2uy","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
+0:{"b":"J8BOHI1m9xgoW1-m26acE","t":{"t":{"s":"","h":80,"c":"$Q1"}}}
