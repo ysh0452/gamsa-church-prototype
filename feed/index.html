@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta property="og:title" content="글이 먼저 보이는 홈 시안">
+<meta property="og:description" content="Knitus 신도 앱 홈에서 말씀과 공지를 한 줄로 줄이고 교인 글을 위로 올린 시안. 지금 앱과 나란히 비교합니다.">
+<title>글이 먼저 보이는 홈 시안</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Gothic+A1:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #f6f3ee;
+  --surface: #ffffff;
+  --primary: #b0472a;
+  --text: #1e1b18;
+  --text-sub: #5b534b;
+  --line: #e2d9cc;
+  --font: "Gothic A1", "Apple SD Gothic Neo", "Malgun Gothic", "Noto Sans KR", sans-serif;
+  color-scheme: light;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body { background: var(--bg); color: var(--text); font-family: var(--font); font-size: 15px; line-height: 25px; -webkit-font-smoothing: antialiased; }
+main { max-width: 820px; margin: 0 auto; padding: 48px 20px 64px; }
+header { padding-bottom: 20px; border-bottom: 2px solid var(--text); }
+header .name { font-size: 13px; letter-spacing: 0.04em; color: var(--text-sub); margin: 0 0 6px; }
+h1 { margin: 0; font-size: 28px; line-height: 38px; font-weight: 800; }
+header p { margin: 10px 0 0; color: var(--text-sub); }
+.open { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 16px; }
+.open a { display: inline-block; padding: 9px 16px; border: 1px solid var(--text); color: var(--text); text-decoration: none; font-weight: 700; font-size: 14px; background: var(--surface); }
+.open a.main { background: var(--primary); border-color: var(--primary); color: #fff; }
+.open a:hover, .open a:focus-visible { text-decoration: underline; }
+h2 { margin: 44px 0 6px; font-size: 19px; line-height: 28px; font-weight: 800; }
+p { margin: 0 0 10px; }
+.sub { color: var(--text-sub); font-size: 14px; line-height: 22px; }
+table { width: 100%; border-collapse: collapse; margin: 8px 0 6px; font-size: 14px; background: var(--surface); }
+th, td { padding: 9px 12px; border-bottom: 1px solid var(--line); text-align: left; vertical-align: top; }
+th { font-weight: 700; color: var(--text-sub); font-size: 13px; border-bottom: 1px solid var(--text); }
+td.num { text-align: right; font-variant-numeric: tabular-nums; white-space: nowrap; }
+td.down { color: var(--primary); font-weight: 700; }
+.pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin: 14px 0 4px; }
+.single { max-width: 50%; margin: 14px 0 4px; }
+figure { margin: 0; }
+figcaption { font-size: 13px; font-weight: 700; margin-bottom: 6px; }
+figcaption span { font-weight: 400; color: var(--text-sub); }
+figure img { width: 100%; height: auto; display: block; border: 1px solid var(--line); background: var(--surface); }
+ol.steps { margin: 8px 0 0; padding-left: 20px; }
+ol.steps li { margin-bottom: 8px; }
+ul.plain { margin: 6px 0 0; padding-left: 18px; }
+ul.plain li { margin-bottom: 6px; }
+.note { margin-top: 28px; padding: 16px 18px; background: var(--surface); border-left: 3px solid var(--primary); font-size: 14px; line-height: 22px; color: var(--text-sub); }
+.note p { margin: 0; }
+.note p + p { margin-top: 8px; }
+footer { margin-top: 40px; font-size: 12px; color: var(--text-sub); }
+footer a { color: var(--primary); }
+@media (max-width: 600px) {
+  main { padding-top: 32px; }
+  h1 { font-size: 23px; line-height: 32px; }
+  .pair { gap: 8px; }
+  .single { max-width: 70%; }
+  th, td { padding: 8px 6px; font-size: 13px; }
+}
+</style>
+</head>
+<body>
+<main>
+  <header>
+    <p class="name">KNITUS 니터스</p>
+    <h1>홈을 열면 말씀보다 교인 글이 먼저 보이게 한 시안</h1>
+    <p>교인이 앱을 다시 여는 이유는 설교보다 아는 사람의 소식에 가깝다는 판단으로 홈 첫 화면을 바꿨습니다. 말씀과 공지는 없애지 않고 한 줄씩으로 줄였습니다. 실제 서비스에는 반영하지 않았습니다. 2026년 11월 27일.</p>
+    <div class="open">
+      <a class="main" href="../app-feed/">시안 열기</a>
+      <a href="../app/">지금 앱 열기</a>
+    </div>
+  </header>
+
+  <h2>숫자로 보면</h2>
+  <p class="sub">휴대폰 화면(390×844) 한 장 기준입니다.</p>
+  <table>
+    <thead>
+      <tr><th>항목</th><th class="num">지금</th><th class="num">시안</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>말씀이 차지하는 첫 화면 높이</td><td class="num">약 31%</td><td class="num down">약 5%</td></tr>
+      <tr><td>첫 화면에 보이는 교인 글</td><td class="num">0개</td><td class="num down">1개 반</td></tr>
+      <tr><td>첫 화면에서 누를 수 있는 곳</td><td class="num">20</td><td class="num down">17</td></tr>
+    </tbody>
+  </table>
+  <p class="sub">꼭 보세요와 새 댓글 알림을 한 번씩 열어 보면 그 줄이 빠지면서 글이 더 올라옵니다.</p>
+
+  <h2>첫 화면</h2>
+  <div class="pair">
+    <figure><figcaption>지금 <span>말씀 카드가 맨 위</span></figcaption><a href="now-home.png"><img src="now-home.png" alt="지금 앱의 홈. 이번 주 말씀 카드가 화면 위쪽 3분의 1을 차지하고 교인 글은 보이지 않는다" width="780" height="1688"></a></figure>
+    <figure><figcaption>시안 <span>말씀 한 줄, 글이 위로</span></figcaption><a href="feed-home.png"><img src="feed-home.png" alt="시안의 홈. 이번 주 말씀이 한 줄이고, 내 글에 새 댓글, 꼭 보세요 한 줄, 내 소그룹, 우리 소그룹 새 글이 이어진다" width="780" height="1688"></a></figure>
+  </div>
+
+  <h2>바꾼 것</h2>
+  <ol class="steps">
+    <li>이번 주 말씀은 한 줄로 줄였습니다. 누르면 지금처럼 말씀 화면(요약, 나눔 질문)이 열립니다. 이번 주 말씀이 없는 교회는 오늘의 말씀 한 줄이 나옵니다.</li>
+    <li>맨 위에 나에게 온 반응을 둡니다. 읽지 않은 "새 댓글", "새 답글"을 글마다 한 줄씩, 최대 2개까지. 다시 들어올 이유가 가장 큰 것이라 가장 위에 두었습니다.</li>
+    <li>꼭 보세요는 아직 읽지 않은 중요 공지만, 최대 2개까지 보여 줍니다. 한 번 누르면 홈에서 사라집니다. 위 반응 줄에 이미 나온 글은 같은 글이라 뺐습니다.</li>
+    <li>피드는 "우리 소그룹 새 글"을 먼저, 그 아래에 "교회 새 글"을 둡니다. 서로 아는 사람의 글이 먼저 보입니다.</li>
+    <li>끝까지 내리면 다음 글을 이어서 불러옵니다. "더 보기" 버튼은 없앴습니다.</li>
+    <li>피드 끝에는 빈 화면 대신 쓸거리를 둡니다. 아래 그림을 보세요.</li>
+    <li>글이 적은 교회(최근 7일 글이 5개보다 적은 곳)는 지금처럼 소식 중심 화면이 나옵니다. 글이 늘면 저절로 이 화면으로 바뀝니다.</li>
+  </ol>
+  <p class="sub">지난번 고를 것 줄이기 시안(바로가기 칩 빼기, 커뮤니티 새 글 바로 보기, 글쓰기 올릴 곳 기본값, MY 줄이기) 위에 이어서 만들었습니다.</p>
+
+  <h2>피드 끝</h2>
+  <p>교인 100명 교회라면 글은 일주일에 몇 개 정도라 금방 끝에 닿습니다. 끝에 닿았을 때 비어 있으면 앱이 죽은 것처럼 보이므로, "이번 주는 여기까지예요"와 함께 이번 주 나눔 질문을 보여 주고 바로 답을 남기게 했습니다. 답 하나가 다음 사람이 볼 글이 됩니다.</p>
+  <div class="single">
+    <figure><figcaption>시안 <span>끝까지 내렸을 때</span></figcaption><a href="feed-end.png"><img src="feed-end.png" alt="피드 끝. 이번 주는 여기까지예요, 이번 주 나눔 질문, 2청년 셀에 답 남기기, 기도 제목 올리기 버튼" width="780" height="1688"></a></figure>
+  </div>
+
+  <h2>시안을 눌러 볼 때</h2>
+  <ul class="plain">
+    <li>체험판은 저장이 되지 않아 알림을 읽어도 기록이 남지 않습니다. 그래서 "내 글에 새 댓글이 있어요" 줄은 다시 열면 또 보입니다. 실제로는 한 번 읽으면 사라집니다.</li>
+    <li>꼭 보세요는 이 기기에 기억해 두어, 한 번 누르면 다시 열어도 나오지 않습니다.</li>
+  </ul>
+
+  <div class="note">
+    <p>시안은 실제 서비스와 따로 보관했고, 실제 서비스와 기존 체험판(지금 앱 열기)은 바뀌지 않았습니다.</p>
+    <p>반영하기로 하면 함께 할 일이 있습니다. 중요 공지를 읽었는지를 서버에 남기고, 소그룹 글을 먼저 보여 주는 순서를 서버에서 정합니다. 그리고 씨앗 교회 4주 동안 확인할 수 있게 말씀 줄과 반응 줄이 눌린 횟수, 피드를 어디까지 내렸는지를 기록합니다.</p>
+  </div>
+
+  <footer>
+    <p><a href="../">Knitus 화면 보기 첫 페이지로</a></p>
+  </footer>
+</main>
+</body>
+</html>
